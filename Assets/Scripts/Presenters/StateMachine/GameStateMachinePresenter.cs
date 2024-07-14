@@ -13,7 +13,7 @@ namespace Presenters.StateMachine
         {
             _model = new GameStateMachineModel();
             CreateStates();
-            EnterGameState<GameInitState>();
+            //EnterGameState<GameInitState>();
         }
 
         public void Enable()
@@ -45,9 +45,9 @@ namespace Presenters.StateMachine
         
         private void EnterGameState<T>(IGameState gameState)
         {
-            _activeGameState?.Exit();
-            _activeGameState = _gameStates[index];
-            _activeGameState.Enter();
+           // _activeGameState?.Exit();
+           // _activeGameState = _gameStates[index];
+            //_activeGameState.Enter();
         }
     }
 }

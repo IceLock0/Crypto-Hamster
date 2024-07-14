@@ -6,7 +6,8 @@ namespace Presenters.State
 
     public class GameInitState : IGameState
     {
-        public event EventHandler Finished;
+        public event Action<IGameState> Finished;
+
         public void Enter()
         {
             throw new NotImplementedException();
