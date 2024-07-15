@@ -1,17 +1,37 @@
-﻿namespace Model.Wallet
+﻿using System;
+using System.Collections.Generic;
+using Views.Currency;
+
+namespace Model.Wallet
 {
     public class WalletModel
     {
-        public float Amount { get; private set; }
-
         public WalletModel()
         {
-            Amount = 10;
+            Currencies = new();
         }
 
-        public void SetAmount(float amount)
+        public Dictionary<ICurrency, float> Currencies { get; private set; }
+        
+        public void AddCurrency(ICurrency currency)
         {
-            Amount = amount;
+            CheckDictionaryForCurrency(currency);
+            
+            Currencies.Add(currency, 0);
+        }
+
+        public void SetCurrencyAmount(ICurrency currency, float amount)
+        {
+            if (amount < 0)
+                throw new ArgumentException($"Cannot set amount < 0. Amount = {amount}");
+
+            Currencies[currency] = amount;
+        }
+        
+        private void CheckDictionaryForCurrency(ICurrency currency)
+        {
+            if (Currencies.ContainsKey(currency))
+                throw new ArgumentException($"Currency: {currency} is already contained");
         }
     }
 }
