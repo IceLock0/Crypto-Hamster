@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Views.Currency;
 
 namespace Model.Wallet
@@ -8,30 +9,30 @@ namespace Model.Wallet
     {
         public WalletModel()
         {
-            Currencies = new();
+            Currencies = new Dictionary<Type, float>();
         }
 
-        public Dictionary<ICurrency, float> Currencies { get; private set; }
+        public Dictionary<Type, float> Currencies { get; private set; }
+
+        public void AddCurrency<T>() where T : class, ICurrency
+        {
+            CheckDictionaryForCurrency<T>();
+
+            Currencies.Add(typeof(T), 0.0f);
+        }
+
+        public void SetCurrencyAmount(Type currencyType, float amount)
+        {
+            amount = amount < 0 ? 0 : amount;
+
+            Currencies[currencyType] = amount;
+        }
         
-        public void AddCurrency(ICurrency currency)
+        private void CheckDictionaryForCurrency<T>() where T : class, ICurrency
         {
-            CheckDictionaryForCurrency(currency);
-            
-            Currencies.Add(currency, 0);
-        }
-
-        public void SetCurrencyAmount(ICurrency currency, float amount)
-        {
-            if (amount < 0)
-                throw new ArgumentException($"Cannot set amount < 0. Amount = {amount}");
-
-            Currencies[currency] = amount;
+            if (Currencies.ContainsKey(typeof(T)))
+                throw new ArgumentException($"Currency type: {typeof(T)} is already contained");
         }
         
-        private void CheckDictionaryForCurrency(ICurrency currency)
-        {
-            if (Currencies.ContainsKey(currency))
-                throw new ArgumentException($"Currency: {currency} is already contained");
-        }
     }
 }

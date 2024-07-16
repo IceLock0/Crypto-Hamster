@@ -1,16 +1,16 @@
-﻿using Model.Wallet;
+﻿using System;
+using Model.Wallet;
 using Presenters.Currency;
 using UnityEngine;
 using Views.Currency;
 using Views.Wallet;
-using Zenject;
 
 namespace Presenters.Wallet
 {
     public class WalletPresenter
     {
-        private WalletUIView _uiView;
-        private WalletModel _model;
+        private readonly WalletUIView _uiView;
+        private readonly WalletModel _model;
         
         public WalletPresenter(WalletUIView uiView)
         {
@@ -18,24 +18,24 @@ namespace Presenters.Wallet
 
             _model = new WalletModel();
             
-            CreateCurrency();
+            CreateCurrencyTypes();
         }
 
-        public void CreateCurrency()
+        public void AddCurrencyAmount(Type currencyType, float amount)
         {
-            // _model.SetAmount(_model.Amount + amount);
-            //
-            // _view.SetCurrencyText(_model.Amount);
+            var resultAmount = _model.Currencies[currencyType] + amount;
             
-            _model.AddCurrency(new Cash());
-            _model.AddCurrency(new Bitcoin());
-            _model.AddCurrency(new Ethereum());
-            _model.AddCurrency(new Solana());
+            _model.SetCurrencyAmount(currencyType, resultAmount);
+            
+            _uiView.SetCurrencyAmountText(resultAmount);
         }
-
-        public void AddCurrencyAmount(ICurrency currency, float amount)
+        
+        private void CreateCurrencyTypes()
         {
-            _model.SetCurrencyAmount( currency, _model.Currencies[currency] + amount);
+            _model.AddCurrency<Cash>();
+            _model.AddCurrency<Bitcoin>();
+            _model.AddCurrency<Ethereum>();
+            _model.AddCurrency<Solana>();
         }
     }
 }

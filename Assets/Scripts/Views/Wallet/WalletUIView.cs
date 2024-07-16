@@ -1,33 +1,40 @@
 ﻿using System;
-using System.Collections;
+using Presenters.Currency;
 using Presenters.Wallet;
-using TMPro;
 using UnityEngine;
 using Views.Currency;
 
+
 namespace Views.Wallet
 {
-    public abstract class WalletUIView : MonoBehaviour
+    public class WalletUIView : MonoBehaviour
     {
+                
         private WalletPresenter _presenter;
+        
+        private float AddingCounter = 0.0f;
+        
+        protected float CurrencyPerSecond;
+        protected float TimeBetweenAdding;
 
-        private void Start()
+        protected void Start()
         {
             _presenter = new WalletPresenter(this);
         }
 
-        protected float CurrencyPerSecond;
-        protected float TimeBetweenAdding;
-        
-        private float AddingCounter = 0.0f;
-
-        public abstract void SetCurrencyAmountText(float amount);
-
-        private void Update()
+        public virtual void SetCurrencyAmountText(float amount)
         {
+        }
+
+        protected bool _isCanAdd;
+        //убрать в презентер        
+        protected void Update()
+        {
+            _isCanAdd = false;
+            
             if (AddingCounter >= TimeBetweenAdding)
             {
-               //AddCurrencyAmount();
+                _isCanAdd = true;
 
                AddingCounter = 0.0f;
             }
@@ -35,9 +42,9 @@ namespace Views.Wallet
             AddingCounter += Time.deltaTime;
         }
 
-        private void AddCurrencyAmount(ICurrency currency)
+        protected virtual void AddCurrencyAmount(Type currencyType) 
         {
-            _presenter.AddCurrencyAmount(currency, CurrencyPerSecond);
+            _presenter.AddCurrencyAmount(currencyType, CurrencyPerSecond);
         }
     }
 }

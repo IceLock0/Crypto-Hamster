@@ -1,27 +1,33 @@
-﻿using TMPro;
+﻿using System;
+using Presenters.Currency;
+using TMPro;
 using UnityEngine;
 
 namespace Views.Wallet
 {
     public class CashWalletUIView : WalletUIView
     {
-        [SerializeField] private TextMeshProUGUI _currencyText;
-
-        private void Start()
+        [SerializeField] private TextMeshProUGUI _amountCurrencyText;
+        
+        protected void Start()
         {
-            TimeBetweenAdding = 0.5f;
-            CurrencyPerSecond = 1.0f;
+            base.Start();
             
+            TimeBetweenAdding = 1f;
+            CurrencyPerSecond = 1.25f;
         }
 
+        protected void  Update()
+        {
+            base.Update();
+            
+            if(_isCanAdd) 
+                AddCurrencyAmount(typeof(Cash));
+        }
+        
         public override void SetCurrencyAmountText(float amount)
         {
-            _currencyText.text = "Cash: " + amount.ToString("#.###") + " $";
-        }
-
-        public void AddCurrencyAmount()
-        {
-            throw new System.NotImplementedException();
+            _amountCurrencyText.text = "Cash: " + $"{amount:f3}" + " $";
         }
     }
 }
