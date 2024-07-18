@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Views.Currency;
 
 namespace Model.Wallet
 {
     public class WalletModel
     {
+        public Dictionary<Type, ICurrency> Currencies { get; private set; }
+        
         public WalletModel()
         {
-            Currencies = new Dictionary<Type, float>();
+            Currencies = new Dictionary<Type, ICurrency>();
         }
 
-        public Dictionary<Type, float> Currencies { get; private set; }
-
-        public void AddCurrency<T>() where T : class, ICurrency
+        public void AddCurrency<T>(T currency) where T : class, ICurrency
         {
             CheckDictionaryForCurrency<T>();
 
-            Currencies.Add(typeof(T), 0.0f);
+            Currencies.Add(typeof(T), currency);
         }
 
-        public void SetCurrencyAmount(Type currencyType, float amount)
+        public void AddCurrencyAmount(Type currencyType)
         {
-            amount = amount < 0 ? 0 : amount;
-
-            Currencies[currencyType] = amount;
+            Currencies[currencyType].Amount += Currencies[currencyType].AmountPerTime;
         }
-        
+
         private void CheckDictionaryForCurrency<T>() where T : class, ICurrency
         {
             if (Currencies.ContainsKey(typeof(T)))

@@ -1,50 +1,39 @@
 ﻿using System;
 using Presenters.Currency;
 using Presenters.Wallet;
+using TMPro;
 using UnityEngine;
 using Views.Currency;
 
 
 namespace Views.Wallet
 {
-    public class WalletUIView : MonoBehaviour
+    public abstract class WalletUIView : MonoBehaviour
     {
-                
-        private WalletPresenter _presenter;
+        [SerializeField] protected TextMeshProUGUI _currencyAmountTextTMP;
         
-        private float AddingCounter = 0.0f;
-        
-        protected float CurrencyPerSecond;
-        protected float TimeBetweenAdding;
+        public event Action OnUpdate;
 
-        protected void Start()
+        private Type _currencyType;
+
+        private WalletPresenter _presenter;
+
+        private void Awake()
         {
             _presenter = new WalletPresenter(this);
         }
 
-        public virtual void SetCurrencyAmountText(float amount)
+        private void Update()
         {
-        }
-
-        protected bool _isCanAdd;
-        //убрать в презентер        
-        protected void Update()
-        {
-            _isCanAdd = false;
+            OnUpdate?.Invoke();
             
-            if (AddingCounter >= TimeBetweenAdding)
-            {
-                _isCanAdd = true;
-
-               AddingCounter = 0.0f;
-            }
-
-            AddingCounter += Time.deltaTime;
+            _currencyType = GetCurrencyType();
+            var amount = _presenter.GetCurrencyAmount(_currencyType);
+            SetCurrencyAmountText(amount);
         }
+        
+        protected abstract void SetCurrencyAmountText(float amount);
 
-        protected virtual void AddCurrencyAmount(Type currencyType) 
-        {
-            _presenter.AddCurrencyAmount(currencyType, CurrencyPerSecond);
-        }
+        protected abstract Type GetCurrencyType();
     }
 }

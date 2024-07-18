@@ -7,27 +7,14 @@ namespace Views.Wallet
 {
     public class CashWalletUIView : WalletUIView
     {
-        [SerializeField] private TextMeshProUGUI _amountCurrencyText;
-        
-        protected void Start()
+        protected override void SetCurrencyAmountText(float amount)
         {
-            base.Start();
-            
-            TimeBetweenAdding = 1f;
-            CurrencyPerSecond = 1.25f;
+            _currencyAmountTextTMP.text = "Cash: " + $"{amount:f3}" + " $";
         }
 
-        protected void  Update()
+        protected override Type GetCurrencyType()
         {
-            base.Update();
-            
-            if(_isCanAdd) 
-                AddCurrencyAmount(typeof(Cash));
-        }
-        
-        public override void SetCurrencyAmountText(float amount)
-        {
-            _amountCurrencyText.text = "Cash: " + $"{amount:f3}" + " $";
+            return typeof(Cash);
         }
     }
 }

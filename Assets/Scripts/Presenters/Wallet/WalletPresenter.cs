@@ -2,7 +2,6 @@
 using Model.Wallet;
 using Presenters.Currency;
 using UnityEngine;
-using Views.Currency;
 using Views.Wallet;
 
 namespace Presenters.Wallet
@@ -11,31 +10,51 @@ namespace Presenters.Wallet
     {
         private readonly WalletUIView _uiView;
         private readonly WalletModel _model;
+
+        private float _addTimer;
         
         public WalletPresenter(WalletUIView uiView)
         {
             _uiView = uiView;
-
+            _uiView.OnUpdate += UpdateFromView;
+            
             _model = new WalletModel();
             
-            CreateCurrencyTypes();
+            CreateCurrencies();
         }
 
-        public void AddCurrencyAmount(Type currencyType, float amount)
+        public float GetCurrencyAmount(Type currencyType)
         {
-            var resultAmount = _model.Currencies[currencyType] + amount;
-            
-            _model.SetCurrencyAmount(currencyType, resultAmount);
-            
-            _uiView.SetCurrencyAmountText(resultAmount);
+            return _model.Currencies[currencyType].Amount;
         }
         
-        private void CreateCurrencyTypes()
+        private void UpdateFromView()
         {
-            _model.AddCurrency<Cash>();
-            _model.AddCurrency<Bitcoin>();
-            _model.AddCurrency<Ethereum>();
-            _model.AddCurrency<Solana>();
+            AddCurrencyAmount();
+        }
+
+        private void AddCurrencyAmount()
+        {
+            foreach (var currency in _model.Currencies.Values)
+            {
+                if (currency.Timer >= currency.TimeToAdding)
+                {
+                    _model.AddCurrencyAmount(currency.GetType());
+                    currency.Timer = 0.0f;
+                }
+                else currency.Timer += Time.deltaTime;
+                // _addTimer = 0.0f;
+            }
+
+            //_addTimer += Time.deltaTime;
+        }
+
+        private void CreateCurrencies()
+        {
+            _model.AddCurrency(new Cash());
+            _model.AddCurrency(new Bitcoin());
+            _model.AddCurrency(new Ethereum());
+            _model.AddCurrency(new Solana());
         }
     }
 }
