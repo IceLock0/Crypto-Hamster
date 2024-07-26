@@ -3,12 +3,13 @@ using Presenters.Player;
 using ScriptableObjects;
 using Services;
 using UnityEngine;
+using Views.ComputerServant;
 using Zenject;
 
 namespace Views.Player
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMoveView : MonoBehaviour
+    public class PlayerMoveView : MonoBehaviour, IComputerServant
     {
         private PlayerMovePresenter _movePresenter;
         private InputService _inputService;
