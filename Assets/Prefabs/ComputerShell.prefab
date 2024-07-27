@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 5768809596122807117}
   - {fileID: 8277190399644241667}
+  - {fileID: 1274883881124473173}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &382585237189736598
@@ -785,6 +786,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.2638955, y: 1, z: 2.9720516}
   m_Center: {x: -0.08877492, y: 0, z: -0.011790276}
+--- !u!1 &7852417870231342100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1274883881124473173}
+  - component: {fileID: 1197454312224837458}
+  m_Layer: 0
+  m_Name: Computer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1274883881124473173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852417870231342100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.14, y: -4.16, z: -1.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8619366415876081855}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1197454312224837458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852417870231342100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d330933f86034ec0add1eeb3218d7ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buyButtonView: {fileID: 3958640859081972158}
+  _computerSpawnPoint: {fileID: 1274883881124473173}
 --- !u!1 &9095728319827250493
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +844,7 @@ GameObject:
   - component: {fileID: 6487280124487378686}
   - component: {fileID: 6354221575008775970}
   - component: {fileID: 6626126380131763456}
+  - component: {fileID: 3958640859081972158}
   m_Layer: 5
   m_Name: Build
   m_TagString: Untagged
@@ -906,3 +954,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3958640859081972158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095728319827250493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a959670a67f5438bbb0262e5aa2f0a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

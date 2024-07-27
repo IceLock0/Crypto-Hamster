@@ -15,7 +15,7 @@ namespace Views.Player
         private InputService _inputService;
         
         [Inject]
-        private void Initialize(InputService inputService, PlayerConfig playerConfig, ICoroutineService coroutineService)
+        public void Initialize(InputService inputService, PlayerConfig playerConfig, ICoroutineService coroutineService)
         {
             _movePresenter = new PlayerMovePresenter(inputService, playerConfig,
                 coroutineService, GetComponent<Rigidbody>());

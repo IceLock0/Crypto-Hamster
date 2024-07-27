@@ -22,6 +22,11 @@ namespace Views.UI.ComputerControlPanel
             _presenter.Enable();
         }
 
+        private void Start()
+        {
+            _controlPanelUI.gameObject.SetActive(false);
+        }
+
         private void OnDisable()
         {
             _presenter.Disable();;
