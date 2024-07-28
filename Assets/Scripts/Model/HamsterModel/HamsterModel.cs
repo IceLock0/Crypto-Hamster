@@ -1,32 +1,58 @@
-﻿namespace Model.HamsterModel
+﻿using System;
+using Presenters.Currency;
+using UnityEngine;
+
+namespace Model.HamsterModel
 {
     public class HamsterModel
     {
-        public double Money { get; private set; }
-        public double MoneyPerClick { get; private set; }
-        public double MoneyPerSecond { get; private set; }
-        public float TimeToAddMoney { get; private set; }
-        
-        
+        public event Action AmountChanged;
+        public event Action AmountPerClickChanged;
+        public event Action AmountPerTimeChanged;
+
+        public Hamster Hamster { get; private set; }
+
         public HamsterModel()
         {
-            Money = 0.0f;
-
-            MoneyPerClick = 123.4567891011213f;
-
-            MoneyPerSecond = 100.100100f;
-
-            TimeToAddMoney = 1.0f;
+            Hamster = new Hamster
+            {
+                Amount = 0.0f,
+                Rate = 5.0f,
+                Timer = 0.0f,
+                AmountPerClick = 1.0f,
+                AmountPerTime = 0.5f,
+                TimeToAdding = 1.0f,
+                AmountOfIncreaseMoneyPerClick = 0.1f,
+                AmountOfIncreaseMoneyPerTime = 0.2f
+            };
         }
-        
-        public void SetMoney(double value)
+
+        public void AddMoneyPerClick()
         {
-            Money = value;
+            Hamster.Amount += Hamster.AmountPerClick;
+            
+            AmountChanged?.Invoke();
         }
 
-        public void SetMoneyPerSecond(double value)
+        public void AddMoneyPerTime()
         {
-            MoneyPerSecond = value;
+            Hamster.Amount += Hamster.AmountPerTime;
+            
+            AmountChanged?.Invoke();
+        }
+
+        public void IncreaseMoneyPerClick()
+        {
+            Hamster.AmountPerClick += Hamster.AmountOfIncreaseMoneyPerClick;
+            
+            AmountPerClickChanged?.Invoke();
+        }
+
+        public void IncreaseMoneyPerTime()
+        {
+            Hamster.AmountPerTime += Hamster.AmountOfIncreaseMoneyPerTime;
+            
+            AmountPerTimeChanged?.Invoke();
         }
     }
 }

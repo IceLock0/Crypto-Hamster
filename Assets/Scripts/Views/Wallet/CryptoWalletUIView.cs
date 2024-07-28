@@ -16,13 +16,6 @@ namespace Views.Wallet
             CreateIndices();
         }
 
-        private void CreateIndices()
-        {
-            CryptoIndexContainer.AddCryptoIndex(CryptoCurrencyIndices.Bitcoin, typeof(Bitcoin));
-            CryptoIndexContainer.AddCryptoIndex(CryptoCurrencyIndices.Ethereum, typeof(Ethereum));
-            CryptoIndexContainer.AddCryptoIndex(CryptoCurrencyIndices.Solana, typeof(Solana));
-        }
-        
         protected override void SetCurrencyAmountText(float amount)
         {   
             _currencyAmountTextTMP.text =  $"{amount:f5}";      
@@ -32,20 +25,32 @@ namespace Views.Wallet
         {
             return CryptoIndexContainer.TypesContainer[_currentCurrencyListIndex];
         }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            
+            _dropdown.onValueChanged.AddListener(GetCurrentListIndex);
+        }
+        
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            
+            _dropdown.onValueChanged.RemoveListener(GetCurrentListIndex);
+        }
+        
+        private void CreateIndices()
+        {
+            CryptoIndexContainer.AddCryptoIndex(CryptoCurrencyIndices.Bitcoin, typeof(Bitcoin));
+            CryptoIndexContainer.AddCryptoIndex(CryptoCurrencyIndices.Ethereum, typeof(Ethereum));
+            CryptoIndexContainer.AddCryptoIndex(CryptoCurrencyIndices.Solana, typeof(Solana));
+        }
         
         private void GetCurrentListIndex(int index)
         {
             _currentCurrencyListIndex = index;
         }
         
-        private void OnEnable()
-        {
-            _dropdown.onValueChanged.AddListener(GetCurrentListIndex);
-        }
-        
-        private void OnDisable()
-        {
-            _dropdown.onValueChanged.RemoveListener(GetCurrentListIndex);
-        }
     }
 }

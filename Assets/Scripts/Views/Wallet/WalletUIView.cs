@@ -12,12 +12,26 @@ namespace Views.Wallet
     {
         [SerializeField] protected TextMeshProUGUI _currencyAmountTextTMP;
         
-        public event Action OnUpdate;
+        public event Action Updated;
 
         private Type _currencyType;
 
         private WalletPresenter _presenter;
 
+        protected abstract void SetCurrencyAmountText(float amount);
+
+        protected abstract Type GetCurrencyType();
+        
+        protected virtual void OnEnable()
+        {
+            _presenter.Enable();
+        }
+        
+        protected virtual void OnDisable()
+        {
+            _presenter.Disable();
+        }
+        
         private void Awake()
         {
             _presenter = new WalletPresenter(this);
@@ -25,15 +39,12 @@ namespace Views.Wallet
 
         private void Update()
         {
-            OnUpdate?.Invoke();
+            Updated?.Invoke();
             
             _currencyType = GetCurrencyType();
             var amount = _presenter.GetCurrencyAmount(_currencyType);
             SetCurrencyAmountText(amount);
         }
         
-        protected abstract void SetCurrencyAmountText(float amount);
-
-        protected abstract Type GetCurrencyType();
     }
 }

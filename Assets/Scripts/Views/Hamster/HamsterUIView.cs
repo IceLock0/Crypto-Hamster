@@ -1,64 +1,66 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Presenters.Hamster;
-using TMPro;
 using UnityEngine;
+using Views.Hamster.Buttons;
 
 namespace Views.Hamster
 {
     public class HamsterUIView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _counterTMP;
+        [SerializeField] private List<HamsterUIButtonHandler> _buttons;
 
-        public event Action OnUpdate;
-        
+        public event Action Updated;
+
         private HamsterPresenter _presenter;
 
-        private HamsterOnClickButton _button;
+        public void SetText(HamsterButtonType type, float value)
+        {
+            foreach (var button in _buttons.Where(button => button.HamsterButtonType == type))
+            {
+                button.SetAmountText(value);
+            }
+        }
 
-        private const float ScaleFactor = 1.3f;
+        private void ButtonProcess(HamsterButtonType type)
+        {
+            switch (type)
+            {
+                case HamsterButtonType.MainButton:
+                    _presenter.AddMoneyPerClick();
+                    break;
+                case HamsterButtonType.UpgradePerClickButton:
+                    _presenter.IncreaseMoneyPerClick();
+                    break;
+                case HamsterButtonType.UpgradePerTimeButton:
+                    _presenter.IncreaseMoneyPerTime();
+                    break;
+            }
+        }
         
-        public void SetCounterText(double value)
-        {
-            _counterTMP.text = $"{value:f10}";
-        }
-
         private void Awake()
-        {
-            _button = GetComponent<HamsterOnClickButton>();
-        }
-
-        private void Start()
         {
             _presenter = new HamsterPresenter(this);
         }
 
-        private void Update()
-        {
-            OnUpdate?.Invoke();
-        }
-        
-        private void DownClicked()
-        {
-            gameObject.transform.localScale /= ScaleFactor;
-        }
-
-        private void UpClicked()
-        {
-            gameObject.transform.localScale *= ScaleFactor;
-
-            _presenter.AddMoneyPerClick();
-        }
-
         private void OnEnable()
         {
-            _button.OnButtonDownClicked += DownClicked;
-            _button.OnButtonUpClicked += UpClicked;
+            _buttons.ForEach(button => button.ButtonPressed += ButtonProcess);
+            
+            _presenter.Enable();
         }
 
         private void OnDisable()
         {
-            _button.OnButtonDownClicked -= DownClicked;
-            _button.OnButtonUpClicked -= UpClicked;
+            _buttons.ForEach(button => button.ButtonPressed -= ButtonProcess);
+            
+            _presenter.Disable();
+        }
+
+        private void Update()
+        {
+            Updated?.Invoke();
         }
     }
 }

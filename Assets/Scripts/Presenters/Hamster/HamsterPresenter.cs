@@ -1,6 +1,7 @@
 ﻿using Model.HamsterModel;
 using UnityEngine;
 using Views.Hamster;
+using Views.Hamster.Buttons;
 
 namespace Presenters.Hamster
 {
@@ -10,49 +11,84 @@ namespace Presenters.Hamster
 
         private readonly HamsterModel _model;
 
-        private float _timerToAddMoney;
-        
         public HamsterPresenter(HamsterUIView view)
         {
             _view = view;
 
-            _view.OnUpdate += UpdateFromView;
-            
             _model = new HamsterModel();
 
-            _timerToAddMoney = 0.0f;
+            SetAmountText();
+            SetAmountPerClickText();
+            SetAmountPerTimeText();
         }
 
-        private void UpdateFromView()
+        public void Enable()
         {
-            if (_timerToAddMoney >= _model.TimeToAddMoney)
-            {
-                AddMoneyPerTime();
-                _timerToAddMoney = 0.0f;
-            }
+            _view.Updated += UpdateFromView;
 
-            _timerToAddMoney += Time.deltaTime;
+            _model.AmountChanged += SetAmountText;
+
+            _model.AmountPerClickChanged += SetAmountPerClickText;
+
+            _model.AmountPerTimeChanged += SetAmountPerTimeText;
         }
         
+        public void Disable()
+        {
+            _view.Updated -= UpdateFromView;
+            
+            _model.AmountChanged -= SetAmountText;
+            
+            _model.AmountPerClickChanged -= SetAmountPerClickText;
+            
+            _model.AmountPerTimeChanged -= SetAmountPerTimeText;
+        }
+
         public void AddMoneyPerClick()
         {
-            var currentMoney = _model.Money + _model.MoneyPerClick;
+            _model.AddMoneyPerClick();
+        }
 
-            SetModelAndViewValue(currentMoney);
+        public void IncreaseMoneyPerClick()
+        {
+            _model.IncreaseMoneyPerClick();
+        }
+        
+        public void IncreaseMoneyPerTime()
+        {
+            _model.IncreaseMoneyPerTime();
+        }
+        
+        private void UpdateFromView()
+        {
+            if (_model.Hamster.Timer >= _model.Hamster.TimeToAdding)
+            {
+                AddMoneyPerTime();
+                _model.Hamster.Timer = 0.0f;
+            }
+
+            _model.Hamster.Timer += Time.deltaTime;
         }
 
         private void AddMoneyPerTime()
         {
-            var currentMoney = _model.Money + _model.MoneyPerSecond;
-
-            SetModelAndViewValue(currentMoney);
+            _model.AddMoneyPerTime();
         }
-
-        private void SetModelAndViewValue(double value)
+        
+        private void SetAmountText()
         {
-            _view.SetCounterText(value);
-            
-            _model.SetMoney(value);
+            _view.SetText(HamsterButtonType.MainButton, _model.Hamster.Amount);
         }
+
+        private void SetAmountPerClickText()
+        {
+            _view.SetText(HamsterButtonType.UpgradePerClickButton, _model.Hamster.AmountPerClick);
+        }
+
+        private void SetAmountPerTimeText()
+        {
+            _view.SetText(HamsterButtonType.UpgradePerTimeButton, _model.Hamster.AmountPerTime);
+        }
+        
     }
 }

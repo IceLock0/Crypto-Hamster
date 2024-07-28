@@ -16,11 +16,20 @@ namespace Presenters.Wallet
         public WalletPresenter(WalletUIView uiView)
         {
             _uiView = uiView;
-            _uiView.OnUpdate += UpdateFromView;
-            
+
             _model = new WalletModel();
             
             CreateCurrencies();
+        }
+
+        public void Enable()
+        {
+            _uiView.Updated += UpdatedFromView;
+        }
+
+        public void Disable()
+        {
+            _uiView.Updated -= UpdatedFromView;
         }
 
         public float GetCurrencyAmount(Type currencyType)
@@ -28,7 +37,7 @@ namespace Presenters.Wallet
             return _model.Currencies[currencyType].Amount;
         }
         
-        private void UpdateFromView()
+        private void UpdatedFromView()
         {
             AddCurrencyAmount();
         }
