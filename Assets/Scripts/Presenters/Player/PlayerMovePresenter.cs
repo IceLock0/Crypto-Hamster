@@ -26,7 +26,7 @@ namespace Presenters.Player
         }
         public void TryMove()
         {
-            _moveDirection = _inputService.Player.Movement.ReadValue<Vector2>().normalized * _playerConfig.Speed * Time.fixedDeltaTime;
+            _moveDirection = _inputService.Player.Movement.ReadValue<Vector2>().normalized * _playerConfig.MovementSpeed * Time.fixedDeltaTime;
             _playerRigidbody.linearVelocity =
                 new Vector3(_moveDirection.x, _playerRigidbody.linearVelocity.y, _moveDirection.y);
         }

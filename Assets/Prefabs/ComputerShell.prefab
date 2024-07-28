@@ -830,7 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d330933f86034ec0add1eeb3218d7ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buyButtonView: {fileID: 3958640859081972158}
+  _buyButtonView: {fileID: 7491882504114227116}
   _computerSpawnPoint: {fileID: 1274883881124473173}
 --- !u!1 &9095728319827250493
 GameObject:
@@ -844,7 +844,7 @@ GameObject:
   - component: {fileID: 6487280124487378686}
   - component: {fileID: 6354221575008775970}
   - component: {fileID: 6626126380131763456}
-  - component: {fileID: 3958640859081972158}
+  - component: {fileID: 7491882504114227116}
   m_Layer: 5
   m_Name: Build
   m_TagString: Untagged
@@ -954,7 +954,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3958640859081972158
+--- !u!114 &7491882504114227116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

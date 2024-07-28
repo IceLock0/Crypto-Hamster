@@ -11,9 +11,9 @@ namespace Installers
 
         public override void InstallBindings()
         {
+            BindFabricService();
             BindInputService();
             BindCoroutineService();
-            BindFabricService();
         }
 
         private void BindInputService()
