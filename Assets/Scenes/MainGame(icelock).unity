@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 1983839360}
   _textFormat: '{0:f5}'
-  hamsterButtonType: 0
+  hamsterButtonType: 1
   _buttonScaleFactor: 1.1
 --- !u!1 &560223922
 GameObject:
@@ -2587,7 +2587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 1407112859}
   _textFormat: '{0:f5}'
-  hamsterButtonType: 0
+  hamsterButtonType: 2
   _buttonScaleFactor: 1.1
 --- !u!1 &1497111308
 GameObject:
@@ -2887,7 +2887,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 271874850}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.81333333
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
