@@ -25,7 +25,7 @@ namespace Model.Wallet
 
         public void AddCurrencyAmount(Type currencyType)
         {
-            Currencies[currencyType].Amount += Currencies[currencyType].AmountPerTime;
+            Currencies[currencyType].Amount += Currencies[currencyType].PerTime;
         }
 
         private void CheckDictionaryForCurrency<T>() where T : class, ICurrency

@@ -6,10 +6,12 @@ namespace Presenters.Currency
     {
         public float Amount { get; set; }
         public float Rate { get; set; }
-        public float AmountPerClick { get; set; }
-        public float AmountPerTime { get; set; }
-        public float AmountOfIncreaseMoneyPerClick { get; set; }
-        public float AmountOfIncreaseMoneyPerTime { get; set; }
+        public float PerClick { get; set; }
+        public float PerTime { get; set; }
+        public float UpgradePerClickValue { get; set; }
+        public float UpgradePerTimeValue { get; set; }
+        public float UpgradePerClickPrice { get; set; }
+        public float UpgradePerTimePrice { get; set; }
         public float TimeToAdding { get; set; }
         public float Timer { get; set; }
     }

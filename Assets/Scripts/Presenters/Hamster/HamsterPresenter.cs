@@ -1,7 +1,6 @@
 ﻿using Model.HamsterModel;
 using UnityEngine;
 using Views.Hamster;
-using Views.Hamster.Buttons;
 
 namespace Presenters.Hamster
 {
@@ -18,47 +17,54 @@ namespace Presenters.Hamster
             _model = new HamsterModel();
 
             SetAmountText();
-            SetAmountPerClickText();
-            SetAmountPerTimeText();
+            SetPerClickText();
+            SetPerTimeText();
+            SetPerClickPriceText();
+            SetPerTimePriceText();
         }
 
         public void Enable()
         {
             _view.Updated += UpdateFromView;
 
+            _view.MainButtonPressed += AddMoneyPerClick;
+
+            _view.UpgradePerClickButtonPressed += UpgradePerClick;
+
+            _view.UpgradePerTimeButtonPressed += UpgradePerTime;
+
             _model.AmountChanged += SetAmountText;
 
-            _model.AmountPerClickChanged += SetAmountPerClickText;
+            _model.PerClickChanged += SetPerClickText;
 
-            _model.AmountPerTimeChanged += SetAmountPerTimeText;
+            _model.PerTimeChanged += SetPerTimeText;
+
+            _model.PerClickPriceChanged += SetPerClickPriceText;
+
+            _model.PerTimePriceChanged += SetPerTimePriceText;
         }
-        
+
         public void Disable()
         {
             _view.Updated -= UpdateFromView;
-            
+
+            _view.MainButtonPressed -= AddMoneyPerClick;
+
+            _view.UpgradePerClickButtonPressed -= UpgradePerClick;
+
+            _view.UpgradePerTimeButtonPressed -= UpgradePerTime;
+
             _model.AmountChanged -= SetAmountText;
-            
-            _model.AmountPerClickChanged -= SetAmountPerClickText;
-            
-            _model.AmountPerTimeChanged -= SetAmountPerTimeText;
+
+            _model.PerClickChanged -= SetPerClickText;
+
+            _model.PerTimeChanged -= SetPerTimeText;
+
+            _model.PerClickPriceChanged -= SetPerClickPriceText;
+
+            _model.PerTimePriceChanged -= SetPerTimePriceText;
         }
 
-        public void AddMoneyPerClick()
-        {
-            _model.AddMoneyPerClick();
-        }
-
-        public void IncreaseMoneyPerClick()
-        {
-            _model.IncreaseMoneyPerClick();
-        }
-        
-        public void IncreaseMoneyPerTime()
-        {
-            _model.IncreaseMoneyPerTime();
-        }
-        
         private void UpdateFromView()
         {
             if (_model.Hamster.Timer >= _model.Hamster.TimeToAdding)
@@ -70,25 +76,23 @@ namespace Presenters.Hamster
             _model.Hamster.Timer += Time.deltaTime;
         }
 
-        private void AddMoneyPerTime()
-        {
-            _model.AddMoneyPerTime();
-        }
         
-        private void SetAmountText()
-        {
-            _view.SetText(HamsterButtonType.MainButton, _model.Hamster.Amount);
-        }
+        private void AddMoneyPerClick() => _model.AddPerClick();
 
-        private void SetAmountPerClickText()
-        {
-            _view.SetText(HamsterButtonType.UpgradePerClickButton, _model.Hamster.AmountPerClick);
-        }
-
-        private void SetAmountPerTimeText()
-        {
-            _view.SetText(HamsterButtonType.UpgradePerTimeButton, _model.Hamster.AmountPerTime);
-        }
+        private void AddMoneyPerTime() => _model.AddPerTime();
         
+        private void UpgradePerClick() => _model.UpgradePerClick();
+
+        private void UpgradePerTime() => _model.UpgradePerTime();
+        
+        private void SetAmountText() => _view.SetText(HamsterTextType.Amount, _model.Hamster.Amount);
+
+        private void SetPerClickText() => _view.SetText(HamsterTextType.PerClick, _model.Hamster.PerClick);
+
+        private void SetPerTimeText() => _view.SetText(HamsterTextType.PerTime, _model.Hamster.PerTime);
+
+        private void SetPerClickPriceText() => _view.SetText(HamsterTextType.PerClickPrice, _model.Hamster.UpgradePerClickPrice);
+
+        private void SetPerTimePriceText() => _view.SetText(HamsterTextType.PerTimePrice, _model.Hamster.UpgradePerTimePrice);
     }
 }

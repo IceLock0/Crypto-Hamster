@@ -7,9 +7,11 @@ namespace Model.HamsterModel
     public class HamsterModel
     {
         public event Action AmountChanged;
-        public event Action AmountPerClickChanged;
-        public event Action AmountPerTimeChanged;
-
+        public event Action PerClickChanged;
+        public event Action PerTimeChanged;
+        public event Action PerClickPriceChanged;
+        public event Action PerTimePriceChanged;
+        
         public Hamster Hamster { get; private set; }
 
         public HamsterModel()
@@ -19,40 +21,66 @@ namespace Model.HamsterModel
                 Amount = 0.0f,
                 Rate = 5.0f,
                 Timer = 0.0f,
-                AmountPerClick = 1.0f,
-                AmountPerTime = 0.5f,
+                PerClick = 1.0f,
+                PerTime = 0.5f,
                 TimeToAdding = 1.0f,
-                AmountOfIncreaseMoneyPerClick = 0.1f,
-                AmountOfIncreaseMoneyPerTime = 0.2f
+                UpgradePerClickValue = 0.1f,
+                UpgradePerTimeValue = 0.2f,
+                UpgradePerClickPrice = 100.0f,
+                UpgradePerTimePrice = 200.0f
             };
         }
 
-        public void AddMoneyPerClick()
+        public void AddPerClick()
         {
-            Hamster.Amount += Hamster.AmountPerClick;
+            Hamster.Amount += Hamster.PerClick;
             
             AmountChanged?.Invoke();
         }
 
-        public void AddMoneyPerTime()
+        public void AddPerTime()
         {
-            Hamster.Amount += Hamster.AmountPerTime;
+            Hamster.Amount += Hamster.PerTime;
             
             AmountChanged?.Invoke();
         }
 
-        public void IncreaseMoneyPerClick()
+        public void UpgradePerClick()
         {
-            Hamster.AmountPerClick += Hamster.AmountOfIncreaseMoneyPerClick;
+            UpgradeProcess(Hamster.UpgradePerClickPrice);
+
+            Hamster.PerClick += Hamster.UpgradePerClickValue;
             
-            AmountPerClickChanged?.Invoke();
+            PerClickChanged?.Invoke();
         }
 
-        public void IncreaseMoneyPerTime()
+        public void UpgradePerTime()
         {
-            Hamster.AmountPerTime += Hamster.AmountOfIncreaseMoneyPerTime;
+            UpgradeProcess(Hamster.UpgradePerTimePrice);
+
+            Hamster.PerTime += Hamster.UpgradePerTimeValue;
             
-            AmountPerTimeChanged?.Invoke();
+            PerTimeChanged?.Invoke();
+        }
+
+        private void IncreasePerClickPrice()
+        {
+            PerClickPriceChanged?.Invoke();
+        }
+
+        private void IncreasePerTimePrice()
+        {
+            PerTimePriceChanged?.Invoke();
+        }
+        
+        private void UpgradeProcess(float value)
+        {
+            if (Hamster.Amount < value)
+                throw new ArgumentException("не хватает денег");// другая обработка
+
+            Hamster.Amount -= value;
+
+            AmountChanged?.Invoke();
         }
     }
 }

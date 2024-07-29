@@ -1,44 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Presenters.Hamster;
 using UnityEngine;
-using Views.Hamster.Buttons;
 
 namespace Views.Hamster
 {
     public class HamsterUIView : MonoBehaviour
     {
-        [SerializeField] private List<HamsterUIButtonHandler> _buttons;
+        [SerializeField] private List<HamsterTextComponent> _textComponents;
+        [SerializeField] private List<HamsterButtonComponent> _buttonComponents;
 
         public event Action Updated;
+        public event Action MainButtonPressed;
+        public event Action UpgradePerClickButtonPressed;
+        public event Action UpgradePerTimeButtonPressed;
 
         private HamsterPresenter _presenter;
-
-        public void SetText(HamsterButtonType type, float value)
-        {
-            foreach (var button in _buttons.Where(button => button.HamsterButtonType == type))
-            {
-                button.SetAmountText(value);
-            }
-        }
-
-        private void ButtonProcess(HamsterButtonType type)
-        {
-            switch (type)
-            {
-                case HamsterButtonType.MainButton:
-                    _presenter.AddMoneyPerClick();
-                    break;
-                case HamsterButtonType.UpgradePerClickButton:
-                    _presenter.IncreaseMoneyPerClick();
-                    break;
-                case HamsterButtonType.UpgradePerTimeButton:
-                    _presenter.IncreaseMoneyPerTime();
-                    break;
-            }
-        }
         
+        public void SetText(HamsterTextType textType, float value)
+        {
+            foreach (var textComponent in _textComponents)
+            {
+                if (textComponent.TextType == textType)
+                    textComponent.SetText(value);
+            }
+        }
+
+        private void HandleButtonDown(HamsterButtonType buttonType)
+        {
+            switch (buttonType)
+            {
+                case HamsterButtonType.Main:
+                    MainButtonPressed?.Invoke();
+                    break;
+                case HamsterButtonType.UpgradePerClick:
+                    UpgradePerClickButtonPressed?.Invoke();
+                    break;
+                case HamsterButtonType.UpgradePerTime:
+                    UpgradePerTimeButtonPressed?.Invoke();
+                    break;
+            }
+        }
+
         private void Awake()
         {
             _presenter = new HamsterPresenter(this);
@@ -46,14 +49,14 @@ namespace Views.Hamster
 
         private void OnEnable()
         {
-            _buttons.ForEach(button => button.ButtonPressed += ButtonProcess);
+            _buttonComponents.ForEach(button => button.OnButtonUpClicked += HandleButtonDown);
             
             _presenter.Enable();
         }
 
         private void OnDisable()
         {
-            _buttons.ForEach(button => button.ButtonPressed -= ButtonProcess);
+            _buttonComponents.ForEach(button => button.OnButtonUpClicked -= HandleButtonDown);
             
             _presenter.Disable();
         }
