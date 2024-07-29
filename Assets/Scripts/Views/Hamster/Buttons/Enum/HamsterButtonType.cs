@@ -4,7 +4,7 @@
     {
         Main,
         UpgradePerClick,
-        UpgradePerTime
-        
+        UpgradePerTime,
+        Exchange
     }
 }

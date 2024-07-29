@@ -21,6 +21,7 @@ namespace Presenters.Hamster
             SetPerTimeText();
             SetPerClickPriceText();
             SetPerTimePriceText();
+            SetRateText();
         }
 
         public void Enable()
@@ -33,6 +34,8 @@ namespace Presenters.Hamster
 
             _view.UpgradePerTimeButtonPressed += UpgradePerTime;
 
+            _view.ExchangeButtonPressed += Exchange;
+
             _model.AmountChanged += SetAmountText;
 
             _model.PerClickChanged += SetPerClickText;
@@ -42,6 +45,8 @@ namespace Presenters.Hamster
             _model.PerClickPriceChanged += SetPerClickPriceText;
 
             _model.PerTimePriceChanged += SetPerTimePriceText;
+
+            _model.RateChanged += SetRateText;
         }
 
         public void Disable()
@@ -54,6 +59,8 @@ namespace Presenters.Hamster
 
             _view.UpgradePerTimeButtonPressed -= UpgradePerTime;
 
+            _view.ExchangeButtonPressed -= Exchange;
+
             _model.AmountChanged -= SetAmountText;
 
             _model.PerClickChanged -= SetPerClickText;
@@ -63,36 +70,60 @@ namespace Presenters.Hamster
             _model.PerClickPriceChanged -= SetPerClickPriceText;
 
             _model.PerTimePriceChanged -= SetPerTimePriceText;
+
+            _model.RateChanged -= SetRateText;
         }
 
         private void UpdateFromView()
         {
+            AddMoneyPerTime();
+            ChangeRate();
+        }
+        //привести в порядок таймеры
+        private float timer = 0.0f;
+        
+        private void ChangeRate()
+        {
+            if (timer >= 2.0f)
+            {
+                _model.ChangeRate();
+                timer = 0.0f;
+            }
+
+            timer += Time.deltaTime;;
+        }
+        
+        private void Exchange() => _model.Exchange();
+
+        private void AddMoneyPerClick() => _model.AddPerClick();
+            
+        private void AddMoneyPerTime()
+        {
             if (_model.Hamster.Timer >= _model.Hamster.TimeToAdding)
             {
-                AddMoneyPerTime();
+                _model.AddPerTime();
                 _model.Hamster.Timer = 0.0f;
             }
 
             _model.Hamster.Timer += Time.deltaTime;
         }
 
-        
-        private void AddMoneyPerClick() => _model.AddPerClick();
-
-        private void AddMoneyPerTime() => _model.AddPerTime();
-        
         private void UpgradePerClick() => _model.UpgradePerClick();
 
         private void UpgradePerTime() => _model.UpgradePerTime();
-        
+
         private void SetAmountText() => _view.SetText(HamsterTextType.Amount, _model.Hamster.Amount);
 
         private void SetPerClickText() => _view.SetText(HamsterTextType.PerClick, _model.Hamster.PerClick);
 
         private void SetPerTimeText() => _view.SetText(HamsterTextType.PerTime, _model.Hamster.PerTime);
 
-        private void SetPerClickPriceText() => _view.SetText(HamsterTextType.PerClickPrice, _model.Hamster.UpgradePerClickPrice);
+        private void SetPerClickPriceText() =>
+            _view.SetText(HamsterTextType.PerClickPrice, _model.Hamster.UpgradePerClickPrice);
 
-        private void SetPerTimePriceText() => _view.SetText(HamsterTextType.PerTimePrice, _model.Hamster.UpgradePerTimePrice);
+        private void SetPerTimePriceText() =>
+            _view.SetText(HamsterTextType.PerTimePrice, _model.Hamster.UpgradePerTimePrice);
+
+        private void SetRateText() => _view.SetText(HamsterTextType.Rate, _model.Hamster.Rate);
     }
 }

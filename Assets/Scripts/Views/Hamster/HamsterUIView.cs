@@ -14,7 +14,8 @@ namespace Views.Hamster
         public event Action MainButtonPressed;
         public event Action UpgradePerClickButtonPressed;
         public event Action UpgradePerTimeButtonPressed;
-
+        public event Action ExchangeButtonPressed;
+        
         private HamsterPresenter _presenter;
         
         public void SetText(HamsterTextType textType, float value)
@@ -38,6 +39,9 @@ namespace Views.Hamster
                     break;
                 case HamsterButtonType.UpgradePerTime:
                     UpgradePerTimeButtonPressed?.Invoke();
+                    break;
+                case HamsterButtonType.Exchange:
+                    ExchangeButtonPressed?.Invoke();
                     break;
             }
         }

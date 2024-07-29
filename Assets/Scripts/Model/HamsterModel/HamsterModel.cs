@@ -11,26 +11,34 @@ namespace Model.HamsterModel
         public event Action PerTimeChanged;
         public event Action PerClickPriceChanged;
         public event Action PerTimePriceChanged;
+
+        public event Action RateChanged;
         
         public Hamster Hamster { get; private set; }
 
         public HamsterModel()
         {
-            Hamster = new Hamster
-            {
-                Amount = 0.0f,
-                Rate = 5.0f,
-                Timer = 0.0f,
-                PerClick = 1.0f,
-                PerTime = 0.5f,
-                TimeToAdding = 1.0f,
-                UpgradePerClickValue = 0.1f,
-                UpgradePerTimeValue = 0.2f,
-                UpgradePerClickPrice = 100.0f,
-                UpgradePerTimePrice = 200.0f
-            };
+            Hamster = new Hamster(amount: 0.0f, rate: 5.0f, timer: 0.0f, perClick: 1.0f, perTime: 0.5f,
+                timeToAdding: 1.0f, upgradePerClickValue: 0.1f, upgradePerTimeValue: 0.2f, upgradePerClickPrice: 100.0f,
+                upgradePerTimePrice: 200.0f);
         }
 
+        public void ChangeRate()
+        {
+            Hamster.ChangeRate();
+
+            RateChanged?.Invoke();
+        }
+        
+        public void Exchange()
+        {
+            var result = Hamster.Exchange();
+            
+            Debug.Log($"Result = {result}");
+            
+            AmountChanged?.Invoke();
+        }
+        
         public void AddPerClick()
         {
             Hamster.Amount += Hamster.PerClick;

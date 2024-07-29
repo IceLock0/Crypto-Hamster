@@ -6,6 +6,7 @@
         PerClick,
         PerTime,
         PerClickPrice,
-        PerTimePrice
+        PerTimePrice,
+        Rate
     }
 }

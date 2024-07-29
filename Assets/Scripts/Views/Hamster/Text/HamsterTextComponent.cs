@@ -29,6 +29,9 @@ namespace Views.Hamster
                 case HamsterTextType.PerTimePrice:
                     _text.text = "Upgrade Price " + $"{value:f4}";
                     break;
+                case HamsterTextType.Rate:
+                    _text.text = "Rate = " + $"{value:f7}";
+                    break;
             }
         }
     }
