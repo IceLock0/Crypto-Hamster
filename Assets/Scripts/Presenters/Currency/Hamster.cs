@@ -60,8 +60,6 @@ namespace Presenters.Currency
                 newRate = MinRate;
 
             Rate = newRate;
-            
-            Debug.Log($"Rate = {Rate}");
         }
     }
 }

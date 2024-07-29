@@ -30,13 +30,13 @@ namespace Model.HamsterModel
             RateChanged?.Invoke();
         }
         
-        public void Exchange()
+        public float Exchange()
         {
-            var result = Hamster.Exchange();
-            
-            Debug.Log($"Result = {result}");
-            
+            var resultCash = Hamster.Exchange();
+
             AmountChanged?.Invoke();
+
+            return resultCash;
         }
         
         public void AddPerClick()

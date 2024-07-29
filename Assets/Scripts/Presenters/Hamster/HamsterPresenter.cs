@@ -1,4 +1,6 @@
 ﻿using Model.HamsterModel;
+using Model.Wallet;
+using Presenters.Currency;
 using UnityEngine;
 using Views.Hamster;
 
@@ -10,11 +12,15 @@ namespace Presenters.Hamster
 
         private readonly HamsterModel _model;
 
-        public HamsterPresenter(HamsterUIView view)
+        private readonly WalletModel _walletModel;
+        
+        public HamsterPresenter(HamsterUIView view, WalletModel walletModel)
         {
             _view = view;
 
             _model = new HamsterModel();
+
+            _walletModel = walletModel;
 
             SetAmountText();
             SetPerClickText();
@@ -93,7 +99,12 @@ namespace Presenters.Hamster
             timer += Time.deltaTime;;
         }
         
-        private void Exchange() => _model.Exchange();
+        private void Exchange()
+        {
+           var resultCash = _model.Exchange();
+           
+           _walletModel.AddCurrencyAmountPerValue(typeof(Cash), resultCash);
+        }
 
         private void AddMoneyPerClick() => _model.AddPerClick();
             

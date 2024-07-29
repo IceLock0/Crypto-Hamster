@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model.Wallet;
 using Presenters.Hamster;
 using UnityEngine;
+using Zenject;
 
 namespace Views.Hamster
 {
@@ -46,9 +48,10 @@ namespace Views.Hamster
             }
         }
 
-        private void Awake()
+        [Inject]
+        private void Initialize(WalletModel walletModel)
         {
-            _presenter = new HamsterPresenter(this);
+            _presenter = new HamsterPresenter(this, walletModel);
         }
 
         private void OnEnable()

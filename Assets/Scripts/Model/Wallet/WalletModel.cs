@@ -9,6 +9,8 @@ namespace Model.Wallet
 {
     public class WalletModel
     {
+        public event Action<Type> AmountChanged;
+        
         public Dictionary<Type, ICurrency> Currencies { get; private set; }
         
         public WalletModel()
@@ -23,9 +25,18 @@ namespace Model.Wallet
             Currencies.Add(typeof(T), currency);
         }
 
-        public void AddCurrencyAmount(Type currencyType)
+        public void AddCurrencyAmountPerTime(Type currencyType)
         {
             Currencies[currencyType].Amount += Currencies[currencyType].PerTime;
+
+            AmountChanged?.Invoke(currencyType);
+        }
+        
+        public void AddCurrencyAmountPerValue(Type currencyType, float value)
+        {
+            Currencies[currencyType].Amount += value;
+            
+            AmountChanged?.Invoke(currencyType);
         }
 
         private void CheckDictionaryForCurrency<T>() where T : class, ICurrency

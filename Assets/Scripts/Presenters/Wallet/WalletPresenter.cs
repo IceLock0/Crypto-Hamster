@@ -3,6 +3,7 @@ using Model.Wallet;
 using Presenters.Currency;
 using UnityEngine;
 using Views.Wallet;
+using Zenject;
 
 namespace Presenters.Wallet
 {
@@ -11,32 +12,41 @@ namespace Presenters.Wallet
         private readonly WalletUIView _uiView;
         private readonly WalletModel _model;
 
-        private float _addTimer;
-        
-        public WalletPresenter(WalletUIView uiView)
+        public WalletPresenter(WalletUIView uiView, WalletModel walletModel)
         {
             _uiView = uiView;
 
-            _model = new WalletModel();
-            
+            _model = walletModel;
+        
             CreateCurrencies();
         }
 
         public void Enable()
         {
             _uiView.Updated += UpdatedFromView;
+
+            _model.AmountChanged += SetCurrencyText;
         }
 
         public void Disable()
         {
             _uiView.Updated -= UpdatedFromView;
+            
+            _model.AmountChanged -= SetCurrencyText;
         }
 
-        public float GetCurrencyAmount(Type currencyType)
+        private void SetCurrencyText(Type type)
         {
-            return _model.Currencies[currencyType].Amount;
+            var amountValue =_model.Currencies[type].Amount;
+
+            if(type == typeof(Cash))
+                _uiView.SetCashText(amountValue);
+            else
+                _uiView.SetCryptoText();
         }
-        
+
+        public float GetCryptoAmount(Type type) => _model.Currencies[type].Amount;
+
         private void UpdatedFromView()
         {
             AddCurrencyAmount();
@@ -48,14 +58,11 @@ namespace Presenters.Wallet
             {
                 if (currency.Timer >= currency.TimeToAdding)
                 {
-                    _model.AddCurrencyAmount(currency.GetType());
+                    _model.AddCurrencyAmountPerTime(currency.GetType());
                     currency.Timer = 0.0f;
                 }
                 else currency.Timer += Time.deltaTime;
-                // _addTimer = 0.0f;
             }
-
-            //_addTimer += Time.deltaTime;
         }
 
         private void CreateCurrencies()
