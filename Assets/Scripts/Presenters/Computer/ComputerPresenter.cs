@@ -35,15 +35,15 @@ namespace Presenters.Computer
 
         public void Enable()
         {
-            _buyButtonView.BuyButtonPresenter.OnBuyButtonClicked += BuyComputer;
+            _buyButtonView.BuyComputerButtonClicked += BuyComputerComputer;
         }
 
         public void Disable()
         {
-            _buyButtonView.BuyButtonPresenter.OnBuyButtonClicked -= BuyComputer;
+            _buyButtonView.BuyComputerButtonClicked -= BuyComputerComputer;
         }
 
-        private void BuyComputer()
+        private void BuyComputerComputer()
         {
             _model.ChangeType((int)++_model.ComputerType);
             TryDestroyOldComputer();

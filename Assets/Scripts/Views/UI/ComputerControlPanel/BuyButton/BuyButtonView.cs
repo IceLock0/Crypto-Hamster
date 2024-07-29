@@ -1,21 +1,17 @@
-﻿using Presenters.UI.ComputerControlPanel.BuyButton;
+﻿using System;
+using Presenters.UI.ComputerControlPanel.BuyButton;
 using Views.UI.ButtonUI;
+using Zenject;
 
 namespace Views.UI.ComputerControlPanel.BuyButton
 {
     public class BuyButtonView : ButtonView
     {
-        protected override void Awake()
-        {
-            base.Awake();
-            BuyButtonPresenter = new BuyButtonPresenter();
-        }
-        
-        public BuyButtonPresenter BuyButtonPresenter;
+        public event Action BuyComputerButtonClicked;
 
         protected override void ButtonClicked()
         {
-            BuyButtonPresenter.BuyButtonClicked();
+            BuyComputerButtonClicked?.Invoke();
         }
     }
 }

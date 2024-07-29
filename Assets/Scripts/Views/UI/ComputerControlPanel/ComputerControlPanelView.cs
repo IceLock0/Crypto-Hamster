@@ -20,10 +20,6 @@ namespace Views.UI.ComputerControlPanel
         private void OnEnable()
         {
             _presenter.Enable();
-        }
-
-        private void Start()
-        {
             _controlPanelUI.gameObject.SetActive(false);
         }
 
