@@ -1,64 +1,76 @@
 ﻿using System;
+using System.Collections.Generic;
+using Model.Wallet;
 using Presenters.Hamster;
-using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Views.Hamster
 {
     public class HamsterUIView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _counterTMP;
+        [SerializeField] private List<HamsterTextComponent> _textComponents;
+        [SerializeField] private List<HamsterButtonComponent> _buttonComponents;
 
-        public event Action OnUpdate;
+        public event Action Updated;
+        public event Action MainButtonPressed;
+        public event Action UpgradePerClickButtonPressed;
+        public event Action UpgradePerTimeButtonPressed;
+        public event Action ExchangeButtonPressed;
         
         private HamsterPresenter _presenter;
-
-        private HamsterOnClickButton _button;
-
-        private const float ScaleFactor = 1.3f;
         
-        public void SetCounterText(double value)
+        public void SetText(HamsterTextType textType, float value)
         {
-            _counterTMP.text = $"{value:f10}";
+            foreach (var textComponent in _textComponents)
+            {
+                if (textComponent.TextType == textType)
+                    textComponent.SetText(value);
+            }
         }
 
-        private void Awake()
+        private void HandleButtonDown(HamsterButtonType buttonType)
         {
-            _button = GetComponent<HamsterOnClickButton>();
+            switch (buttonType)
+            {
+                case HamsterButtonType.Main:
+                    MainButtonPressed?.Invoke();
+                    break;
+                case HamsterButtonType.UpgradePerClick:
+                    UpgradePerClickButtonPressed?.Invoke();
+                    break;
+                case HamsterButtonType.UpgradePerTime:
+                    UpgradePerTimeButtonPressed?.Invoke();
+                    break;
+                case HamsterButtonType.Exchange:
+                    ExchangeButtonPressed?.Invoke();
+                    break;
+            }
         }
 
-        private void Start()
+        [Inject]
+        private void Initialize(WalletModel walletModel)
         {
-            _presenter = new HamsterPresenter(this);
-        }
-
-        private void Update()
-        {
-            OnUpdate?.Invoke();
-        }
-        
-        private void DownClicked()
-        {
-            gameObject.transform.localScale /= ScaleFactor;
-        }
-
-        private void UpClicked()
-        {
-            gameObject.transform.localScale *= ScaleFactor;
-
-            _presenter.AddMoneyPerClick();
+            _presenter = new HamsterPresenter(this, walletModel);
         }
 
         private void OnEnable()
         {
-            _button.OnButtonDownClicked += DownClicked;
-            _button.OnButtonUpClicked += UpClicked;
+            _buttonComponents.ForEach(button => button.OnButtonUpClicked += HandleButtonDown);
+            
+            _presenter.Enable();
         }
 
         private void OnDisable()
         {
-            _button.OnButtonDownClicked -= DownClicked;
-            _button.OnButtonUpClicked -= UpClicked;
+            _buttonComponents.ForEach(button => button.OnButtonUpClicked -= HandleButtonDown);
+            
+            _presenter.Disable();
+        }
+
+        private void Update()
+        {
+            Updated?.Invoke();
         }
     }
 }
