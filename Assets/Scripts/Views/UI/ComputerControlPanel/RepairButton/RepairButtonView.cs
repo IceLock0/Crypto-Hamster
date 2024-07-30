@@ -1,13 +1,15 @@
-﻿using Views.UI.ButtonUI;
+﻿using System;
+using Views.UI.ButtonUI;
 
 namespace Views.UI.ComputerControlPanel.RepairButton
 {
     public class RepairButtonView : ButtonView
     {
-
+        public event Action RepairButtonClicked;
+        
         protected override void ButtonClicked()
         {
-            throw new System.NotImplementedException();
+            RepairButtonClicked?.Invoke();
         }
     }
 }

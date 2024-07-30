@@ -25,7 +25,7 @@ namespace Presenters.Computer
             InvariantChecker.CheckObjectInvariant(buyButtonView, computerFabric, view, computerFabric, computerPosition,
                 computersParent);
 
-            Model = new ComputerModel((int)ComputerType.Empty, 100f, 100f);
+            Model = new ComputerModel((int)ComputerType.Empty, 100f);
             _view = view;
             _buyButtonView = buyButtonView;
             _computerFabric = computerFabric;
@@ -33,7 +33,7 @@ namespace Presenters.Computer
             _computerParent = computersParent;
         }
 
-        public ComputerModel Model { get; private set; }
+        public ComputerModel Model { get; }
 
         public void Enable()
         {

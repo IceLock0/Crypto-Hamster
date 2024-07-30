@@ -496,7 +496,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerConfig: {fileID: 11400000, guid: 374e66283f7593c4685b2bfeacc44ecb, type: 2}
   _cameraConfig: {fileID: 11400000, guid: 9cc75fd57ac9dd7479dac83117beb00e, type: 2}
-  _computerConfig: {fileID: 11400000, guid: f0cf76bca193eae49a0ccbe8a13ea14b, type: 2}
+  _computerConfig:
+  - {fileID: 11400000, guid: f0cf76bca193eae49a0ccbe8a13ea14b, type: 2}
+  - {fileID: 11400000, guid: 778093697a106904a84811d361a3ffe3, type: 2}
 --- !u!4 &363569108
 Transform:
   m_ObjectHideFlags: 0

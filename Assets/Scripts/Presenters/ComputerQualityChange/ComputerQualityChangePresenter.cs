@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Enums;
 using Model.Computer;
+using Presenters.ComputerRepair;
 using ScriptableObjects;
 using UnityEngine;
 using Utils;
@@ -11,48 +14,57 @@ namespace Presenters.ComputerQualityChange
     public class ComputerQualityChangePresenter
     {
         private readonly ComputerModel _computerModel;
-        private readonly ComputerConfig _computerConfig;
+        private readonly List<ComputerConfig> _computerConfigs;
+        private readonly ComputerRepairPresenter _computerRepairPresenter;
         
-        public ComputerQualityChangePresenter(ComputerModel computerModel, ComputerConfig computerConfig)
+        private ComputerConfig _computerConfig;
+        private UniTask _qualityChangeTask;
+        
+        public ComputerQualityChangePresenter(ComputerModel computerModel, List<ComputerConfig> computerConfigs, ComputerRepairPresenter computerRepairPresenter)
         {
-            InvariantChecker.CheckObjectInvariant(computerModel, computerConfig);
+            InvariantChecker.CheckObjectInvariant(computerModel, computerConfigs);
             
             _computerModel = computerModel;
-            _computerConfig = computerConfig;
+            _computerConfigs = computerConfigs;
+            _computerRepairPresenter = computerRepairPresenter;
         }
 
-        public void TryChangingQuality()
+        public void Enable()
         {
-            if (_computerModel.Quality <= 0 || _computerModel.ThermalQuality <= 0 || _computerModel.ComputerType == ComputerType.Empty)
-            {
-                Debug.Log("Computer is broken");
-                return; //Пока заглушка
-            }
-
-            ChangeQuality();
-            ChangeThermalQuality();
+            _computerRepairPresenter.ComputerFixed += OnComputerFixed;
+            _computerModel.ComputerTypeChanged += OnComputerTypeChanged;
         }
-
-        private async UniTaskVoid ChangeQuality()
+        public void Disable()
+        {
+            _computerRepairPresenter.ComputerFixed -= OnComputerFixed;
+            _computerModel.ComputerTypeChanged -= OnComputerTypeChanged;
+        }
+        
+        private async UniTask ChangeComputerQuality()
         {
             while (_computerModel.Quality > 0)
             {
                 _computerModel.ChangeQuality(Mathf.Clamp(_computerModel.Quality - _computerConfig.QualityFatigue, 
                     0f, 100f));
                 await UniTask.Delay((int) (_computerConfig.QualityFatigueDelay * 1000));
-                Debug.Log($"Quality Changed on {_computerModel.Quality}");
             }
         }
 
-        private async UniTaskVoid ChangeThermalQuality()
+        private void TryChangeComputerQuality()
         {
-            while (_computerModel.ThermalQuality > 0)
-            {
-                _computerModel.ChangeThermalQuality(Mathf.Clamp(_computerModel.ThermalQuality - _computerConfig.ThermalQualityFatigue, 
-                    0f, 100f));
-                await UniTask.Delay((int) (_computerConfig.ThermalQualityFatigueDelay * 1000));
-                Debug.Log($"Thermal Quality Changed on {_computerModel.ThermalQuality}");
-            }
+            if(_qualityChangeTask.Status == UniTaskStatus.Succeeded)
+                _qualityChangeTask = ChangeComputerQuality();
+        }
+
+        private void OnComputerTypeChanged(ComputerType type)
+        {
+            _computerConfig = _computerConfigs.FirstOrDefault(x => x.ComputerType == type);
+            TryChangeComputerQuality();
+        }
+
+        private void OnComputerFixed()
+        {
+            TryChangeComputerQuality();
         }
     }
 }
