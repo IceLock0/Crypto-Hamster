@@ -2,9 +2,9 @@
 
 namespace Model
 {
-    public class MoveModel //На будущее для персонажей
+    public class SpeedModel //На будущее для персонажей
     {
-        public MoveModel(float speed)
+        public SpeedModel(float speed)
         {
             if (speed < 0.0f)
                 throw new ArgumentOutOfRangeException();
