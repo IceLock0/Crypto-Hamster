@@ -1,5 +1,7 @@
 ﻿using System;
 using Presenters.Computer;
+using Presenters.ComputerQualityChange;
+using ScriptableObjects;
 using Services.Fabric;
 using UnityEngine;
 using Views.UI.ComputerControlPanel.BuyButton;
@@ -13,11 +15,18 @@ namespace Views.Computer
         [SerializeField] private Transform _computerSpawnPoint;
 
         private ComputerPresenter _computerPresenter;
+        private ComputerQualityChangePresenter _computerQualityChangePresenter;
         
         [Inject]
-        public void Initialize(IComputerFabric computerFabric)
+        public void Initialize(IComputerFabric computerFabric, ComputerConfig computerConfig)
         {
             _computerPresenter = new ComputerPresenter(_buyButtonView, computerFabric, this,_computerSpawnPoint.position, _computerSpawnPoint);
+            _computerQualityChangePresenter = new ComputerQualityChangePresenter(_computerPresenter.Model, computerConfig);
+        }
+
+        private void Start()
+        {
+            _computerQualityChangePresenter.TryChangingQuality();
         }
 
         private void OnEnable()

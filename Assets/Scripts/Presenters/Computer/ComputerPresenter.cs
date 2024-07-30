@@ -1,4 +1,5 @@
-﻿using Model.Computer;
+﻿using Enums;
+using Model.Computer;
 using Services.Fabric;
 using UnityEngine;
 using Utils;
@@ -9,7 +10,6 @@ namespace Presenters.Computer
 {
     public class ComputerPresenter
     {
-        private readonly ComputerModel _model;
         private readonly ComputerView _view;
 
         private readonly BuyButtonView _buyButtonView;
@@ -25,13 +25,15 @@ namespace Presenters.Computer
             InvariantChecker.CheckObjectInvariant(buyButtonView, computerFabric, view, computerFabric, computerPosition,
                 computersParent);
 
-            _model = new ComputerModel();
+            Model = new ComputerModel((int)ComputerType.Empty, 100f, 100f);
             _view = view;
             _buyButtonView = buyButtonView;
             _computerFabric = computerFabric;
             _computerPosition = computerPosition;
             _computerParent = computersParent;
         }
+
+        public ComputerModel Model { get; private set; }
 
         public void Enable()
         {
@@ -45,7 +47,7 @@ namespace Presenters.Computer
 
         private void BuyComputerComputer()
         {
-            _model.ChangeType((int)++_model.ComputerType);
+            Model.ChangeType((int)(Model.ComputerType + 1));
             TryDestroyOldComputer();
             TryBuildNewComputer();
         }
@@ -61,7 +63,7 @@ namespace Presenters.Computer
         private void TryBuildNewComputer()
         {
             //Нехватка бабок и тп обработка невозможности билда
-            _currentComputerModel = _computerFabric.Create(_model.ComputerType, _computerPosition, _computerParent) as GameObject;
+            _currentComputerModel = _computerFabric.Create(Model.ComputerType, _computerPosition, _computerParent) as GameObject;
         }
     }
 }
