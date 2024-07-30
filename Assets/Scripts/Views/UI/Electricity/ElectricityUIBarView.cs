@@ -1,9 +1,11 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Model.Wallet;
 using Presenters.Electricity;
 using UnityEngine;
 using UnityEngine.UI;
+using Views.UI.Electricity.ButtonPayment;
+using Zenject;
 
 namespace Views.UI.Electricity
 {
@@ -12,7 +14,13 @@ namespace Views.UI.Electricity
         [SerializeField] private Image _electricityImage;
         [SerializeField] private GameObject _noElectricityNotification;
 
-        private ElectricityPresenter _presenter;
+        private ElectricityBarPresenter _barPresenter;
+
+        [Inject]
+        public void Initialize(ElectricityUIButtonPayment paymentButton, WalletModel walletModel)
+        {
+            _barPresenter = new ElectricityBarPresenter(this, paymentButton, walletModel);
+        }
         
         public void ChangeFillAmount(float value, float duration)
         {
@@ -28,12 +36,10 @@ namespace Views.UI.Electricity
         {
             _noElectricityNotification.SetActive(false);
         }
-        
+
         private void Awake()
         {
             InitStartValues();
-            
-            _presenter = new ElectricityPresenter(this);
         }
 
         private void InitStartValues()
@@ -42,6 +48,16 @@ namespace Views.UI.Electricity
             _electricityImage.fillAmount = 1.0f;
             
             _noElectricityNotification.gameObject.SetActive(false);
+        }
+
+        private void OnEnable()
+        {
+            _barPresenter.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _barPresenter.Disable();
         }
     }
 }
