@@ -19,7 +19,7 @@ namespace Presenters.Hamster
             _view = view;
 
             _model = new HamsterModel();
-
+            
             _walletModel = walletModel;
 
             SetAmountText();
