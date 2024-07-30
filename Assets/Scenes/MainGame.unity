@@ -961,6 +961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerConfig: {fileID: 11400000, guid: 374e66283f7593c4685b2bfeacc44ecb, type: 2}
   _cameraConfig: {fileID: 11400000, guid: 9cc75fd57ac9dd7479dac83117beb00e, type: 2}
+  _computerConfig: {fileID: 11400000, guid: f0cf76bca193eae49a0ccbe8a13ea14b, type: 2}
 --- !u!4 &731888194
 Transform:
   m_ObjectHideFlags: 0
@@ -2195,7 +2196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8214367, y: 0}
   m_AnchorMax: {x: 1, y: 0.18900001}
-  m_AnchoredPosition: {x: -22, y: 20}
+  m_AnchoredPosition: {x: -22, y: 19.999998}
   m_SizeDelta: {x: -49.47998, y: -16.839996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2133648467

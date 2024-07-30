@@ -27,6 +27,8 @@ namespace Presenters.Player
         public void TryRotate()
         {
             _moveDirection = _inputService.Player.Movement.ReadValue<Vector2>();
+            if(_moveDirection == Vector2.zero)
+                return;
             _lookDirection = Quaternion.LookRotation(new Vector3(_moveDirection.x, 0 , _moveDirection.y), Vector3.up);
             _targetRotation = Quaternion.RotateTowards(
                 _playerGameModelTransform.rotation, _lookDirection, _playerConfig.RotationSpeed * Time.fixedDeltaTime);

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b3073f81564149930040fbee1af84b, type: 3}
   m_Name: Camera Config
   m_EditorClassIdentifier: 
-  _smooth: 0.9
-  _offset: {x: 0, y: 7.84, z: -10.05}
-  _rotation: {x: 32.4, y: 0, z: 0}
+  _smooth: 1
+  _offset: {x: 0, y: 5.01, z: -5.47}
+  _rotation: {x: 31.3, y: 0, z: 0}
