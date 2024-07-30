@@ -19,9 +19,5 @@ namespace Presenters.Currency
         {
             throw new System.NotImplementedException();
         }
-
-        public float PerTime { get; set; } = 0.001f;
-        public float TimeToAdding { get; set; } = 1.0f;
-        public float Timer { get; set; } = 0.0f;
     }
 }

@@ -23,15 +23,11 @@ namespace Presenters.Wallet
 
         public void Enable()
         {
-            _uiView.Updated += UpdatedFromView;
-
             _model.AmountChanged += SetCurrencyText;
         }
 
         public void Disable()
         {
-            _uiView.Updated -= UpdatedFromView;
-            
             _model.AmountChanged -= SetCurrencyText;
         }
 
@@ -47,23 +43,6 @@ namespace Presenters.Wallet
 
         public float GetCryptoAmount(Type type) => _model.Currencies[type].Amount;
 
-        private void UpdatedFromView()
-        {
-            AddCurrencyAmount();
-        }
-
-        private void AddCurrencyAmount()
-        {
-            foreach (var currency in _model.Currencies.Values)
-            {
-                if (currency.Timer >= currency.TimeToAdding)
-                {
-                    _model.AddCurrencyAmountPerTime(currency.GetType());
-                    currency.Timer = 0.0f;
-                }
-                else currency.Timer += Time.deltaTime;
-            }
-        }
 
         private void CreateCurrencies()
         {

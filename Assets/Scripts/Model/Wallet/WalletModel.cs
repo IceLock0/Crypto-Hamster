@@ -24,13 +24,6 @@ namespace Model.Wallet
 
             Currencies.Add(typeof(T), currency);
         }
-
-        public void AddCurrencyAmountPerTime(Type currencyType)
-        {
-            Currencies[currencyType].Amount += Currencies[currencyType].PerTime;
-
-            AmountChanged?.Invoke(currencyType);
-        }
         
         public void AddCurrencyAmountPerValue(Type currencyType, float value)
         {
