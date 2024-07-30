@@ -14,8 +14,6 @@ namespace Views.Wallet
     {
         [SerializeField] private TextMeshProUGUI _cashText;
         [SerializeField] private CryptoDropDownHandler _dropDownHandler;
-        
-        public event Action Updated;
 
         private WalletPresenter _presenter;
 
@@ -54,11 +52,6 @@ namespace Views.Wallet
             _presenter.Disable();
             
             _dropDownHandler.CryptoSelected -= SetCryptoType;
-        }
-
-        private void Update()
-        {
-            Updated?.Invoke();
         }
 
         private void SetCryptoType(Type type)
