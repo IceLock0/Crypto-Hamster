@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b9ddf6d25f45638515c6fe26b41894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currencyAmountTextTMP: {fileID: 1670642121}
+  _cryptoText: {fileID: 1670642121}
   _dropdown: {fileID: 299844454}
 --- !u!1 &618987647
 GameObject:
@@ -1422,6 +1422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerConfig: {fileID: 11400000, guid: 374e66283f7593c4685b2bfeacc44ecb, type: 2}
   _cameraConfig: {fileID: 11400000, guid: 9cc75fd57ac9dd7479dac83117beb00e, type: 2}
+  _computerConfig: {fileID: 11400000, guid: f0cf76bca193eae49a0ccbe8a13ea14b, type: 2}
 --- !u!4 &731888194
 Transform:
   m_ObjectHideFlags: 0
@@ -1675,7 +1676,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 834778651}
-  - component: {fileID: 834778652}
   m_Layer: 0
   m_Name: Cash
   m_TagString: Untagged
@@ -1703,19 +1703,6 @@ RectTransform:
   m_AnchoredPosition: {x: 57.4, y: 71.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &834778652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 834778650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e83e0119e3d41b98bdb311dff424246, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currencyAmountTextTMP: {fileID: 1655793854}
 --- !u!1 &881735831
 GameObject:
   m_ObjectHideFlags: 0
@@ -3426,6 +3413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1525552934}
+  - component: {fileID: 1525552935}
   m_Layer: 0
   m_Name: Wallet
   m_TagString: Untagged
@@ -3454,6 +3442,20 @@ RectTransform:
   m_AnchoredPosition: {x: -460.7, y: 173.4}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1525552935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525552933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfde0da7957e458b824d272d47c6a41a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cashText: {fileID: 1655793854}
+  _dropDownHandler: {fileID: 560223924}
 --- !u!1 &1569730619
 GameObject:
   m_ObjectHideFlags: 0
@@ -4138,8 +4140,8 @@ MonoBehaviour:
   _textComponents:
   - {fileID: 1595930122}
   - {fileID: 504200517}
-  - {fileID: 419543720}
   - {fileID: 1479932080}
+  - {fileID: 419543720}
   - {fileID: 1901091347}
   - {fileID: 934958184}
   _buttonComponents:

@@ -30,7 +30,7 @@ namespace Views.Wallet
         {
             var amount = _presenter.GetCryptoAmount(_cryptoType);
             
-            _dropDownHandler.CryptoText.text = "Cash: " + $"{amount:f8}" + " $";
+            _dropDownHandler.CryptoText.text = $"{amount:f8}";
         }
         
 
