@@ -1,4 +1,5 @@
-﻿using Model.HamsterModel;
+﻿using Cysharp.Threading.Tasks;
+using Model.HamsterModel;
 using Model.Wallet;
 using Presenters.Currency;
 using UnityEngine;
@@ -28,12 +29,13 @@ namespace Presenters.Hamster
             SetPerClickPriceText();
             SetPerTimePriceText();
             SetRateText();
+
+            ChangeRate();
+            AddMoneyPerTime();
         }
 
         public void Enable()
         {
-            _view.Updated += UpdateFromView;
-
             _view.MainButtonPressed += AddMoneyPerClick;
 
             _view.UpgradePerClickButtonPressed += UpgradePerClick;
@@ -57,8 +59,6 @@ namespace Presenters.Hamster
 
         public void Disable()
         {
-            _view.Updated -= UpdateFromView;
-
             _view.MainButtonPressed -= AddMoneyPerClick;
 
             _view.UpgradePerClickButtonPressed -= UpgradePerClick;
@@ -80,23 +80,29 @@ namespace Presenters.Hamster
             _model.RateChanged -= SetRateText;
         }
 
-        private void UpdateFromView()
-        {
-            AddMoneyPerTime();
-            ChangeRate();
-        }
-        //привести в порядок таймеры
-        private float timer = 0.0f;
-        
-        private void ChangeRate()
-        {
-            if (timer >= 2.0f)
-            {
-                _model.ChangeRate();
-                timer = 0.0f;
-            }
+        private float _rateChangeFrequencyInSeconds = 2.0f;
+        private bool _isCanChangeRate = true;
 
-            timer += Time.deltaTime;;
+        private float _hamsterAddingFrequencyInSeconds = 1.0f;
+        private bool _isCanAddHamster = true;
+        private async UniTaskVoid ChangeRate()
+        {
+            while (_isCanChangeRate)
+            {
+                await UniTask.Delay((int) _rateChangeFrequencyInSeconds * 1000);
+
+                _model.ChangeRate();
+            }
+        }
+        
+        private async UniTaskVoid AddMoneyPerTime()
+        {
+            while (_isCanAddHamster)
+            {
+                await UniTask.Delay((int) _hamsterAddingFrequencyInSeconds * 1000);
+
+                _model.AddPerTime();
+            }
         }
         
         private void Exchange()
@@ -107,17 +113,6 @@ namespace Presenters.Hamster
         }
 
         private void AddMoneyPerClick() => _model.AddPerClick();
-            
-        private void AddMoneyPerTime()
-        {
-            if (_model.Hamster.Timer >= _model.Hamster.TimeToAdding)
-            {
-                _model.AddPerTime();
-                _model.Hamster.Timer = 0.0f;
-            }
-
-            _model.Hamster.Timer += Time.deltaTime;
-        }
 
         private void UpgradePerClick() => _model.UpgradePerClick();
 

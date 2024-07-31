@@ -11,8 +11,6 @@ namespace Views.Hamster
     {
         [SerializeField] private List<HamsterTextComponent> _textComponents;
         [SerializeField] private List<HamsterButtonComponent> _buttonComponents;
-
-        public event Action Updated;
         public event Action MainButtonPressed;
         public event Action UpgradePerClickButtonPressed;
         public event Action UpgradePerTimeButtonPressed;
@@ -66,11 +64,6 @@ namespace Views.Hamster
             _buttonComponents.ForEach(button => button.OnButtonUpClicked -= HandleButtonDown);
             
             _presenter.Disable();
-        }
-
-        private void Update()
-        {
-            Updated?.Invoke();
         }
     }
 }
