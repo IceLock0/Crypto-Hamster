@@ -1,4 +1,4 @@
-﻿namespace Views.Wallet
+﻿namespace Views.Wallet.Association_dropdown
 {
     public enum CryptoCurrencyIndices
     {

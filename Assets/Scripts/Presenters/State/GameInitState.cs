@@ -15,7 +15,7 @@ namespace Presenters.State
 
         public void Exit()
         {
-            throw new NotImplementedException();
+            Finished?.Invoke(this);
         }
     }
 

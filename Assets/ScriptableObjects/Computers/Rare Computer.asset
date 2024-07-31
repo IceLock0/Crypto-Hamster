@@ -10,9 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a87beabbabc341e8a1f6b5216789c7ba, type: 3}
-  m_Name: Computer Config
+  m_Name: Rare Computer
   m_EditorClassIdentifier: 
-  _qualityFatigue: 3
-  _qualityFatigueDelay: 1
-  _thermalQualityFatigue: 4
-  _thermalQualityFatigueDelay: 10
+  _qualityFatigue: 2
+  _qualityFatigueDelay: 4
+  _computerType: 2
+  _cryptoModels:
+  - Currency: 0
+    Rate: 10
+    PerTime: 1
+  - Currency: 1
+    Rate: 3
+    PerTime: 1
+  - Currency: 2
+    Rate: 110
+    PerTime: 1
