@@ -44,6 +44,8 @@ namespace Views.Computer
             Destroy(gameObj);
         }
 
+        public ComputerPresenter GetComputerPresenter() => _computerPresenter;
+
         /*private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

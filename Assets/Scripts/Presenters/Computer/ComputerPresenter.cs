@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using Model.Computer;
 using Services.Fabric;
 using UnityEngine;
@@ -25,7 +26,8 @@ namespace Presenters.Computer
             InvariantChecker.CheckObjectInvariant(buyButtonView, computerFabric, view, computerFabric, computerPosition,
                 computersParent);
 
-            Model = new ComputerModel((int)ComputerType.Empty, 100f, 100f);
+            Model = new ComputerModel((int)ComputerType.Empty, 100f, 100f, computerPosition);
+
             _view = view;
             _buyButtonView = buyButtonView;
             _computerFabric = computerFabric;
