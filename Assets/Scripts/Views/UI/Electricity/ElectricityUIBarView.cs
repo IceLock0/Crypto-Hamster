@@ -1,5 +1,5 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
+using Model.Electricity;
 using Model.Wallet;
 using Presenters.Electricity;
 using UnityEngine;
@@ -17,9 +17,24 @@ namespace Views.UI.Electricity
         private ElectricityBarPresenter _barPresenter;
 
         [Inject]
-        public void Initialize(ElectricityUIButtonPayment paymentButton, WalletModel walletModel)
+        public void Initialize(ElectricityUIButtonPayment paymentButton, WalletModel walletModel, ElectricityModel electricityModel)
         {
-            _barPresenter = new ElectricityBarPresenter(this, paymentButton, walletModel);
+            _barPresenter = new ElectricityBarPresenter(this, paymentButton, walletModel, electricityModel);
+        }
+        
+        private void Awake()
+        {
+            InitStartValues();
+        }
+        
+        private void OnEnable()
+        {
+            _barPresenter.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _barPresenter.Disable();
         }
         
         public void ChangeFillAmount(float value, float duration)
@@ -37,11 +52,6 @@ namespace Views.UI.Electricity
             _noElectricityNotification.SetActive(false);
         }
 
-        private void Awake()
-        {
-            InitStartValues();
-        }
-
         private void InitStartValues()
         {
             _electricityImage.gameObject.SetActive(true);
@@ -50,14 +60,6 @@ namespace Views.UI.Electricity
             _noElectricityNotification.gameObject.SetActive(false);
         }
 
-        private void OnEnable()
-        {
-            _barPresenter.Enable();
-        }
-
-        private void OnDisable()
-        {
-            _barPresenter.Disable();
-        }
+        
     }
 }

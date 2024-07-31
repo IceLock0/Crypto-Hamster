@@ -8,16 +8,16 @@ namespace Presenters.Electricity
 {
     public class ElectricityPaymentPresenter
     {
-        public event Action PaymentCompleted;
-        
         private readonly WalletModel _walletModel;
+        
+        private float _paymentPrice = 100.0f;
 
         public ElectricityPaymentPresenter(WalletModel walletModel)
         {
             _walletModel = walletModel;
         }
+        public event Action PaymentCompleted;
 
-        private float _paymentPrice = 100.0f;
         
         public void TryToPay()
         {
