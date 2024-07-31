@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Presenters.Currency;
 using TMPro;
 using UnityEngine;
+using Views.Wallet.Association_dropdown;
 
 namespace Views.Wallet
 {

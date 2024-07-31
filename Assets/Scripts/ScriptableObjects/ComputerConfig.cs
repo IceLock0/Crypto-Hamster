@@ -1,5 +1,8 @@
-﻿using Enums;
+﻿using System.Collections.Generic;
+using Enums;
+using Model.Crypto;
 using UnityEngine;
+using Views.Wallet.Association_dropdown;
 
 namespace ScriptableObjects
 {
@@ -10,18 +13,15 @@ namespace ScriptableObjects
         [Header("Quality Change Parameters")]
         [SerializeField] private float _qualityFatigue;
         [SerializeField] private float _qualityFatigueDelay;
-        [Space(3)]
-        [SerializeField] private float _thermalQualityFatigue;
-        [SerializeField] private float _thermalQualityFatigueDelay;
         [Space(20)] 
         [SerializeField] private ComputerType _computerType;
+        [Space(40)] 
+        [SerializeField] private List<CryptoModel> _cryptoModels;
 
         public float QualityFatigue => _qualityFatigue;
         public float QualityFatigueDelay => _qualityFatigueDelay;
-
-        public float ThermalQualityFatigue => _thermalQualityFatigue;
-        public float ThermalQualityFatigueDelay => _thermalQualityFatigueDelay;
         public ComputerType ComputerType => _computerType;
+        public List<CryptoModel> CryptoModels => _cryptoModels;
 
     }
 

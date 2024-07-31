@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using Enums;
 using Model.Computer;
+using Presenters.ComputerParameterChange;
 using Presenters.ComputerRepair;
 using ScriptableObjects;
 using UnityEngine;
@@ -11,60 +11,27 @@ using Utils;
 
 namespace Presenters.ComputerQualityChange
 {
-    public class ComputerQualityChangePresenter
+    public class ComputerQualityChangePresenter : ComputerParameterChangePresenter
     {
-        private readonly ComputerModel _computerModel;
-        private readonly List<ComputerConfig> _computerConfigs;
-        private readonly ComputerRepairPresenter _computerRepairPresenter;
-        
-        private ComputerConfig _computerConfig;
-        private UniTask _qualityChangeTask;
-        
-        public ComputerQualityChangePresenter(ComputerModel computerModel, List<ComputerConfig> computerConfigs, ComputerRepairPresenter computerRepairPresenter)
+        public ComputerQualityChangePresenter(ComputerModel computerModel, List<ComputerConfig> computerConfigs, ComputerRepairPresenter computerRepairPresenter) : base(computerModel, computerConfigs, computerRepairPresenter)
         {
-            InvariantChecker.CheckObjectInvariant(computerModel, computerConfigs);
-            
-            _computerModel = computerModel;
-            _computerConfigs = computerConfigs;
-            _computerRepairPresenter = computerRepairPresenter;
         }
 
-        public void Enable()
+        protected override async UniTask ChangeComputerParameter()
         {
-            _computerRepairPresenter.ComputerFixed += OnComputerFixed;
-            _computerModel.ComputerTypeChanged += OnComputerTypeChanged;
-        }
-        public void Disable()
-        {
-            _computerRepairPresenter.ComputerFixed -= OnComputerFixed;
-            _computerModel.ComputerTypeChanged -= OnComputerTypeChanged;
-        }
-        
-        private async UniTask ChangeComputerQuality()
-        {
-            while (_computerModel.Quality > 0)
+            while (ComputerModel.Quality > 0)
             {
-                _computerModel.ChangeQuality(Mathf.Clamp(_computerModel.Quality - _computerConfig.QualityFatigue, 
+                Debug.Log($"QualityFatigue : {ComputerConfig.QualityFatigue}\n QualityFatigueDelay : {ComputerConfig.QualityFatigueDelay}");
+                ComputerModel.ChangeQuality(Mathf.Clamp(ComputerModel.Quality - ComputerConfig.QualityFatigue, 
                     0f, 100f));
-                await UniTask.Delay((int) (_computerConfig.QualityFatigueDelay * 1000));
+                await UniTask.Delay((int) (ComputerConfig.QualityFatigueDelay * 1000));
             }
         }
 
-        private void TryChangeComputerQuality()
+        protected override void OnComputerTypeChanged(ComputerType type)
         {
-            if(_qualityChangeTask.Status == UniTaskStatus.Succeeded)
-                _qualityChangeTask = ChangeComputerQuality();
-        }
-
-        private void OnComputerTypeChanged(ComputerType type)
-        {
-            _computerConfig = _computerConfigs.FirstOrDefault(x => x.ComputerType == type);
-            TryChangeComputerQuality();
-        }
-
-        private void OnComputerFixed()
-        {
-            TryChangeComputerQuality();
+            base.OnComputerTypeChanged(type);
+            TryChangeComputerParameter();
         }
     }
 }

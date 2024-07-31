@@ -14,6 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _qualityFatigue: 2
   _qualityFatigueDelay: 4
-  _thermalQualityFatigue: 2
-  _thermalQualityFatigueDelay: 14
   _computerType: 2
+  _cryptoModels:
+  - Currency: 0
+    Rate: 10
+    PerTime: 1
+  - Currency: 1
+    Rate: 3
+    PerTime: 1
+  - Currency: 2
+    Rate: 110
+    PerTime: 1

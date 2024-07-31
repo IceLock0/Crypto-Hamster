@@ -1,6 +1,10 @@
 ﻿using System;
 using Enums;
+using Presenters.Currency;
 using Utils;
+using Utils.EnumToTypeService;
+using Views.Currency;
+using Views.Wallet.Association_dropdown;
 
 namespace Model.Computer
 {
@@ -8,6 +12,7 @@ namespace Model.Computer
     {
         public ComputerModel(int startComputerType, float startQuality)
         {
+            ChangeCurrentCurrency(CryptoCurrencyIndices.Bitcoin);
             ChangeType(startComputerType);
             ChangeQuality(startQuality);
         }
@@ -15,7 +20,10 @@ namespace Model.Computer
         public ComputerType ComputerType { get; private set; }
         public float Quality { get; private set; }
 
+        public Type CurrentCurrency { get; private set; }
+
         public event Action<ComputerType> ComputerTypeChanged;
+        public event Action CurrentCurrencyChanged;
 
         public void ChangeType(int typeNum)
         {
@@ -23,6 +31,14 @@ namespace Model.Computer
                 throw new ArgumentOutOfRangeException();
             ComputerType = (ComputerType) typeNum;
             ComputerTypeChanged?.Invoke(ComputerType);
+        }
+
+        public void ChangeCurrentCurrency(CryptoCurrencyIndices currency)
+        {
+            if (CryptoEnumToTypeService.CryptoToType(currency) == typeof(Cash) || CryptoEnumToTypeService.CryptoToType(currency) == typeof(Hamster))
+                throw new ArgumentOutOfRangeException();
+            CurrentCurrency = CryptoEnumToTypeService.CryptoToType(currency);
+            CurrentCurrencyChanged?.Invoke();
         }
 
         public void ChangeQuality(float targetQuality)
