@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using Enums;
 using Presenters.Currency;
 using Utils;
@@ -10,12 +11,16 @@ namespace Model.Computer
 {
     public class ComputerModel
     {
-        public ComputerModel(int startComputerType, float startQuality)
+        public ComputerModel(int startComputerType, float startQuality, Vector3 position)
         {
             ChangeCurrentCurrency(CryptoCurrencyIndices.Bitcoin);
             ChangeType(startComputerType);
             ChangeQuality(startQuality);
+
+            Position = position;
         }
+
+        public Vector3 Position { get; private set; }
 
         public ComputerType ComputerType { get; private set; }
         public float Quality { get; private set; }
@@ -25,6 +30,8 @@ namespace Model.Computer
         public event Action<ComputerType> ComputerTypeChanged;
         public event Action CurrentCurrencyChanged;
 
+        public event Action<ComputerModel> QualityChanged;
+        
         public void ChangeType(int typeNum)
         {
             if (!Enum.IsDefined(typeof(ComputerType), typeNum))
@@ -45,6 +52,7 @@ namespace Model.Computer
         {
             InvariantChecker.CheckPercentageInvariant(targetQuality);
             Quality = targetQuality;
+            QualityChanged?.Invoke(this);
         }
     }
 }

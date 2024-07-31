@@ -29,7 +29,7 @@ namespace Views.Staff
         
         private void Start()
         {
-            var presenters = _computerViews.Select(view => view.GetComputerPresenter()).ToList();
+            var presenters = _computerViews.Select(view => view.GetPresenter()).ToList();
 
             _presenter = new SysAdminPresenter(_sysAdminConfig, presenters, _agent);
         }

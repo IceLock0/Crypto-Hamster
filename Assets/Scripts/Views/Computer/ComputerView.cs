@@ -68,5 +68,7 @@ namespace Views.Computer
         {
             Destroy(gameObj);
         }
+
+        public ComputerPresenter GetPresenter() => _computerPresenter;
     }
 }

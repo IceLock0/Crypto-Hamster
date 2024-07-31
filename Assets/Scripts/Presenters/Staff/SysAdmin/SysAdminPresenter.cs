@@ -79,7 +79,7 @@ namespace Presenters.Staff.SysAdmin
 
         private void RepairPC()
         {
-            _agent.SetDestination(_brokenPC.Peek().ComputerPosition);
+            _agent.SetDestination(_brokenPC.Peek().Position);
 
             _hasWork = true;
             
