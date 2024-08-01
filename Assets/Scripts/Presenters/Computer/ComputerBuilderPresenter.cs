@@ -10,7 +10,7 @@ using Views.UI.ComputerControlPanel.BuyButton;
 
 namespace Presenters.Computer
 {
-    public class ComputerPresenter
+    public class ComputerBuilderPresenter
     {
         private readonly BuyButtonView _buyButtonView;
         private readonly IComputerFabric _computerFabric;
@@ -19,7 +19,7 @@ namespace Presenters.Computer
         
         private GameObject _currentComputerModel;
 
-        public ComputerPresenter(BuyButtonView buyButtonView, IComputerFabric computerFabric,  Transform computersParent, ComputerModel model, GameObjectDestroyerService gameObjectDestroyerServiceService)
+        public ComputerBuilderPresenter(BuyButtonView buyButtonView, IComputerFabric computerFabric,  Transform computersParent, ComputerModel model, GameObjectDestroyerService gameObjectDestroyerServiceService)
         {
             InvariantChecker.CheckObjectInvariant(buyButtonView, computerFabric, computerFabric,
                 computersParent, model, gameObjectDestroyerServiceService);

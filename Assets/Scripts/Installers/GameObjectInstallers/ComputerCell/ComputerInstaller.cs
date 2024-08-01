@@ -7,6 +7,7 @@ using Presenters.ComputerQualityChange;
 using Presenters.ComputerRepair;
 using UnityEngine;
 using Views.Computer;
+using Views.Computer.ComputerBuilder;
 using Zenject;
 
 namespace Installers.GameObjectInstallers.ComputerCell
@@ -14,7 +15,6 @@ namespace Installers.GameObjectInstallers.ComputerCell
 
     public class ComputerInstaller : MonoInstaller<ComputerInstaller>
     {
-        [SerializeField] private ComputerView _computerView;
         [SerializeField] private Transform _computerSpawnPoint;
         
         [Header("Parameters will be upload from saves, DEBUG OPTION!!!!!!")] 
@@ -24,8 +24,7 @@ namespace Installers.GameObjectInstallers.ComputerCell
         {
             BindComputerModel();
             BindComputerSpawnPoint();
-            BindComputerView();
-            BindComputerPresenter();
+            BindComputerBuilderPresenter();
             BindComputerRepairPresenter();
             BindQualityChangePresenter();
             BindMinerPresenter();
@@ -75,16 +74,9 @@ namespace Installers.GameObjectInstallers.ComputerCell
                 .NonLazy();
         }
 
-        private void BindComputerView()
+        private void BindComputerBuilderPresenter()
         {
-            Container.Bind<ComputerView>()
-                .FromInstance(_computerView)
-                .AsSingle();
-        }
-
-        private void BindComputerPresenter()
-        {
-            Container.Bind<ComputerPresenter>()
+            Container.Bind<ComputerBuilderPresenter>()
                 .AsSingle()
                 .NonLazy();
         }

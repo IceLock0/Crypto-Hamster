@@ -22,7 +22,7 @@ namespace Presenters.Staff.SysAdmin
 
         private readonly SysAdminConfig _sysAdminConfig;
 
-        private readonly List<ComputerPresenter> _computerPresenters;
+        private readonly List<ComputerBuilderPresenter> _computerPresenters;
         private readonly List<ComputerModel> _computers;
         
         private float _fatigueValueReaction;
@@ -30,11 +30,11 @@ namespace Presenters.Staff.SysAdmin
 
         private bool _hasWork = false;
         
-        public SysAdminPresenter(SysAdminConfig sysAdminConfig, List<ComputerPresenter> computerPresenters, NavMeshAgent agent, Unity.AI.Navigation.NavMeshSurface surface)
+        public SysAdminPresenter(SysAdminConfig sysAdminConfig, List<ComputerBuilderPresenter> computerPresenters, NavMeshAgent agent, Unity.AI.Navigation.NavMeshSurface surface)
         {
             _brokenPC = new Queue<ComputerModel>();
 
-            _computerPresenters = new List<ComputerPresenter>();
+            _computerPresenters = new List<ComputerBuilderPresenter>();
             
             _computers = new List<ComputerModel>();
 

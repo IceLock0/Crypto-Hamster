@@ -9,13 +9,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Views.Computer;
+using Views.Computer.ComputerBuilder;
 using Zenject;
 
 namespace Views.Staff
 {
     public class SysAdminView : MonoBehaviour
     {
-        [SerializeField] private List<ComputerView> _computerViews;
+        [SerializeField] private List<ComputerBuilderView> _computerViews;
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private Unity.AI.Navigation.NavMeshSurface _surface; 
         
