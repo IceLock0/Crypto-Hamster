@@ -12,6 +12,7 @@ namespace Installers
         [SerializeField] private CameraConfig _cameraConfig;
         [SerializeField] private List<ComputerConfig> _computerConfig;
         [SerializeField] private SysAdminConfig _sysAdminConfig;
+        [SerializeField] private ElectricityConfig _electricityConfig;
         
         public override void InstallBindings()
         {
@@ -19,6 +20,7 @@ namespace Installers
             Container.Bind<CameraConfig>().FromScriptableObject(_cameraConfig).AsSingle().NonLazy();
             Container.Bind<List<ComputerConfig>>().FromInstance(_computerConfig).AsSingle().NonLazy();
             Container.Bind<SysAdminConfig>().FromInstance(_sysAdminConfig).AsSingle().NonLazy();
+            Container.Bind<ElectricityConfig>().FromScriptableObject(_electricityConfig).AsSingle().NonLazy();
         }
     }
 

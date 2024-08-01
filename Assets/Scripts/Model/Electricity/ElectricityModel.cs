@@ -1,27 +1,30 @@
 ﻿using System;
+using ScriptableObjects;
 using UnityEngine;
+using Utils;
 
 namespace Model.Electricity
 {
 
     public class ElectricityModel
     {
-        public ElectricityModel(float maxElectricity, float secondsDelay, float paymentPrice, float decreaseValue)
+        public ElectricityModel(ElectricityConfig electricityConfig)
         {
-            if (maxElectricity <= 0 || secondsDelay <= 0 || paymentPrice <= 0 || decreaseValue < 0)
+            InvariantChecker.CheckObjectInvariant(electricityConfig);
+            if (electricityConfig.MaxElectricity <= 0 || electricityConfig.SecondsDelay <= 0)
                 throw new ArgumentOutOfRangeException();
 
-            MaxElectricity = maxElectricity;
-            SecondsDelay = secondsDelay;
+            MaxElectricity = electricityConfig.MaxElectricity;
+            SecondsDelay = electricityConfig.SecondsDelay;
             CurrentElectricity = MaxElectricity;
-            PaymentPrice = paymentPrice;
-            DecreaseValue = decreaseValue;
+            PaymentPrice = electricityConfig.PaymentPrice;
+            DecreaseValue = electricityConfig.DecreaseValue;
         }
 
         public float MaxElectricity { get; }
         public float SecondsDelay { get; }
         public float CurrentElectricity { get; private set; }
-        public float DecreaseValue { get;  }
+        public float DecreaseValue { get; private set; }
         public float PaymentPrice { get;  }
 
         public event Action ElectricityRanOut;
@@ -30,8 +33,16 @@ namespace Model.Electricity
         public void DecreaseElectricity(float amount)
         {
             CurrentElectricity = Mathf.Clamp(CurrentElectricity - amount,0f, MaxElectricity);
+            Debug.Log($"Current electricity consumation : {DecreaseValue}");
             if(CurrentElectricity == 0)
                 ElectricityRanOut?.Invoke();
+        }
+
+        public void IncreaseDecreaseValue(float amount)
+        {
+            if (amount <= 0)
+                throw new ArgumentOutOfRangeException();
+            DecreaseValue += amount;
         }
 
         public void ResetElectricity()

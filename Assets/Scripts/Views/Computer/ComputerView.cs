@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model.Electricity;
 using Model.Wallet;
 using Presenters.Computer;
 using Presenters.ComputerCryptoChanger;
+using Presenters.ComputerElectricityConsumation;
 using Presenters.ComputerMiner;
 using Presenters.ComputerQualityChange;
 using Presenters.ComputerRepair;
@@ -29,9 +31,10 @@ namespace Views.Computer
         private ComputerRepairPresenter _computerRepairPresenter;
         private ComputerMinerPresenter _computerMinerPresenter;
         private ComputerCryptoChangePresenter _cryptoChangePresenter;
+        private ComputerElectricityConsumationPresenter _computerElectricityConsumationPresenter;
 
         [Inject]
-        public void Initialize(IComputerFabric computerFabric, List<ComputerConfig> computerConfigs, WalletModel walletModel)
+        public void Initialize(IComputerFabric computerFabric, List<ComputerConfig> computerConfigs, WalletModel walletModel, ElectricityModel electricityModel)
         {
             _computerPresenter = 
                 new ComputerPresenter(_buyButtonView, computerFabric, this,_computerSpawnPoint.position, _computerSpawnPoint);
@@ -44,6 +47,8 @@ namespace Views.Computer
                     walletModel);
             _cryptoChangePresenter =
                 new ComputerCryptoChangePresenter(_computerPresenter.Model, _cryptoChangeButonViews);
+            _computerElectricityConsumationPresenter =
+                new ComputerElectricityConsumationPresenter(electricityModel, _computerPresenter.Model, computerConfigs);
         }
 
         private void OnEnable()
@@ -53,6 +58,7 @@ namespace Views.Computer
             _computerRepairPresenter.Enable();
             _computerMinerPresenter.Enable();
             _cryptoChangePresenter.Enable();
+            _computerElectricityConsumationPresenter.Enable();
         }
 
         private void OnDisable()
@@ -62,6 +68,7 @@ namespace Views.Computer
             _computerRepairPresenter.Disable();
             _computerMinerPresenter.Disable();
             _cryptoChangePresenter.Disable();
+            _computerElectricityConsumationPresenter.Disable();
         }
 
         public void DestroyComputer(GameObject gameObj)
