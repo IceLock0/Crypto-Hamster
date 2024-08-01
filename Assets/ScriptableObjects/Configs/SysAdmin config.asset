@@ -16,5 +16,9 @@ MonoBehaviour:
   _rotationSpeed: 100
   _name: Moisuk
   _price: 111
+  _sourcePoint: {fileID: 1659931549745464885, guid: 9d89974457e610f44a19dfde0bd59208, type: 3}
   _repairSpeed: 35
-  _fatigueValueReaction: 92
+  _fatigueValueReaction: 95
+  _efficiency: 2
+  _relaxTime: 20
+  _checkerTime: 10

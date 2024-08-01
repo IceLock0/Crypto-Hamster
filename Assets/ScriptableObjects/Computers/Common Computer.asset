@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87beabbabc341e8a1f6b5216789c7ba, type: 3}
   m_Name: Common Computer
   m_EditorClassIdentifier: 
-  _qualityFatigue: 3
-  _qualityFatigueDelay: 1
+  _qualityFatigue: 1
+  _qualityFatigueDelay: 2
   _computerType: 1
   _cryptoModels:
   - Currency: 0
@@ -25,3 +25,4 @@ MonoBehaviour:
   - Currency: 2
     Rate: 100
     PerTime: 1
+  _electricityConsumation: 0

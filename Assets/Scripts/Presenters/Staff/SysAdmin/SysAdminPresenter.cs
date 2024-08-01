@@ -27,9 +27,15 @@ namespace Presenters.Staff.SysAdmin
         
         private float _fatigueValueReaction;
         private float _repairSpeed;
-
-        private bool _hasWork = false;
+        private float _efficiency;
+        private float _relaxTime;
+        private float _checkerTime;
         
+        private float _computersFixed;
+        
+        private bool _hasWork = false;
+
+        private Transform _sourcePoint;
         public SysAdminPresenter(SysAdminConfig sysAdminConfig, List<ComputerPresenter> computerPresenters, NavMeshAgent agent, Unity.AI.Navigation.NavMeshSurface surface)
         {
             _brokenPC = new Queue<ComputerModel>();
@@ -85,6 +91,10 @@ namespace Presenters.Staff.SysAdmin
 
             _fatigueValueReaction = _sysAdminConfig.FatigueValueReaction;
             _repairSpeed = _sysAdminConfig.RepairSpeed;
+            _sourcePoint = _sysAdminConfig.SourcePoint;
+            _efficiency = _sysAdminConfig.Efficiency;
+            _relaxTime = _sysAdminConfig.RelaxTime;
+            _checkerTime = _sysAdminConfig.CheckerTime;
         }
         
         private void AddBrokenPC(ComputerModel brokenPC)
@@ -98,35 +108,82 @@ namespace Presenters.Staff.SysAdmin
             _brokenPC.Enqueue(brokenPC);
         }
 
-        private async UniTask CheckBrokenComputersInQueue()
+        private async UniTaskVoid CheckBrokenComputersInQueue()
         {
             while (true)
             {
-                await UniTask.Delay(5000);
+                await UniTask.Delay((int)(_checkerTime * 1000));
+                
+                if (_computersFixed >= _efficiency)
+                    await WaitForRelax();
+                
                 if(!_brokenPC.IsEmpty() && _hasWork == false)
-                   RepairPC();
+                   StartRepairProcess();
             }
         }
-        
-        private void RepairPC()
+
+        private async UniTask WaitForRelax()
         {
-            var currentPC = _brokenPC.Peek();
-
-            _agent.SetDestination(currentPC.Position);
-
+            Debug.Log("go to relax");
+            await UniTask.Delay((int) (_relaxTime * 1000));
+            Debug.Log("can work");
+            _computersFixed = 0;
+        }
+        
+        private void StartRepairProcess()
+        {
             _hasWork = true;
             
+            SetDestination(_brokenPC.Peek().Position).Forget();
+        }
+        
+        private async UniTaskVoid SetDestination(Vector3 destination)
+        {
+            _agent.SetDestination(destination);
             
-            // while (true)
-            // {
-            //     Debug.Log("Sysadmin walking....");
-            // }
+            await WaitForDestinationReached();
+        }
 
-            Debug.Log("Пришёл   ");
+        private async UniTask WaitForDestinationReached()
+        {
+            await UniTask.WaitUntil(() => 
+                !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance
+            );
             
-            currentPC.ChangeQuality(100.0f);
+            await RepairPC();
+        }
+
+        private async UniTask RepairPC()
+        {
+            Debug.Log("Пришёл");
+
+            await WaitRepairProcess();
+            
+            _brokenPC.Peek().ChangeQuality(100.0f);
+            
+            Debug.Log("Починил");
+
+            _computersFixed++;
+            
+            GoToSourcePoint();
             
             RemoveRepairedPC();
+        }
+
+        private async UniTask WaitRepairProcess()
+        {
+            var qualityToRepair = 100 - _brokenPC.Peek().Quality;
+
+            var timeToRepair = _repairSpeed / 100 * qualityToRepair;
+
+            Debug.Log($"Время для починки = {timeToRepair}");
+            
+            await UniTask.Delay((int) (timeToRepair * 1000));
+        }
+        
+        private void GoToSourcePoint()
+        {
+            _agent.SetDestination(_sourcePoint.position);
         }
         
         private void RemoveRepairedPC()
