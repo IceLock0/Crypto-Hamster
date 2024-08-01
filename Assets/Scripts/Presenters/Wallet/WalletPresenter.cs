@@ -47,6 +47,7 @@ namespace Presenters.Wallet
         private void CreateCurrencies()
         {
             _model.AddCurrency(new Cash());
+            _model.AddCurrencyAmountPerValue(typeof(Cash), 10000000000000f);
             _model.AddCurrency(new Bitcoin());
             _model.AddCurrency(new Ethereum());
             _model.AddCurrency(new Solana());

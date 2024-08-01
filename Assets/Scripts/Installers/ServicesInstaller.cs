@@ -7,26 +7,26 @@ namespace Installers
 {
     public class ServicesInstaller : MonoInstaller
     {
-        [SerializeField] private CoroutineService _coroutineService;
+        [SerializeField] private GameObjectDestroyerService _gameObjectDestroyerService;
 
         public override void InstallBindings()
         {
+            BindGameObjectDestroyerService();
             BindFabricService();
             BindInputService();
-            BindCoroutineService();
+        }
+
+        private void BindGameObjectDestroyerService()
+        {
+            Container.Bind<GameObjectDestroyerService>()
+                .FromInstance(_gameObjectDestroyerService)
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindInputService()
         {
             Container.Bind<InputService>()
-                .AsSingle()
-                .NonLazy();
-        }
-
-        private void BindCoroutineService()
-        {
-            Container.Bind<ICoroutineService>()
-                .FromComponentInNewPrefab(_coroutineService)
                 .AsSingle()
                 .NonLazy();
         }

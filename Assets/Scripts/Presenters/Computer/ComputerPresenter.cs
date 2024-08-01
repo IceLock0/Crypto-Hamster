@@ -1,6 +1,7 @@
 ﻿using System;
 using Enums;
 using Model.Computer;
+using Services;
 using Services.Fabric;
 using UnityEngine;
 using Utils;
@@ -11,31 +12,26 @@ namespace Presenters.Computer
 {
     public class ComputerPresenter
     {
-        private readonly ComputerView _view;
-
         private readonly BuyButtonView _buyButtonView;
         private readonly IComputerFabric _computerFabric;
-        private readonly Vector3 _computerPosition;
         private readonly Transform _computerParent;
+        private readonly GameObjectDestroyerService _gameObjectDestroyerService;
         
         private GameObject _currentComputerModel;
 
-        public ComputerPresenter(BuyButtonView buyButtonView, IComputerFabric computerFabric, ComputerView view,
-            Vector3 computerPosition, Transform computersParent)
+        public ComputerPresenter(BuyButtonView buyButtonView, IComputerFabric computerFabric,  Transform computersParent, ComputerModel model, GameObjectDestroyerService gameObjectDestroyerServiceService)
         {
-            InvariantChecker.CheckObjectInvariant(buyButtonView, computerFabric, view, computerFabric, computerPosition,
-                computersParent);
+            InvariantChecker.CheckObjectInvariant(buyButtonView, computerFabric, computerFabric,
+                computersParent, model, gameObjectDestroyerServiceService);
 
-            Model = new ComputerModel((int)ComputerType.Empty, 100f, computerPosition);
-
-            _view = view;
+            Model = model;
             _buyButtonView = buyButtonView;
             _computerFabric = computerFabric;
-            _computerPosition = computerPosition;
             _computerParent = computersParent;
+            _gameObjectDestroyerService = gameObjectDestroyerServiceService;
         }
 
-        public ComputerModel Model { get; private set; }
+        public ComputerModel Model { get;  }
 
         public event Action<ComputerType> ComputerMeshCreated;
 
@@ -61,13 +57,13 @@ namespace Presenters.Computer
         {
             if (_currentComputerModel == null)
                 return;
-            _view.DestroyComputer(_currentComputerModel);
+            _gameObjectDestroyerService.DestroyGameObject(_currentComputerModel);
         }
         
         private void TryBuildNewComputer()
         {
             //Нехватка бабок и тп обработка невозможности билда
-            _currentComputerModel = _computerFabric.Create(Model.ComputerType, _computerPosition, _computerParent) as GameObject;
+            _currentComputerModel = _computerFabric.Create(Model.ComputerType, Model.Position, _computerParent) as GameObject;
             ComputerMeshCreated?.Invoke(Model.ComputerType);
         }
     }

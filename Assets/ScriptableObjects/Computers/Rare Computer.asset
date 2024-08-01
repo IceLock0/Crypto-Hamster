@@ -25,4 +25,4 @@ MonoBehaviour:
   - Currency: 2
     Rate: 110
     PerTime: 1
-  _electricityConsumation: 0.2
+  _electricityConsumation: 2

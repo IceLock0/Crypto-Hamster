@@ -31,7 +31,6 @@ namespace Presenters.ComputerMiner
         {
             while (ComputerModel.Quality > 0)
             {
-                Debug.Log($"Rate : {_targetCryptoModel.Rate}\n Quality : {ComputerModel.Quality}");
                 _walletModel.AddCurrencyAmountPerValue(CryptoEnumToTypeService.CryptoToType(_targetCryptoModel.Currency), _targetCryptoModel.Rate * ComputerModel.Quality);
                 await UniTask.Delay((int)(_targetCryptoModel.PerTime * 1000));
             }

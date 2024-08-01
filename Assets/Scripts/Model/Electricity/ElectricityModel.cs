@@ -33,7 +33,6 @@ namespace Model.Electricity
         public void DecreaseElectricity(float amount)
         {
             CurrentElectricity = Mathf.Clamp(CurrentElectricity - amount,0f, MaxElectricity);
-            Debug.Log($"Current electricity consumation : {DecreaseValue}");
             if(CurrentElectricity == 0)
                 ElectricityRanOut?.Invoke();
         }

@@ -17,9 +17,9 @@ namespace Presenters.Player
         
         private Vector2 _moveDirection;
         
-        public PlayerMovePresenter(InputService inputService, PlayerConfig playerConfig, ICoroutineService coroutineService, Rigidbody playerRigidbody)
+        public PlayerMovePresenter(InputService inputService, PlayerConfig playerConfig, Rigidbody playerRigidbody)
         {
-            InvariantChecker.CheckObjectInvariant(inputService, coroutineService, playerRigidbody);
+            InvariantChecker.CheckObjectInvariant(inputService, playerRigidbody);
             _inputService = inputService;
             _playerConfig = playerConfig;
             _playerRigidbody = playerRigidbody;
