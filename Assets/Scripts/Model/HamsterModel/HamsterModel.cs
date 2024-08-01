@@ -18,8 +18,8 @@ namespace Model.HamsterModel
 
         public HamsterModel()
         {
-            Hamster = new Hamster(amount: 0.0f, rate: 5.0f, timer: 0.0f, perClick: 1.0f, perTime: 0.5f,
-                timeToAdding: 1.0f, upgradePerClickValue: 0.1f, upgradePerTimeValue: 0.2f, upgradePerClickPrice: 100.0f,
+            Hamster = new Hamster(amount: 0.0f, rate: 5.0f, perClick: 1.0f, perTime: 0.5f,
+                upgradePerClickValue: 0.1f, upgradePerTimeValue: 0.2f, upgradePerClickPrice: 100.0f,
                 upgradePerTimePrice: 200.0f);
         }
 

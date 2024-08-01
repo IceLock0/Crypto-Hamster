@@ -15,21 +15,16 @@ namespace Presenters.Currency
         public float UpgradePerTimeValue { get; set; }
         public float UpgradePerClickPrice { get; set; }
         public float UpgradePerTimePrice { get; set; }
-        public float TimeToAdding { get; set; }
-        public float Timer { get; set; }
 
         public Hamster(float amount,
-            float rate,
-            float timer, float perClick, float perTime, 
-            float timeToAdding, float upgradePerClickValue, 
+            float rate, float perClick, float perTime, 
+             float upgradePerClickValue, 
             float upgradePerTimeValue, float upgradePerClickPrice, float upgradePerTimePrice)
         {
             Amount = amount;
             Rate = rate;
-            Timer = timer;
             PerClick = perClick;
             PerTime = perTime;
-            TimeToAdding = timeToAdding;
             UpgradePerClickValue = upgradePerClickValue;
             UpgradePerTimeValue = upgradePerTimeValue;
             UpgradePerClickPrice = upgradePerClickPrice;

@@ -32,6 +32,7 @@ namespace Model.Wallet
             AmountChanged?.Invoke(currencyType);
         }
 
+
         private void CheckDictionaryForCurrency<T>() where T : class, ICurrency
         {
             if (Currencies.ContainsKey(typeof(T)))
