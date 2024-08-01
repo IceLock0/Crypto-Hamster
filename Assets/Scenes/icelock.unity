@@ -1641,7 +1641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b942616ea414f4ebdcaf25186131cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coroutineService: {fileID: 862151391140863607, guid: dac9d86ba28029a419063855e96744a7, type: 3}
+  _gameObjectDestroyerService: {fileID: 0}
 --- !u!4 &609129861
 Transform:
   m_ObjectHideFlags: 0
@@ -2097,7 +2097,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 949511644}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.8133449
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3624,7 +3624,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.85
+  m_fontSize: 58.14
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3709,7 +3709,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00016021729}
+  m_AnchoredPosition: {x: 0, y: 0.0012264252}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1735358074
@@ -3938,7 +3938,6 @@ GameObject:
   - component: {fileID: 1839489878}
   - component: {fileID: 1839489877}
   - component: {fileID: 1839489876}
-  - component: {fileID: 1839489875}
   - component: {fileID: 1839489874}
   m_Layer: 3
   m_Name: Staff
@@ -3964,20 +3963,7 @@ MonoBehaviour:
   - {fileID: 576920685}
   - {fileID: 1249703605}
   _agent: {fileID: 1839489876}
---- !u!114 &1839489875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1839489873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76806f1c17fd4ac5915b7aed9b2b9950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _surface: {fileID: 1165786456}
-  _agent: {fileID: 1839489876}
 --- !u!195 &1839489876
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4281,6 +4267,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f0cf76bca193eae49a0ccbe8a13ea14b, type: 2}
   - {fileID: 11400000, guid: 778093697a106904a84811d361a3ffe3, type: 2}
   _sysAdminConfig: {fileID: 11400000, guid: c715e5344125bf3419a3132377cea4d1, type: 2}
+  _electricityConfig: {fileID: 0}
+  _repairKit: {fileID: 0}
 --- !u!4 &1983795141
 Transform:
   m_ObjectHideFlags: 0
@@ -4447,6 +4435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buyCellButtonView: {fileID: 576987067}
+  _electricityUIButtonPayment: {fileID: 0}
 --- !u!4 &2016453756
 Transform:
   m_ObjectHideFlags: 0
@@ -4513,6 +4502,14 @@ PrefabInstance:
     - target: {fileID: 8619366415876081855, guid: f816674cffd58444886a18255ec6b1f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000325137481430959, guid: f816674cffd58444886a18255ec6b1f1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000325137481430959, guid: f816674cffd58444886a18255ec6b1f1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
