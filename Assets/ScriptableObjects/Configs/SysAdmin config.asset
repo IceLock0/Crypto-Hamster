@@ -17,4 +17,4 @@ MonoBehaviour:
   _name: Moisuk
   _price: 111
   _repairSpeed: 35
-  _fatigueValueReaction: 35
+  _fatigueValueReaction: 92

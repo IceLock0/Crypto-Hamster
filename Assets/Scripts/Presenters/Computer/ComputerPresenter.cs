@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using Model.Computer;
 using Services.Fabric;
 using UnityEngine;
@@ -36,6 +37,8 @@ namespace Presenters.Computer
 
         public ComputerModel Model { get; private set; }
 
+        public event Action<ComputerType> ComputerMeshCreated;
+
         public void Enable()
         {
             _buyButtonView.BuyComputerButtonClicked += BuyComputerComputer;
@@ -65,6 +68,7 @@ namespace Presenters.Computer
         {
             //Нехватка бабок и тп обработка невозможности билда
             _currentComputerModel = _computerFabric.Create(Model.ComputerType, _computerPosition, _computerParent) as GameObject;
+            ComputerMeshCreated?.Invoke(Model.ComputerType);
         }
     }
 }

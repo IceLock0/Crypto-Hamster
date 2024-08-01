@@ -21,7 +21,8 @@ namespace Presenters.Staff.SysAdmin
         private readonly NavMeshAgent _agent;
 
         private readonly SysAdminConfig _sysAdminConfig;
-        
+
+        private readonly List<ComputerPresenter> _computerPresenters;
         private readonly List<ComputerModel> _computers;
         
         private float _fatigueValueReaction;
@@ -33,6 +34,8 @@ namespace Presenters.Staff.SysAdmin
         {
             _brokenPC = new Queue<ComputerModel>();
 
+            _computerPresenters = new List<ComputerPresenter>();
+            
             _computers = new List<ComputerModel>();
 
             _agent = agent;
@@ -40,7 +43,9 @@ namespace Presenters.Staff.SysAdmin
             
             _sysAdminConfig = sysAdminConfig;
 
-            foreach (var presenter in computerPresenters)
+            _computerPresenters = computerPresenters;
+            
+            foreach (var presenter in _computerPresenters)
                 _computers.Add(presenter.Model);
 
             InitConfigParameters();
@@ -52,7 +57,11 @@ namespace Presenters.Staff.SysAdmin
             foreach (var computer in _computers)
             {
                 computer.QualityChanged += AddBrokenPC;
-                computer.ComputerTypeChanged += BuildNavMesh;
+            }
+
+            foreach (var presenter in _computerPresenters)
+            {
+                presenter.ComputerMeshCreated += BuildNavMesh;
             }
         }
 
@@ -61,7 +70,11 @@ namespace Presenters.Staff.SysAdmin
             foreach (var computer in _computers)
             {
                 computer.QualityChanged -= AddBrokenPC;
-                computer.ComputerTypeChanged -= BuildNavMesh;
+            }
+            
+            foreach (var presenter in _computerPresenters)
+            {
+                presenter.ComputerMeshCreated -= BuildNavMesh;
             }
         }
 
@@ -77,15 +90,12 @@ namespace Presenters.Staff.SysAdmin
         private void AddBrokenPC(ComputerModel brokenPC)
         {
             if (brokenPC.Quality > _fatigueValueReaction)
-                throw new ArgumentOutOfRangeException($"Computer fatigue value = {brokenPC.Quality}, but sysadmin have {_fatigueValueReaction}");
+                return;
 
-            if(_brokenPC.Contains(brokenPC))
-                throw new ArgumentException($"Computer {brokenPC} already contained");
+            if (_brokenPC.Contains(brokenPC))
+                return;
             
             _brokenPC.Enqueue(brokenPC);
-            
-            Debug.Log($"Pc {brokenPC} added, Queue Length = {_brokenPC.Count}");
-            
         }
 
         private async UniTask CheckBrokenComputersInQueue()
@@ -94,29 +104,26 @@ namespace Presenters.Staff.SysAdmin
             {
                 await UniTask.Delay(5000);
                 if(!_brokenPC.IsEmpty() && _hasWork == false)
-                    RepairPC();
+                   RepairPC();
             }
         }
         
         private void RepairPC()
         {
             var currentPC = _brokenPC.Peek();
-            
-            Debug.Log($"Sysadming go to {currentPC.Position}");
-            
+
             _agent.SetDestination(currentPC.Position);
 
             _hasWork = true;
-
-            Debug.Log($"Agent has path: {_agent.destination}");
             
-            while (_agent.hasPath)
-            {
-                Debug.Log("Sysadmin walk....");
-            }
+            
+            // while (true)
+            // {
+            //     Debug.Log("Sysadmin walking....");
+            // }
 
-            Debug.Log("Ready to repair");
-
+            Debug.Log("Пришёл   ");
+            
             currentPC.ChangeQuality(100.0f);
             
             RemoveRepairedPC();
@@ -127,18 +134,12 @@ namespace Presenters.Staff.SysAdmin
             var repairedPC = _brokenPC.Dequeue();
 
             _hasWork = false;
-            
-            Debug.Log($"Computer: {repairedPC} was repaired, Quality = {repairedPC.Quality}");
         }
 
         private void BuildNavMesh(ComputerType computerType)
         {
             if (computerType == ComputerType.Common)
-            {
-                Debug.Log("Build");
                 _surface.BuildNavMesh();
-                
-            }
         }
             
         

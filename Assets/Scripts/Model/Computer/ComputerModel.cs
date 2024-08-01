@@ -52,7 +52,6 @@ namespace Model.Computer
         {
             InvariantChecker.CheckPercentageInvariant(targetQuality);
             Quality = targetQuality;
-            Debug.Log($"Quality = {Quality}");
             QualityChanged?.Invoke(this);
         }
     }
