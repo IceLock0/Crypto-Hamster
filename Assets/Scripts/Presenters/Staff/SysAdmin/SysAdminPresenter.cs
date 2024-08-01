@@ -105,6 +105,8 @@ namespace Presenters.Staff.SysAdmin
             if (_brokenPC.Contains(brokenPC))
                 return;
             
+            Debug.Log("PC added");
+            
             _brokenPC.Enqueue(brokenPC);
         }
 
@@ -166,7 +168,7 @@ namespace Presenters.Staff.SysAdmin
             _computersFixed++;
             
             GoToSourcePoint();
-            
+
             RemoveRepairedPC();
         }
 

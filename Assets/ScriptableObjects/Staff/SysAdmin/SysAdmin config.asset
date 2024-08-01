@@ -21,4 +21,4 @@ MonoBehaviour:
   _fatigueValueReaction: 95
   _efficiency: 2
   _relaxTime: 20
-  _checkerTime: 10
+  _checkerTime: 1

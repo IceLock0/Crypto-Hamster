@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Common Computer
   m_EditorClassIdentifier: 
   _qualityFatigue: 1
-  _qualityFatigueDelay: 2
+  _qualityFatigueDelay: 1
   _computerType: 1
   _cryptoModels:
   - Currency: 0
