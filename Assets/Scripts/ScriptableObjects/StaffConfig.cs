@@ -7,8 +7,9 @@ namespace ScriptableObjects
     {
         [SerializeField] private string _name;
         [SerializeField] private float _price;
-
+        [SerializeField] private Transform _sourcePoint;
         public string Name => _name;
         public float Price => _price;
+        public Transform SourcePoint => _sourcePoint;
     }
 }
