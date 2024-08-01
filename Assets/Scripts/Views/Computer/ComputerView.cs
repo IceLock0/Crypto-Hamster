@@ -49,11 +49,6 @@ namespace Views.Computer
             _computerElectricityConsumationPresenter.Disable();
         }
 
-        public void DestroyComputer(GameObject gameObj)
-        {
-            Destroy(gameObj);
-        }
-
         public ComputerPresenter GetPresenter() => _computerPresenter;
     }
 }
