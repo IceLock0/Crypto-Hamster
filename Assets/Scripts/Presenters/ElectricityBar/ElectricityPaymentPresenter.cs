@@ -1,23 +1,21 @@
 ﻿using System;
 using Model.Wallet;
 using Presenters.Currency;
-using UnityEngine;
-using Views.UI.Electricity.ButtonPayment;
 
-namespace Presenters.Electricity
+namespace Presenters.ElectricityBar
 {
     public class ElectricityPaymentPresenter
     {
-        public event Action PaymentCompleted;
-        
         private readonly WalletModel _walletModel;
+        
+        private float _paymentPrice = 100.0f;
 
         public ElectricityPaymentPresenter(WalletModel walletModel)
         {
             _walletModel = walletModel;
         }
 
-        private float _paymentPrice = 100.0f;
+        public event Action PaymentCompleted;
         
         public void TryToPay()
         {

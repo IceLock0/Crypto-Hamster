@@ -17,11 +17,13 @@ namespace ScriptableObjects
         [SerializeField] private ComputerType _computerType;
         [Space(40)] 
         [SerializeField] private List<CryptoModel> _cryptoModels;
+        [SerializeField] private float _electricityConsumation;
 
         public float QualityFatigue => _qualityFatigue;
         public float QualityFatigueDelay => _qualityFatigueDelay;
         public ComputerType ComputerType => _computerType;
         public List<CryptoModel> CryptoModels => _cryptoModels;
+        public float ElectricityConsumation => _electricityConsumation;
 
     }
 
