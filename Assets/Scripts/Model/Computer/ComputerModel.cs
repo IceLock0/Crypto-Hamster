@@ -31,7 +31,7 @@ namespace Model.Computer
         public event Action CurrentCurrencyChanged;
 
         public event Action<ComputerModel> QualityChanged;
-        
+
         public void ChangeType(int typeNum)
         {
             if (!Enum.IsDefined(typeof(ComputerType), typeNum))
@@ -52,6 +52,7 @@ namespace Model.Computer
         {
             InvariantChecker.CheckPercentageInvariant(targetQuality);
             Quality = targetQuality;
+            Debug.Log($"Quality = {Quality}");
             QualityChanged?.Invoke(this);
         }
     }

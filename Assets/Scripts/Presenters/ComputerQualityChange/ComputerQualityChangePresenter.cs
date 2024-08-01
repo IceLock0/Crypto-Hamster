@@ -21,7 +21,7 @@ namespace Presenters.ComputerQualityChange
         {
             while (ComputerModel.Quality > 0)
             {
-                Debug.Log($"QualityFatigue : {ComputerConfig.QualityFatigue}\n QualityFatigueDelay : {ComputerConfig.QualityFatigueDelay}");
+                // Debug.Log($"QualityFatigue : {ComputerConfig.QualityFatigue}\n QualityFatigueDelay : {ComputerConfig.QualityFatigueDelay}");
                 ComputerModel.ChangeQuality(Mathf.Clamp(ComputerModel.Quality - ComputerConfig.QualityFatigue, 
                     0f, 100f));
                 await UniTask.Delay((int) (ComputerConfig.QualityFatigueDelay * 1000));
