@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Model.Computer;
 using Utils;
-using Utils.EnumToTypeService;
-using Views.Currency;
 using Views.UI.ComputerControlPanel.ChangeCryptoButton;
 using Views.Wallet.Association_dropdown;
 
-namespace Presenters.ComputerCryptoChanger
+namespace Presenters.Computer.ComputerCryptoChanger
 {
     public class ComputerCryptoChangePresenter
     {

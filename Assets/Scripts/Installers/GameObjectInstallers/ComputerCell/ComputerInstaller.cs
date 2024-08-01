@@ -1,9 +1,9 @@
 ﻿using Model.Computer;
 using Presenters.Computer;
-using Presenters.ComputerCryptoChanger;
-using Presenters.ComputerElectricityConsumation;
+using Presenters.Computer.ComputerCryptoChanger;
+using Presenters.Computer.ComputerElectricityConsumation;
+using Presenters.Computer.ComputerQualityChange;
 using Presenters.ComputerMiner;
-using Presenters.ComputerQualityChange;
 using Presenters.ComputerRepair;
 using UnityEngine;
 using Views.Computer;

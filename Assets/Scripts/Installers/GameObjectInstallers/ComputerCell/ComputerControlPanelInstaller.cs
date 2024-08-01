@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Presenters.UI.ComputerControlPanel.ComputerHealthbar;
 using UnityEngine;
 using Views.UI.ComputerControlPanel.BuyButton;
 using Views.UI.ComputerControlPanel.ChangeCryptoButton;
+using Views.UI.ComputerControlPanel.ComputerHealthbar;
 using Views.UI.ComputerControlPanel.RepairButton;
 using Zenject;
 
@@ -13,12 +15,30 @@ namespace Installers.GameObjectInstallers.ComputerCell
         [SerializeField] private BuyButtonView _buyButtonView;
         [SerializeField] private RepairButtonView _repairButtonView;
         [SerializeField] private List<ChangeCryptoButtonView> _cryptoChangeButonViews;
+        [SerializeField] private ComputerHealthbarView _computerHealthbarView;
         
         public override void InstallBindings()
         {
+            BindComputerHealthbarView();
             BindButtonView();
             BindRepairButtonView();
             BindCryptoChangeButtonViews();
+            BindComputerHealthbarPresenter();
+        }
+
+        private void BindComputerHealthbarPresenter()
+        {
+            Container.Bind<ComputerHealthbarPresenter>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindComputerHealthbarView()
+        {
+            Container.Bind<ComputerHealthbarView>()
+                .FromInstance(_computerHealthbarView)
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindCryptoChangeButtonViews()

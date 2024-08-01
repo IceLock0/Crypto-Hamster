@@ -7,7 +7,7 @@ using Presenters.ComputerRepair;
 using ScriptableObjects;
 using Utils;
 
-namespace Presenters.ComputerParameterChange
+namespace Presenters.Computer.ComputerParameterChange
 {
 
     public abstract class ComputerParameterChangePresenter

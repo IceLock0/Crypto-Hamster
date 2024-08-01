@@ -1,4 +1,4 @@
-﻿using Presenters.ComputerElectricityConsumation;
+﻿using Presenters.Computer.ComputerElectricityConsumation;
 using UnityEngine;
 using Utils;
 using Zenject;

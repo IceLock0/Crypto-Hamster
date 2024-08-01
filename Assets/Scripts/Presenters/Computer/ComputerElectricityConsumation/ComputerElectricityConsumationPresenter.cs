@@ -7,7 +7,7 @@ using Model.Electricity;
 using ScriptableObjects;
 using Utils;
 
-namespace Presenters.ComputerElectricityConsumation
+namespace Presenters.Computer.ComputerElectricityConsumation
 {
 
     public class ComputerElectricityConsumationPresenter

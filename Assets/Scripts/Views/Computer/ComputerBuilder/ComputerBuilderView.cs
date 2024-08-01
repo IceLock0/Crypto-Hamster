@@ -1,8 +1,5 @@
 ﻿using Presenters.Computer;
-using Presenters.ComputerCryptoChanger;
-using Presenters.ComputerElectricityConsumation;
 using Presenters.ComputerMiner;
-using Presenters.ComputerQualityChange;
 using Presenters.ComputerRepair;
 using UnityEngine;
 using Zenject;
