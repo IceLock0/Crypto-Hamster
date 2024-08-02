@@ -6,6 +6,7 @@ using ModestTree;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace Model.Staff.SysAdmin
 {
@@ -32,25 +33,29 @@ namespace Model.Staff.SysAdmin
 
         public void AddBrokenModel(ComputerModel model)
         {
-            if (!BrokenModels.Contains(model) && model.Quality > FatigueValueReaction)
-                return;
-            
-            if(!BrokenModels.Contains(model) && model.Quality <= FatigueValueReaction)
-                BrokenModels.Enqueue(model);
-
-            if (BrokenModels.Contains(model) && model.Quality > FatigueValueReaction)
+            if (BrokenModels.Contains(model))
             {
-                for (var i = 0; i < BrokenModels.Count; i++)
+                if (model.Quality > FatigueValueReaction)
                 {
-                    var firstElement = BrokenModels.Dequeue();
+                    var brokenModelsCount = BrokenModels.Count;
+                    
+                    Debug.Log($"Count = {brokenModelsCount}");
+                    
+                    for (int i = 0; i < brokenModelsCount; i++)
+                    {
+                        var element = BrokenModels.Dequeue();
 
-                    if (firstElement == model)
-                        continue;
-
-                    BrokenModels.Enqueue(firstElement);
+                        if (model == element)
+                            continue;
+                        
+                        BrokenModels.Enqueue(element);
+                    }
+                    ModelRemoved?.Invoke();
                 }
-
-                ModelRemoved?.Invoke();
+            }
+            else if (model.Quality <= FatigueValueReaction)
+            {
+                BrokenModels.Enqueue(model);
             }
         }
 

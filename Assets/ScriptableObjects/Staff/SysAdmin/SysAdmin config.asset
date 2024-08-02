@@ -22,4 +22,4 @@ MonoBehaviour:
   _efficiency: 2
   _checkerTime: 1
   _repairSpeed: 3
-  _fatigueValueReaction: 95
+  _fatigueValueReaction: 85

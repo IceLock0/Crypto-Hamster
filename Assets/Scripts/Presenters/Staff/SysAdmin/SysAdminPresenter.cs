@@ -24,7 +24,7 @@ namespace Presenters.Staff.SysAdmin
 
         private readonly List<ComputerBuilderPresenter> _computerPresenters;
 
-        private readonly CancellationTokenSource _cts;
+        private CancellationTokenSource _cts;
         
         public SysAdminPresenter(SysAdminConfig sysAdminConfig, List<ComputerBuilderPresenter> computerPresenters,
             NavMeshAgent agent, Unity.AI.Navigation.NavMeshSurface surface)
@@ -70,6 +70,8 @@ namespace Presenters.Staff.SysAdmin
         private void CancelWork()
         {
             _cts.Cancel();
+
+            _cts = new CancellationTokenSource();
         }
 
         private void AddBrokenModel(ComputerModel brokenModel)
@@ -111,11 +113,12 @@ namespace Presenters.Staff.SysAdmin
             catch (OperationCanceledException)
             {
                 Debug.Log("Repair process was canceled");
+                _sysAdminModel.CompletedUnits--;
             }
             finally
             {
                 _sysAdminModel.EndWork();
-            
+                
                 _sysAdminModel.RemoveRepairedModel();
             
                 GoToSourcePoint();

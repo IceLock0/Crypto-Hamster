@@ -31,7 +31,7 @@ namespace Model.Staff
 
         public float RelaxTime { get; }
         public float Efficiency { get; }
-        public int CompletedUnits { get; private set; }
+        public int CompletedUnits { get; set; }
         
         public float CheckerTime { get; }
         
