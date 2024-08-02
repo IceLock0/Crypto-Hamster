@@ -43,13 +43,6 @@ namespace Presenters.Wallet.Crypto
 
             _view.SetText(amountValue);
         }
-
-        protected override void CreateCurrencies()
-        {
-            Model.AddCurrency(new Bitcoin());
-            Model.AddCurrency(new Ethereum());
-            Model.AddCurrency(new Solana());
-        }
         
         private void ChangeSelectedCrypto(Type type)
         {

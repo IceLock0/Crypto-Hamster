@@ -23,11 +23,5 @@ namespace Presenters.Wallet.Cash
 
             _view.SetText(amountValue);
         }
-
-        protected override void CreateCurrencies()
-        {
-            Model.AddCurrency(new Currency.Cash());
-            Model.AddCurrencyAmountPerValue(typeof(Currency.Cash), 10000f);
-        }
     }
 }

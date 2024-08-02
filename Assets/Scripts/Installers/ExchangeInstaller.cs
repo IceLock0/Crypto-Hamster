@@ -2,7 +2,7 @@
 using Presenters.UI.ExchangeButton;
 using UnityEngine;
 using Views.UI.ExchangeButton;
-using Views.UI.Wallet;
+using Views.Wallet;
 using Zenject;
 
 namespace Installers
@@ -11,19 +11,19 @@ namespace Installers
     public class ExchangeInstaller : MonoInstaller
     {
         [SerializeField] private ExchangeButtonView _exchangeButtonView;
-        [SerializeField] private CryptoDropDownHandler _cryptoDropDownHandler;
+        [SerializeField] private WalletCryptoUIView _walletCryptoUIView;
         public override void InstallBindings()
         {
             BindExchangeModel();
-            BindCryptoDropdownHandler();
+            BindWalletCryptoUIView();
             BindExchangeButtonView();
             BindExchangeButtonPresenter();
         }
 
-        private void BindCryptoDropdownHandler()
+        private void BindWalletCryptoUIView()
         {
-            Container.Bind<CryptoDropDownHandler>()
-                .FromInstance(_cryptoDropDownHandler)
+            Container.Bind<WalletCryptoUIView>()
+                .FromInstance(_walletCryptoUIView)
                 .AsSingle()
                 .NonLazy();
         }

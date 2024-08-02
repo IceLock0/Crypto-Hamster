@@ -18,6 +18,7 @@ namespace Views.Wallet
         private WalletCryptoPresenter _presenter;
         
         public event Action<Type> CryptoSelected;
+        public Type CurrentChosenCrypto { get; private set; }
 
         [Inject]
         public void Initialize(WalletModel walletModel)
@@ -37,15 +38,15 @@ namespace Views.Wallet
 
             var selectedIndex = (CryptoCurrencyIndices) index;
 
-            var type = CryptoEnumToTypeService.CryptoToType(selectedIndex);
+            CurrentChosenCrypto = CryptoEnumToTypeService.CryptoToType(selectedIndex);
             
-            CryptoSelected?.Invoke(type);
+            CryptoSelected?.Invoke(CurrentChosenCrypto);
         }
 
         private void OnEnable()
         {
             _presenter.Enable();
-
+            CurrentChosenCrypto = CryptoEnumToTypeService.CryptoToType((CryptoCurrencyIndices)_dropdown.value);
             _dropdown.onValueChanged.AddListener(GetCurrentListIndex);
         }
 

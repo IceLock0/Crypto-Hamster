@@ -11,8 +11,6 @@ namespace Presenters.Wallet
         protected WalletPresenter(WalletModel walletModel)
         {
             Model = walletModel;
-        
-            CreateCurrencies();
         }
 
         public virtual void Enable()
@@ -26,10 +24,6 @@ namespace Presenters.Wallet
         }
         
         protected abstract void SetCurrencyText(Type type);
-        
-        protected abstract void CreateCurrencies();
 
-        public float GetCryptoAmount(Type type) => Model.Currencies[type].Amount;
-        
     }
 }

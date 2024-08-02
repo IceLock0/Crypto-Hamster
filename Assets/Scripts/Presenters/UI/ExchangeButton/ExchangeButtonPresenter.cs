@@ -5,8 +5,7 @@ using Model.Wallet;
 using Presenters.Currency;
 using Utils;
 using Views.UI.ExchangeButton;
-using Views.UI.Wallet;
-using Zenject;
+using Views.Wallet;
 
 namespace Presenters.UI.ExchangeButton
 {
@@ -14,17 +13,17 @@ namespace Presenters.UI.ExchangeButton
     {
         private readonly ExchangeButtonView _view;
         private readonly WalletModel _walletModel;
-        private readonly CryptoDropDownHandler _cryptoDropDownHandler;
+        private readonly WalletCryptoUIView _walletCryptoUIView;
         private readonly ExchangeModel _exchangeModel;
 
         private float _targetExchangeAmount;
-        public ExchangeButtonPresenter(ExchangeButtonView view, WalletModel walletModel, CryptoDropDownHandler cryptoDropDownHandler, ExchangeModel exchangeModel)
+        public ExchangeButtonPresenter(ExchangeButtonView view, WalletModel walletModel, WalletCryptoUIView walletCryptoUIView, ExchangeModel exchangeModel)
         {
-            InvariantChecker.CheckObjectInvariant(view, walletModel, cryptoDropDownHandler, exchangeModel);
+            InvariantChecker.CheckObjectInvariant(view, walletModel, walletCryptoUIView, exchangeModel);
 
             _view = view;
             _walletModel = walletModel;
-            _cryptoDropDownHandler = cryptoDropDownHandler;
+            _walletCryptoUIView = walletCryptoUIView;
             _exchangeModel = exchangeModel;
             _view.ExchangeButtonClicked += OnExchangeButtonClicked;
         }
@@ -43,7 +42,7 @@ namespace Presenters.UI.ExchangeButton
         private void CalculateExchangeAmount()
         {
             _targetExchangeAmount =
-                _exchangeModel.CryptoExchangables.FirstOrDefault(x => x.Key == _cryptoDropDownHandler.CurrentCrypto).Value.Exchange();
+                _exchangeModel.CryptoExchangables.FirstOrDefault(x => x.Key == _walletCryptoUIView.CurrentChosenCrypto).Value.Exchange();
         }
 
         public void Dispose()
