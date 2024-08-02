@@ -8,7 +8,8 @@
 
         public float MaxRate { get; set; }
 
-        public float Exchange();
+        public float Sell();
+        public void Buy(float amount);
         public void ChangeRate();
     }
 }

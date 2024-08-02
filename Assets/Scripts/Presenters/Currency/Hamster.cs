@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Views.Currency;
+using Random = UnityEngine.Random;
 
 namespace Presenters.Currency
 {
@@ -34,7 +36,7 @@ namespace Presenters.Currency
             MaxRate = rate + rate * 0.2f;
         }
         
-        public float Exchange()
+        public float Sell()
         {
             var resultCash = Amount * Rate;
 
@@ -43,16 +45,18 @@ namespace Presenters.Currency
             return resultCash;
         }
 
+        public void Buy(float amount)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ChangeRate()
         {
             var step = Rate / 100;
 
             var newRate = Random.Range(Rate - step, Rate + step);
 
-            if (newRate > MaxRate)
-                newRate = MaxRate;
-            else if (newRate < MinRate)
-                newRate = MinRate;
+            newRate = Mathf.Clamp(newRate, MinRate, MaxRate);
 
             Rate = newRate;
         }

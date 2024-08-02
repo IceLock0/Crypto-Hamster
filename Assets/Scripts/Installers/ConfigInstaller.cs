@@ -8,6 +8,7 @@ namespace Installers
 
     public class ConfigInstaller : MonoInstaller
     {
+        [SerializeField] private List<CryptoConfig> _cryptoConfigs;
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private CameraConfig _cameraConfig;
         [SerializeField] private List<ComputerConfig> _computerConfig;
@@ -23,6 +24,15 @@ namespace Installers
             BindSysAdminConfig();
             BindElectricityConfig();
             BindRepairKit();
+            BindCryptoConfigs();
+        }
+
+        private void BindCryptoConfigs()
+        {
+            Container.Bind<List<CryptoConfig>>()
+                .FromInstance(_cryptoConfigs)
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindRepairKit()

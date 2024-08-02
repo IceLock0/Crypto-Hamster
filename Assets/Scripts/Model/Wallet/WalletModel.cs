@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
-using Presenters.Currency;
-using UnityEngine;
 using Utils;
 using Views.Currency;
 
@@ -23,19 +19,14 @@ namespace Model.Wallet
 
         public void AddCurency(Type currencyType, float value)
         {
-            if (value <= 0)
+            if (value < 0)
                 throw new ArgumentOutOfRangeException();
             ChangeCurrencyValue(currencyType, value);
         }
 
-        public void ResetCurrency(Type currencyType)
-        {
-            Currencies[currencyType].Amount = 0;
-        }
-
         public void RemoveCurrency(Type currencyType, float value)
         {
-            if (value <= 0)
+            if (value < 0)
                 throw new ArgumentOutOfRangeException();
             ChangeCurrencyValue(currencyType, -value);
         }
@@ -46,13 +37,5 @@ namespace Model.Wallet
             
             AmountChanged?.Invoke(currencyType);
         }
-
-        private void CheckDictionaryForCurrency<T>() where T : class, ICurrency
-        {
-            if (Currencies.ContainsKey(typeof(T)))
-                throw new ArgumentException($"Currency type: {typeof(T)} is already contained");
-        }
-
-        
     }
 }

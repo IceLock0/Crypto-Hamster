@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Presenters.Currency;
+using ScriptableObjects;
+using UnityEngine;
 using Views.Currency;
 using Zenject;
 
@@ -19,18 +21,35 @@ namespace Installers
         
         public override void InstallBindings()
         {
-            CreateCrypto();
+            BindCrypto();
+            ResolveCrypto();
             CreateDictionary();
             BindICurrencyDictionary();
             BindIExchangableDictionary();
         }
 
-        private void CreateCrypto()
+        private void BindCrypto()
         {
-            _bitcoin = new Bitcoin();
-            _ethereum = new Ethereum();
-            _cash = new Cash();
-            _solana = new Solana();
+            Container.Bind<Bitcoin>()
+                .AsSingle()
+                .NonLazy();
+            Container.Bind<Ethereum>()
+                .AsSingle()
+                .NonLazy();
+            Container.Bind<Solana>()
+                .AsSingle()
+                .NonLazy();
+            Container.Bind<Cash>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void ResolveCrypto()
+        {
+            _bitcoin = Container.Resolve<Bitcoin>();
+            _ethereum = Container.Resolve<Ethereum>();
+            _solana = Container.Resolve<Solana>();
+            _cash = Container.Resolve<Cash>();
         }
 
         private void CreateDictionary()
