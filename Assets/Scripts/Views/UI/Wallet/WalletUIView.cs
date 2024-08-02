@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using Model.Wallet;
 using Presenters.Currency;
 using Presenters.Wallet;
 using TMPro;
 using UnityEngine;
 using Views.Currency;
+using Views.UI.Wallet;
 using Zenject;
 
 
@@ -33,11 +35,11 @@ namespace Views.Wallet
         
 
         [Inject]
-        private void Initialize(WalletModel walletModel)
+        private void Initialize(WalletModel walletModel, Dictionary<Type, ICurrency> currencies)
         {
             _cryptoType = typeof(Bitcoin);
             
-            _presenter = new WalletPresenter(this, walletModel);
+            _presenter = new WalletPresenter(this, walletModel, currencies);
         }
         
         private void OnEnable()

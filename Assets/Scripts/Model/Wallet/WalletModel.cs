@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Presenters.Currency;
 using UnityEngine;
+using Utils;
 using Views.Currency;
 
 namespace Model.Wallet
@@ -13,31 +15,44 @@ namespace Model.Wallet
         
         public Dictionary<Type, ICurrency> Currencies { get; private set; }
         
-        public WalletModel()
+        public WalletModel(Dictionary<Type, ICurrency> currencies)
         {
-            Currencies = new Dictionary<Type, ICurrency>();
+            InvariantChecker.CheckObjectInvariant(currencies);
+            Currencies = currencies;
         }
 
-        public void AddCurrency<T>(T currency) where T : class, ICurrency
+        public void AddCurency(Type currencyType, float value)
         {
-            CheckDictionaryForCurrency<T>();
-
-            Currencies.Add(typeof(T), currency);
+            if (value <= 0)
+                throw new ArgumentOutOfRangeException();
+            ChangeCurrencyValue(currencyType, value);
         }
-        
-        public void AddCurrencyAmountPerValue(Type currencyType, float value)
+
+        public void ResetCurrency(Type currencyType)
+        {
+            Currencies[currencyType].Amount = 0;
+        }
+
+        public void RemoveCurrency(Type currencyType, float value)
+        {
+            if (value <= 0)
+                throw new ArgumentOutOfRangeException();
+            ChangeCurrencyValue(currencyType, -value);
+        }
+
+        private void ChangeCurrencyValue(Type currencyType, float value)
         {
             Currencies[currencyType].Amount += value;
             
             AmountChanged?.Invoke(currencyType);
         }
 
-
         private void CheckDictionaryForCurrency<T>() where T : class, ICurrency
         {
             if (Currencies.ContainsKey(typeof(T)))
                 throw new ArgumentException($"Currency type: {typeof(T)} is already contained");
         }
+
         
     }
 }

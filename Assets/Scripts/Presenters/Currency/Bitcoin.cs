@@ -12,7 +12,9 @@ namespace Presenters.Currency
 
         public float Exchange()
         {
-            throw new System.NotImplementedException();
+            var targetAmount = Amount * Rate;
+            Amount = 0;
+            return targetAmount;
         }
 
         public void ChangeRate()

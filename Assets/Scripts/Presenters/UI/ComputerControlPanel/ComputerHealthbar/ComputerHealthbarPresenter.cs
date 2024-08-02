@@ -18,6 +18,11 @@ namespace Presenters.UI.ComputerControlPanel.ComputerHealthbar
             
             _computerModel.QualityChanged += OnQualityChanged;
         }
+        
+        ~ComputerHealthbarPresenter()
+        {
+            Dispose();
+        }
 
         public void Dispose()
         {

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Model.Wallet;
 using Presenters.Currency;
 using UnityEngine;
+using Utils;
+using Views.Currency;
 using Views.Wallet;
 using Zenject;
 
@@ -10,15 +13,15 @@ namespace Presenters.Wallet
     public class WalletPresenter
     {
         private readonly WalletUIView _uiView;
+        private readonly Dictionary<Type,ICurrency> _currencies;
         private readonly WalletModel _model;
 
-        public WalletPresenter(WalletUIView uiView, WalletModel walletModel)
+        public WalletPresenter(WalletUIView uiView, WalletModel walletModel, Dictionary<Type,ICurrency> currencies)
         {
+            InvariantChecker.CheckObjectInvariant(currencies);
             _uiView = uiView;
-
             _model = walletModel;
-        
-            CreateCurrencies();
+            _currencies = currencies;
         }
 
         public void Enable()
@@ -42,15 +45,5 @@ namespace Presenters.Wallet
         }
 
         public float GetCryptoAmount(Type type) => _model.Currencies[type].Amount;
-
-
-        private void CreateCurrencies()
-        {
-            _model.AddCurrency(new Cash());
-            _model.AddCurrencyAmountPerValue(typeof(Cash), 10000000000000f);
-            _model.AddCurrency(new Bitcoin());
-            _model.AddCurrency(new Ethereum());
-            _model.AddCurrency(new Solana());
-        }
     }
 }
