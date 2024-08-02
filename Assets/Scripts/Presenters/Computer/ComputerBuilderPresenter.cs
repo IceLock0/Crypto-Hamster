@@ -33,7 +33,7 @@ namespace Presenters.Computer
 
         public ComputerModel Model { get;  }
 
-        public event Action<ComputerType> ComputerMeshCreated;
+        public event Action<ComputerType> ComputerBuilded;
 
         public void Enable()
         {
@@ -64,7 +64,7 @@ namespace Presenters.Computer
         {
             //Нехватка бабок и тп обработка невозможности билда
             _currentComputerModel = _computerFabric.Create(Model.ComputerType, Model.Position, _computerParent) as GameObject;
-            ComputerMeshCreated?.Invoke(Model.ComputerType);
+            ComputerBuilded?.Invoke(Model.ComputerType);
         }
     }
 }

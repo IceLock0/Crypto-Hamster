@@ -1,49 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using Model.Wallet;
 using Presenters.Currency;
-using UnityEngine;
-using Utils;
-using Views.Currency;
-using Views.Wallet;
-using Zenject;
 
 namespace Presenters.Wallet
 {
-    public class WalletPresenter
+    public abstract class WalletPresenter
     {
-        private readonly WalletUIView _uiView;
-        private readonly Dictionary<Type,ICurrency> _currencies;
-        private readonly WalletModel _model;
-
-        public WalletPresenter(WalletUIView uiView, WalletModel walletModel, Dictionary<Type,ICurrency> currencies)
+        protected readonly WalletModel Model;
+        
+        protected WalletPresenter(WalletModel walletModel)
         {
-            InvariantChecker.CheckObjectInvariant(currencies);
-            _uiView = uiView;
-            _model = walletModel;
-            _currencies = currencies;
+            Model = walletModel;
+        
+            CreateCurrencies();
         }
 
-        public void Enable()
+        public virtual void Enable()
         {
-            _model.AmountChanged += SetCurrencyText;
+            Model.AmountChanged += SetCurrencyText;
         }
 
-        public void Disable()
+        public virtual void Disable()
         {
-            _model.AmountChanged -= SetCurrencyText;
+            Model.AmountChanged -= SetCurrencyText;
         }
+        
+        protected abstract void SetCurrencyText(Type type);
+        
+        protected abstract void CreateCurrencies();
 
-        private void SetCurrencyText(Type type)
-        {
-            var amountValue =_model.Currencies[type].Amount;
-
-            if(type == typeof(Cash))
-                _uiView.SetCashText(amountValue);
-            else
-                _uiView.SetCryptoText();
-        }
-
-        public float GetCryptoAmount(Type type) => _model.Currencies[type].Amount;
+        public float GetCryptoAmount(Type type) => Model.Currencies[type].Amount;
+        
     }
 }

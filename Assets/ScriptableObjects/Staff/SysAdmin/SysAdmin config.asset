@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268c9b6aba9c449aacdafa9953b515cf, type: 3}
   m_Name: SysAdmin config
   m_EditorClassIdentifier: 
-  _movementSpeed: 5
-  _rotationSpeed: 100
+  _movementSpeed: 3.5
+  _rotationSpeed: 120
+  _acceleration: 8
   _name: Moisuk
   _price: 111
   _sourcePoint: {fileID: 1659931549745464885, guid: 9d89974457e610f44a19dfde0bd59208, type: 3}
-  _repairSpeed: 35
-  _fatigueValueReaction: 95
+  _relaxTime: 10
   _efficiency: 2
-  _relaxTime: 20
   _checkerTime: 1
+  _repairSpeed: 3
+  _fatigueValueReaction: 85

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c647576f7bb460f8f9d5fce1c35a3cf, type: 3}
   m_Name: Common
   m_EditorClassIdentifier: 
-  _repairPower: 10
+  _repairPower: 100
