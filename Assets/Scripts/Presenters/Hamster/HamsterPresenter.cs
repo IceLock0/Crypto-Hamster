@@ -3,6 +3,7 @@ using Model.HamsterModel;
 using Model.Wallet;
 using Presenters.Currency;
 using UnityEngine;
+using Utils;
 using Views.Hamster;
 
 namespace Presenters.Hamster
@@ -17,6 +18,8 @@ namespace Presenters.Hamster
         
         public HamsterPresenter(HamsterUIView view, WalletModel walletModel)
         {
+            InvariantChecker.CheckObjectInvariant(view, walletModel);
+            
             _view = view;
 
             _model = new HamsterModel();
