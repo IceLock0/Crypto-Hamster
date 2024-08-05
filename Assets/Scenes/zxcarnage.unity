@@ -989,6 +989,7 @@ MonoBehaviour:
   _sysAdminConfig: {fileID: 11400000, guid: c715e5344125bf3419a3132377cea4d1, type: 2}
   _electricityConfig: {fileID: 11400000, guid: c95b11fb1e7f6934182a6dcd114fef39, type: 2}
   _repairKit: {fileID: 11400000, guid: 3c3b6241cdf4f64459f728f8a3d7acb5, type: 2}
+  _costConfig: {fileID: 11400000, guid: 4c9a0690cfc008149a99b94aeaacba63, type: 2}
 --- !u!4 &363569108
 Transform:
   m_ObjectHideFlags: 0
@@ -1173,7 +1174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.51860315, y: 0.056610055}
   m_AnchorMax: {x: 0.86600006, y: 0.95023745}
-  m_AnchoredPosition: {x: 1, y: -0.9991226}
+  m_AnchoredPosition: {x: 1, y: -0.999115}
   m_SizeDelta: {x: 3.1700134, y: 6.6600037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &391498378
@@ -1536,7 +1537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00047683716}
+  m_AnchoredPosition: {x: 0, y: -0.0004196167}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &589875811
@@ -2239,7 +2240,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.055102464, y: 0.75980943}
   m_AnchorMax: {x: 0.41169804, y: 0.96116513}
-  m_AnchoredPosition: {x: -19.999886, y: 2.3899841}
+  m_AnchoredPosition: {x: -19.999878, y: 2.3899841}
   m_SizeDelta: {x: -178.26001, y: -45.884003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &869886607

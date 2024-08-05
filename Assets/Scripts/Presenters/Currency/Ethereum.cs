@@ -13,6 +13,18 @@ namespace Presenters.Currency
     public class Ethereum : ICurrency, IExchangeable
     {
         public float Amount { get; set; }
+        public void ChangeAmount(float amount, Action<Type> callback)
+        {
+            Amount += amount;
+            callback?.Invoke(typeof(Ethereum));
+        }
+
+        public void Reset(Action<Type> callback)
+        {
+            Amount = 0;
+            callback?.Invoke(typeof(Ethereum));
+        }
+
         public float MinRate { get; set; }
         public float Rate { get; set; }
         public float MaxRate { get; set; }
@@ -32,10 +44,9 @@ namespace Presenters.Currency
             MaxRate = targetConfig.MaxRate;
         }
         
-        public float Sell()
+        public float GetSellAmount()
         {
             var targetAmount = Amount * Rate;
-            Amount = 0;
             return targetAmount;
         }
 

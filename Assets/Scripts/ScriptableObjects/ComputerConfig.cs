@@ -15,6 +15,7 @@ namespace ScriptableObjects
         [SerializeField] private float _qualityFatigueDelay;
         [Space(20)] 
         [SerializeField] private ComputerType _computerType;
+        [SerializeField] private float _computerPrice;
         [Space(40)] 
         [SerializeField] private List<CryptoModel> _cryptoModels;
         [SerializeField] private float _electricityConsumation;
@@ -24,6 +25,8 @@ namespace ScriptableObjects
         public ComputerType ComputerType => _computerType;
         public List<CryptoModel> CryptoModels => _cryptoModels;
         public float ElectricityConsumation => _electricityConsumation;
+
+        public float ComputerPrice => _computerPrice;
 
     }
 

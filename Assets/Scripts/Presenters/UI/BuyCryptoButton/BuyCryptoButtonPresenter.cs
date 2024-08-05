@@ -34,8 +34,10 @@ namespace Presenters.UI.BuyCryptoButton
 
         protected override void ExchangeCash()
         {
-            ExchangeModel.CryptoExchangables.FirstOrDefault(x => x.Key == WalletCryptoUIView.CurrentChosenCrypto)
-                .Value.Buy(TargetExchangeAmount);
+            var targetCrypto = ExchangeModel.CryptoExchangables
+                .FirstOrDefault(x => x.Key == WalletCryptoUIView.CurrentChosenCrypto).Value;
+            WalletModel.AddCurency(WalletCryptoUIView.CurrentChosenCrypto, TargetExchangeAmount/targetCrypto.Rate);
+            WalletModel.NullifyCurrency(typeof(Cash));
         }
 
         protected override void CalculateExchangeAmount()

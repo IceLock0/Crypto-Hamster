@@ -28,7 +28,7 @@ namespace Views.Wallet
         
         public void SetText(float value)
         {
-            _text.text = $"{value:f12}";
+            _text.text = $"{value:0.000}";
         }
         
         private void GetCurrentListIndex(int index)

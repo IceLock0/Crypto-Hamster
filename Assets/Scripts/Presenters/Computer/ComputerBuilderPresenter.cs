@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Enums;
 using Model.Computer;
+using Model.Wallet;
+using Presenters.Currency;
+using ScriptableObjects;
 using Services;
 using Services.Fabric;
 using UnityEngine;
@@ -16,19 +21,25 @@ namespace Presenters.Computer
         private readonly IComputerFabric _computerFabric;
         private readonly Transform _computerParent;
         private readonly GameObjectDestroyerService _gameObjectDestroyerService;
+        private readonly WalletModel _walletModel;
+        private readonly List<ComputerConfig> _computerConfigs;
         
         private GameObject _currentComputerModel;
 
-        public ComputerBuilderPresenter(BuyButtonView buyButtonView, IComputerFabric computerFabric,  Transform computersParent, ComputerModel model, GameObjectDestroyerService gameObjectDestroyerServiceService)
+        public ComputerBuilderPresenter(BuyButtonView buyButtonView, IComputerFabric computerFabric,  
+            Transform computersParent, ComputerModel model, 
+            GameObjectDestroyerService gameObjectDestroyerServiceService, WalletModel walletModel, List<ComputerConfig> computerConfigs)
         {
             InvariantChecker.CheckObjectInvariant(buyButtonView, computerFabric, computerFabric,
-                computersParent, model, gameObjectDestroyerServiceService);
+                computersParent, model, gameObjectDestroyerServiceService, walletModel, computerConfigs);
 
             Model = model;
             _buyButtonView = buyButtonView;
             _computerFabric = computerFabric;
             _computerParent = computersParent;
             _gameObjectDestroyerService = gameObjectDestroyerServiceService;
+            _walletModel = walletModel;
+            _computerConfigs = computerConfigs;
         }
 
         public ComputerModel Model { get;  }
@@ -37,19 +48,41 @@ namespace Presenters.Computer
 
         public void Enable()
         {
-            _buyButtonView.BuyComputerButtonClicked += BuyComputerComputer;
+            _buyButtonView.BuyComputerButtonClicked += OnBuyComputerButtonClicked;
         }
 
         public void Disable()
         {
-            _buyButtonView.BuyComputerButtonClicked -= BuyComputerComputer;
+            _buyButtonView.BuyComputerButtonClicked -= OnBuyComputerButtonClicked;
         }
 
-        private void BuyComputerComputer()
+        private void OnBuyComputerButtonClicked()
         {
-            Model.ChangeType((int)(Model.ComputerType + 1));
+            TryBuyComputer();
+        }
+
+        private void TryBuyComputer()
+        {
+            var targetComputerType = Model.ComputerType + 1;
+            if (!Enum.IsDefined(typeof(ComputerType), targetComputerType))
+                throw new ArgumentOutOfRangeException();
+            var targetCost = _computerConfigs.FirstOrDefault(x => x.ComputerType == targetComputerType)!.ComputerPrice;
+            if (_walletModel.Currencies[typeof(Cash)].Amount < targetCost)
+                throw new ArgumentOutOfRangeException("Not enough money");
+            BuyComputer(targetCost);
+        }
+
+        private void BuyComputer(float cost)
+        {
+            _walletModel.RemoveCurrency(typeof(Cash), cost);
+            ChangeModel();
             TryDestroyOldComputer();
             TryBuildNewComputer();
+        }
+
+        private void ChangeModel()
+        {
+            Model.ChangeType((int) (Model.ComputerType + 1));
         }
 
 

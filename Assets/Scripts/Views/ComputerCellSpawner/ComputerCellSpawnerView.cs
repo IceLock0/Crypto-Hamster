@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model.Wallet;
 using Presenters.ComputerCellSpawner;
+using ScriptableObjects;
 using UnityEngine;
 using Views.ComputerCell;
 using Views.UI.BuyCellButton;
@@ -15,9 +17,9 @@ namespace Views.ComputerCellSpawner
         private ComputerCellSpawnerPresenter _presenter;
 
         [Inject]
-        private void Initialize(BuyCellButtonView buyCellButtonView)
+        private void Initialize(BuyCellButtonView buyCellButtonView, CostConfig costConfig, WalletModel walletModel)
         {
-            _presenter = new ComputerCellSpawnerPresenter(_computerCellViews,buyCellButtonView);
+            _presenter = new ComputerCellSpawnerPresenter(_computerCellViews,buyCellButtonView,costConfig, walletModel);
         }
 
         private void OnEnable()

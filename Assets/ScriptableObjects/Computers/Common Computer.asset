@@ -15,6 +15,7 @@ MonoBehaviour:
   _qualityFatigue: 3
   _qualityFatigueDelay: 1
   _computerType: 1
+  _computerPrice: 100
   _cryptoModels:
   - Currency: 0
     Rate: 5

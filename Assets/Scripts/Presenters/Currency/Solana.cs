@@ -13,6 +13,18 @@ namespace Presenters.Currency
     public class Solana : ICurrency, IExchangeable
     {
         public float Amount { get; set; }
+        public void ChangeAmount(float amount, Action<Type> callback)
+        {
+            Amount += amount;
+            callback?.Invoke(typeof(Solana));
+        }
+
+        public void Reset(Action<Type> callback)
+        {
+            Amount = 0;
+            callback?.Invoke(typeof(Solana));
+        }
+
         public float MinRate { get; set; }
         public float Rate { get; set; }
         public float MaxRate { get; set; }
@@ -33,10 +45,9 @@ namespace Presenters.Currency
         }
         
         
-        public float Sell()
+        public float GetSellAmount()
         {
             var targetAmount = Amount * Rate;
-            Amount = 0;
             return targetAmount;
         }
 

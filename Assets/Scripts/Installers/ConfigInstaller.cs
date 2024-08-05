@@ -15,6 +15,7 @@ namespace Installers
         [SerializeField] private SysAdminConfig _sysAdminConfig;
         [SerializeField] private ElectricityConfig _electricityConfig;
         [SerializeField] private RepairKit _repairKit;
+        [SerializeField] private CostConfig _costConfig;
         
         public override void InstallBindings()
         {
@@ -25,6 +26,15 @@ namespace Installers
             BindElectricityConfig();
             BindRepairKit();
             BindCryptoConfigs();
+            BindCostConfig();
+        }
+
+        private void BindCostConfig()
+        {
+            Container.Bind<CostConfig>()
+                .FromScriptableObject(_costConfig)
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindCryptoConfigs()

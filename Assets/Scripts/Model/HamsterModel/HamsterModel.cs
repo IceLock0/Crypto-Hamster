@@ -32,7 +32,7 @@ namespace Model.HamsterModel
         
         public float Exchange()
         {
-            var resultCash = Hamster.Sell();
+            var resultCash = Hamster.GetSellAmount();
 
             AmountChanged?.Invoke();
 

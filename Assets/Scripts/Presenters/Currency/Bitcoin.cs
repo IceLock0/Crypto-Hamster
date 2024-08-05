@@ -13,6 +13,17 @@ namespace Presenters.Currency
     public class Bitcoin : ICurrency, IExchangeable
     {
         public float Amount { get; set; }
+        public void ChangeAmount(float amount, Action<Type> callback)
+        {
+            Amount += amount;
+            callback?.Invoke(typeof(Bitcoin));
+        }
+
+        public void Reset(Action<Type> callback)
+        {
+            Amount = 0;
+            callback?.Invoke(typeof(Bitcoin));
+        }
 
         public float MinRate { get; set; }
         public float Rate { get; set; }
@@ -33,10 +44,9 @@ namespace Presenters.Currency
             MaxRate = targetConfig.MaxRate;
         }
 
-        public float Sell()
+        public float GetSellAmount()
         {
             var targetAmount = Amount * Rate;
-            Amount = 0;
             return targetAmount;
         }
 

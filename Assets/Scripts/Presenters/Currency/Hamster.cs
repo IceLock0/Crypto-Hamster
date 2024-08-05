@@ -9,6 +9,17 @@ namespace Presenters.Currency
     {
         public float MinRate { get; set; }
         public float Amount { get; set; }
+        public void ChangeAmount(float amount, Action<Type> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reset(Action<Type> callback)
+        {
+            Amount = 0;
+            callback?.Invoke(typeof(Hamster));
+        }
+
         public float Rate { get; set; }
         public float MaxRate { get; set; }
         public float PerClick { get; set; }
@@ -36,7 +47,7 @@ namespace Presenters.Currency
             MaxRate = rate + rate * 0.2f;
         }
         
-        public float Sell()
+        public float GetSellAmount()
         {
             var resultCash = Amount * Rate;
 
