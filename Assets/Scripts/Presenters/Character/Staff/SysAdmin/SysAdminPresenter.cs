@@ -9,6 +9,7 @@ using Model.Computer;
 using Model.Staff.SysAdmin;
 using ModestTree;
 using Presenters.Computer;
+using Presenters.Room;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,10 +25,12 @@ namespace Presenters.Staff.SysAdmin
 
         private readonly List<ComputerBuilderPresenter> _computerPresenters;
 
+        private readonly ContaminationPresenter _contaminationPresenter;
+        
         private CancellationTokenSource _cts;
         
         public SysAdminPresenter(SysAdminConfig sysAdminConfig, List<ComputerBuilderPresenter> computerPresenters,
-            NavMeshAgent agent, Unity.AI.Navigation.NavMeshSurface surface)
+            NavMeshAgent agent, Unity.AI.Navigation.NavMeshSurface surface, ContaminationPresenter contaminationPresenter)
         {
             InvariantChecker.CheckObjectInvariant(sysAdminConfig, computerPresenters, agent, surface);
 
@@ -41,6 +44,8 @@ namespace Presenters.Staff.SysAdmin
             _surface = surface;
 
             _cts = new CancellationTokenSource();
+
+            _contaminationPresenter = contaminationPresenter;
             
             CheckBrokenComputersInQueue().Forget();
         }
@@ -54,6 +59,8 @@ namespace Presenters.Staff.SysAdmin
                 presenter.ComputerBuilded += BuildNavMesh;
 
             _sysAdminModel.ModelRemoved += CancelWork;
+
+            _contaminationPresenter.SpeedChanged += ChangeSpeedByContamination;
         }
 
         public void Disable()
@@ -65,6 +72,8 @@ namespace Presenters.Staff.SysAdmin
                 presenter.ComputerBuilded -= BuildNavMesh;
             
             _sysAdminModel.ModelRemoved -= CancelWork;
+            
+            _contaminationPresenter.SpeedChanged -= ChangeSpeedByContamination;
         }
 
         private void CancelWork()
@@ -152,6 +161,11 @@ namespace Presenters.Staff.SysAdmin
         {
             if (computerType == ComputerType.Common)
                 _surface.BuildNavMesh();
+        }
+
+        private void ChangeSpeedByContamination(float contamination)
+        {
+            _sysAdminModel.SpeedModel.ChangeSpeedByContamination(contamination);
         }
     }
 }

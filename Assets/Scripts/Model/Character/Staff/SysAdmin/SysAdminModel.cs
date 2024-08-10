@@ -38,9 +38,7 @@ namespace Model.Staff.SysAdmin
                 if (model.Quality > FatigueValueReaction)
                 {
                     var brokenModelsCount = BrokenModels.Count;
-                    
-                    Debug.Log($"Count = {brokenModelsCount}");
-                    
+
                     for (int i = 0; i < brokenModelsCount; i++)
                     {
                         var element = BrokenModels.Dequeue();

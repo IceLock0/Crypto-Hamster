@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.Computer;
 using Presenters.Computer;
+using Presenters.Room;
 using Presenters.Staff.SysAdmin;
 using ScriptableObjects;
 using Unity.VisualScripting;
@@ -24,10 +25,13 @@ namespace Views.Staff
         
         private SysAdminConfig _sysAdminConfig;
         
+        private ContaminationPresenter _contaminationPresenter;
+        
         [Inject]
-        public void Initialize(SysAdminConfig sysAdminConfig)
+        public void Initialize(SysAdminConfig sysAdminConfig, ContaminationPresenter contaminationPresenter)
         {
             _sysAdminConfig = sysAdminConfig;
+            _contaminationPresenter = contaminationPresenter;
         }
 
         private void OnEnable()
@@ -44,7 +48,7 @@ namespace Views.Staff
         {
             var presenters = _computerViews.Select(view => view.GetPresenter()).ToList();
 
-            _presenter = new SysAdminPresenter(_sysAdminConfig, presenters, _agent, _surface);
+            _presenter = new SysAdminPresenter(_sysAdminConfig, presenters, _agent, _surface, _contaminationPresenter);
         }
     }
 }

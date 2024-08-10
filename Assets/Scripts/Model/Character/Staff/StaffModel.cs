@@ -8,9 +8,10 @@ namespace Model.Staff
     {
         public StaffModel(StaffConfig staffConfig, NavMeshAgent agent)
         {
-            AngularSpeed = staffConfig.RotationSpeed;
+            RotationSpeed = staffConfig.RotationSpeed;
             Acceleration = staffConfig.Acceleration;
-            MovementSpeed = staffConfig.MovementSpeed;
+
+            SpeedModel = new SpeedModel(staffConfig.MovementSpeed);
             
             RelaxTime = staffConfig.RelaxTime;
             Efficiency = staffConfig.Efficiency;
@@ -24,10 +25,8 @@ namespace Model.Staff
 
             SetAgentParameter();
         }
-        
-        public float AngularSpeed { get; }
         public float Acceleration { get; }
-        public float MovementSpeed { get; }
+        public float RotationSpeed { get; }
 
         public float RelaxTime { get; }
         public float Efficiency { get; }
@@ -40,12 +39,14 @@ namespace Model.Staff
         public NavMeshAgent Agent { get; }
 
         public bool HasWork { get; private set; }
+        
+        public SpeedModel SpeedModel { get; }
 
         private void SetAgentParameter()
         {
             Agent.acceleration = Acceleration;
-            Agent.speed = MovementSpeed;
-            Agent.angularSpeed = AngularSpeed;
+            Agent.speed = SpeedModel.CurrentSpeed;
+            Agent.angularSpeed = RotationSpeed;
         }
 
         public void Relax()

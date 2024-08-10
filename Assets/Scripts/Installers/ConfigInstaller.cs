@@ -14,6 +14,7 @@ namespace Installers
         [SerializeField] private SysAdminConfig _sysAdminConfig;
         [SerializeField] private ElectricityConfig _electricityConfig;
         [SerializeField] private RepairKit _repairKit;
+        [SerializeField] private ContaminationConfig _contaminationConfig;
         
         public override void InstallBindings()
         {
@@ -23,8 +24,14 @@ namespace Installers
             BindSysAdminConfig();
             BindElectricityConfig();
             BindRepairKit();
+            BindContaminationConfig();
         }
 
+        private void BindContaminationConfig()
+        {
+            Container.Bind<ContaminationConfig>().FromScriptableObject(_contaminationConfig).AsSingle().NonLazy();
+        }
+        
         private void BindRepairKit()
         {
             Container.Bind<RepairKit>().FromScriptableObject(_repairKit).AsSingle().NonLazy();
