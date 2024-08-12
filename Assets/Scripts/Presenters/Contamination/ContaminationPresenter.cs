@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Model;
 using Model.Contamination;
 using ScriptableObjects;
+using UnityEngine;
 using Views.Room;
 
 namespace Presenters.Room
@@ -24,20 +25,26 @@ namespace Presenters.Room
             Contaminate().Forget();
         }
 
-        public event Action<float> SpeedChanged;
+        public event Action<float> ContaminationChanged;
         
         public void Enable()
         {
             _model.CurrentContaminationChanged += ChangeContaminationFilling;
-            _model.CurrentContaminationChanged += ChangeSpeed;
+            _model.CurrentContaminationChanged += SpeedChange;
         }
 
         public void Disable()
         {
             _model.CurrentContaminationChanged -= ChangeContaminationFilling;
-            _model.CurrentContaminationChanged -= ChangeSpeed;
+            _model.CurrentContaminationChanged -= SpeedChange;
         }
 
+        public void ChangeContaminationByCleaner()
+        {
+            Debug.Log("Cleaned");
+            _model.IncreaseContamination(-100.0f);
+        }
+        
         private async UniTask Contaminate()
         {
             while (_isCanContaminate)
@@ -45,12 +52,13 @@ namespace Presenters.Room
                 await UniTask.Delay((int)(_model.SecondsDelay * 1000));
 
                 _model.IncreaseContamination(_model.IncreaseValue);
+                Debug.Log($"Contamination increased, current contamination = {_model.CurrentContamination}");
             }
         }
 
-        private void ChangeSpeed()
+        private void SpeedChange()
         {
-            SpeedChanged?.Invoke(_model.CurrentContamination);
+            ContaminationChanged?.Invoke(_model.CurrentContamination);
         }
         
         private void ChangeContaminationFilling()

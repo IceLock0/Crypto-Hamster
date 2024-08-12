@@ -23,7 +23,9 @@ namespace Model
 
         public void ChangeSpeedByContamination(float contamination)
         {
-            CurrentSpeed = Mathf.Clamp( CurrentSpeed - CurrentSpeed * contamination / 100, MinSpeed,CurrentSpeed);
+            contamination = Mathf.Clamp01(contamination / 100f);
+            CurrentSpeed = Mathf.Lerp(MaxSpeed, MinSpeed, contamination);
+            Debug.Log($"CurrentSpeed = {CurrentSpeed}");
         }
     }
 }

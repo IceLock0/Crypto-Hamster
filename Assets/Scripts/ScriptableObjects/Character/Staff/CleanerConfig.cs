@@ -10,7 +10,7 @@ namespace ScriptableObjects
     {
         [SerializeField] private float _cleanSpeed;
         [SerializeField] private float _contaminationValueReaction;
-
+        
         public float CleanSpeed => _cleanSpeed;
         public float ContaminationValueReaction => _contaminationValueReaction;
     }

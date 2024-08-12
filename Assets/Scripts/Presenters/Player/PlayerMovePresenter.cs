@@ -37,12 +37,12 @@ namespace Presenters.Player
 
         public void Enable()
         {
-            _contaminationPresenter.SpeedChanged += ChangeSpeedByContamination;
+            _contaminationPresenter.ContaminationChanged += ChangeContaminationByContamination;
         }
 
         public void Disable()
         {
-            _contaminationPresenter.SpeedChanged -= ChangeSpeedByContamination;
+            _contaminationPresenter.ContaminationChanged -= ChangeContaminationByContamination;
         }
         
         public void TryMove()
@@ -52,7 +52,7 @@ namespace Presenters.Player
                 new Vector3(_moveDirection.x, _playerRigidbody.linearVelocity.y, _moveDirection.y);
         }
 
-        private void ChangeSpeedByContamination(float contamination)
+        private void ChangeContaminationByContamination(float contamination)
         {
             _speedModel.ChangeSpeedByContamination(contamination);
         }

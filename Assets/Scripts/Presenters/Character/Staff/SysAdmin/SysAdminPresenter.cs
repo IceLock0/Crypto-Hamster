@@ -59,7 +59,7 @@ namespace Presenters.Staff.SysAdmin
 
             _sysAdminModel.ModelRemoved += CancelWork;
 
-            _contaminationPresenter.SpeedChanged += ChangeSpeedByContamination;
+            _contaminationPresenter.ContaminationChanged += ChangeContaminationByContamination;
         }
 
         public void Disable()
@@ -72,7 +72,7 @@ namespace Presenters.Staff.SysAdmin
             
             _sysAdminModel.ModelRemoved -= CancelWork;
             
-            _contaminationPresenter.SpeedChanged -= ChangeSpeedByContamination;
+            _contaminationPresenter.ContaminationChanged -= ChangeContaminationByContamination;
         }
 
         private void CancelWork()
@@ -162,7 +162,7 @@ namespace Presenters.Staff.SysAdmin
                 _surface.BuildNavMesh();
         }
 
-        private void ChangeSpeedByContamination(float contamination)
+        private void ChangeContaminationByContamination(float contamination)
         {
             _sysAdminModel.SpeedModel.ChangeSpeedByContamination(contamination);
         }
