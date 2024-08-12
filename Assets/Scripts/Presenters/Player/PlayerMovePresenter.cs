@@ -47,7 +47,6 @@ namespace Presenters.Player
         
         public void TryMove()
         {
-            Debug.Log($"Move with speed = {_speedModel.CurrentSpeed}");
             _moveDirection = _inputService.Player.Movement.ReadValue<Vector2>().normalized * _speedModel.CurrentSpeed * Time.fixedDeltaTime;
             _playerRigidbody.linearVelocity =
                 new Vector3(_moveDirection.x, _playerRigidbody.linearVelocity.y, _moveDirection.y);

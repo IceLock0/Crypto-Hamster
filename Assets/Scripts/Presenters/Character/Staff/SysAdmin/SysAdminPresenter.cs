@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Enums;
@@ -32,7 +31,7 @@ namespace Presenters.Staff.SysAdmin
         public SysAdminPresenter(SysAdminConfig sysAdminConfig, List<ComputerBuilderPresenter> computerPresenters,
             NavMeshAgent agent, Unity.AI.Navigation.NavMeshSurface surface, ContaminationPresenter contaminationPresenter)
         {
-            InvariantChecker.CheckObjectInvariant(sysAdminConfig, computerPresenters, agent, surface);
+            InvariantChecker.CheckObjectInvariant(sysAdminConfig, computerPresenters, agent, surface, contaminationPresenter);
 
             _computerPresenters = new List<ComputerBuilderPresenter>();
             _computerPresenters = computerPresenters;

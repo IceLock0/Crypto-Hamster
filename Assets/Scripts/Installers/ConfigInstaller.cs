@@ -15,6 +15,7 @@ namespace Installers
         [SerializeField] private ElectricityConfig _electricityConfig;
         [SerializeField] private RepairKit _repairKit;
         [SerializeField] private ContaminationConfig _contaminationConfig;
+        [SerializeField] private CleanerConfig _cleanerConfig;
         
         public override void InstallBindings()
         {
@@ -25,6 +26,7 @@ namespace Installers
             BindElectricityConfig();
             BindRepairKit();
             BindContaminationConfig();
+            BindCleanerConfig();
         }
 
         private void BindContaminationConfig()
@@ -60,6 +62,11 @@ namespace Installers
         private void BindPlayerConfig()
         {
              Container.Bind<PlayerConfig>().FromScriptableObject(_playerConfig).AsSingle().NonLazy();
+        }
+
+        private void BindCleanerConfig()
+        {
+            Container.Bind<CleanerConfig>().FromScriptableObject(_cleanerConfig).AsSingle().NonLazy();
         }
     }
 

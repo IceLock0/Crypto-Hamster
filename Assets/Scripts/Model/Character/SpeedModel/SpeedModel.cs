@@ -23,7 +23,6 @@ namespace Model
 
         public void ChangeSpeedByContamination(float contamination)
         {
-            Debug.Log($"Speed = {CurrentSpeed}, Contamination = {contamination}");
             CurrentSpeed = Mathf.Clamp( CurrentSpeed - CurrentSpeed * contamination / 100, MinSpeed,CurrentSpeed);
         }
     }
