@@ -31,7 +31,7 @@ namespace Presenters.Player
                 return;
             _lookDirection = Quaternion.LookRotation(new Vector3(_moveDirection.x, 0 , _moveDirection.y), Vector3.up);
             _targetRotation = Quaternion.RotateTowards(
-                _playerGameModelTransform.rotation, _lookDirection, _playerConfig.RotationSpeed * Time.fixedDeltaTime);
+                _playerGameModelTransform.rotation, _lookDirection, _playerConfig.AngularSpeed * Time.fixedDeltaTime);
             _playerGameModelTransform.rotation = _targetRotation;
         }
     }

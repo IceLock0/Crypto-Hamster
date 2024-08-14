@@ -5,10 +5,11 @@ namespace ScriptableObjects
     //[CreateAssetMenu(fileName = "Character config", menuName = "Configs/Character", order = 0)]
     public class CharacterConfig : ScriptableObject
     {
+        [Header("Movement")]
         [SerializeField] private float _movementSpeed;
-        [SerializeField] private float _rotationSpeed;
+        [SerializeField] private float _angularSpeed;
 
         public float MovementSpeed => _movementSpeed;
-        public float RotationSpeed => _rotationSpeed;
+        public float AngularSpeed => _angularSpeed;
     }
 }

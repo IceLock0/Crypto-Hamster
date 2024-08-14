@@ -8,7 +8,7 @@ namespace Model.Staff
     {
         public StaffModel(StaffConfig staffConfig, NavMeshAgent agent)
         {
-            RotationSpeed = staffConfig.RotationSpeed;
+            RotationSpeed = staffConfig.AngularSpeed;
             Acceleration = staffConfig.Acceleration;
 
             SpeedModel = new SpeedModel(staffConfig.MovementSpeed);
