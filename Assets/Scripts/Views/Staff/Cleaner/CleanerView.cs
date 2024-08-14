@@ -9,28 +9,28 @@ using Zenject;
 
 namespace Views.Staff.Cleaner
 {
-    public class CleanerView : MonoBehaviour
+    public class CleanerView : StaffView
     {
-        [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private Unity.AI.Navigation.NavMeshSurface _surface;
-
         [SerializeField] private List<CleaningPoint> _cleaningPoints;
         
-        private CleanerPresenter _presenter;
-        
-        private CleanerConfig _cleanerConfig;
-        
-        private ContaminationPresenter _contaminationPresenter;
-
         [Inject]
-        public void Initialize(CleanerConfig cleanerConfig, ContaminationPresenter contaminationPresenter)
+        public void Initialize(CleanerConfig cleanerConfig)
         {
-            _cleanerConfig = cleanerConfig;
-            _contaminationPresenter = contaminationPresenter;
+            StaffConfig = cleanerConfig;
 
-            _presenter = new CleanerPresenter(_cleanerConfig, _agent, _surface, _contaminationPresenter, _cleaningPoints);
+            StaffPresenter = new CleanerPresenter(StaffConfig, Agent, ContaminationPresenter, _cleaningPoints);
         }
+        
+        [Serializable]
+        public class CleaningPoint
+        {
+            [SerializeField] private Transform _pointTransform;
+            [SerializeField] private float _pointRadius;
 
+            public Transform PointTransform => _pointTransform;
+            public float PointRadius => _pointRadius;
+        }
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.black;
@@ -45,24 +45,5 @@ namespace Views.Staff.Cleaner
 
         }
 
-        private void OnEnable()
-        {
-            _presenter.Enable();
-        }
-        
-        private void OnDisable()
-        {
-            _presenter.Disable();
-        }
-
-        [Serializable]
-        public class CleaningPoint
-        {
-            [SerializeField] private Transform _pointTransform;
-            [SerializeField] private float _pointRadius;
-
-            public Transform PointTransform => _pointTransform;
-            public float PointRadius => _pointRadius;
-        }
     }
 }
