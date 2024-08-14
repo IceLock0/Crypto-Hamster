@@ -10,8 +10,8 @@ namespace Model.Staff.Cleaner
     {
         public CleanerModel(CleanerConfig cleanerConfig, NavMeshAgent agent, List<CleanerView.CleaningPoint> cleaningPoints) : base(cleanerConfig, agent)
         {
-            ContaminationValueReaction = cleanerConfig.ContaminationValueReaction;
-            CleanSpeed = cleanerConfig.CleanSpeed;
+           // ContaminationValueReaction = cleanerConfig.ContaminationValueReaction;
+           // CleanSpeed = cleanerConfig.CleanSpeed;
 
             CleaningPoints = cleaningPoints;
         }

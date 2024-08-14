@@ -15,7 +15,7 @@ namespace Model.Staff
             
             RelaxTime = staffConfig.RelaxTime;
             Efficiency = staffConfig.Efficiency;
-            CheckerTime = staffConfig.CheckerTime;
+          //  CheckerTime = staffConfig.CheckerTime;
             
             SourcePoint = staffConfig.SourcePoint;
 

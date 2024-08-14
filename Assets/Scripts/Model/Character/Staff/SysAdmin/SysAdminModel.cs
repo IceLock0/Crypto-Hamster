@@ -20,8 +20,8 @@ namespace Model.Staff.SysAdmin
             Computers = new List<ComputerModel>();
             Computers = computers;
 
-            FatigueValueReaction = sysAdminConfig.FatigueValueReaction;
-            RepairSpeed = sysAdminConfig.RepairSpeed;
+          //  FatigueValueReaction = sysAdminConfig.FatigueValueReaction;
+          //  RepairSpeed = sysAdminConfig.RepairSpeed;
         }
 
         public List<ComputerModel> Computers { get; }
