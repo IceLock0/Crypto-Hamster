@@ -8,8 +8,9 @@ using Zenject;
 
 namespace Views.Staff
 {
+    [RequireComponent(typeof(NavMeshAgent))]
     public abstract class StaffView : MonoBehaviour
-    {
+    { 
         [SerializeField] protected NavMeshAgent Agent;
 
         protected StaffPresenter StaffPresenter;
@@ -17,7 +18,7 @@ namespace Views.Staff
         protected StaffConfig StaffConfig;
 
         protected ContaminationPresenter ContaminationPresenter;
-        
+
         [Inject]
         public void Initialize(ContaminationPresenter contaminationPresenter)
         {

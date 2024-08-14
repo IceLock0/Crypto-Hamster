@@ -52,7 +52,7 @@ namespace Presenters.Room
                 await UniTask.Delay((int)(_model.SecondsDelay * 1000));
 
                 _model.IncreaseContamination(_model.IncreaseValue);
-                Debug.Log($"Contamination increased, current contamination = {_model.CurrentContamination}");
+                //  Debug.Log($"Contamination increased, current contamination = {_model.CurrentContamination}");
             }
         }
 

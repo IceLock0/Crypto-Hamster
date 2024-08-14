@@ -12,11 +12,11 @@ namespace Model.Staff.SysAdmin
 {
     public class SysAdminModel : StaffModel
     {
-        public SysAdminModel(SysAdminConfig sysAdminConfig, NavMeshAgent agent, List<ComputerModel> computers) : base(
+        public SysAdminModel(StaffConfig sysAdminConfig, NavMeshAgent agent, List<ComputerModel> computers) : base(
             sysAdminConfig, agent)
         {
             Computers = computers;
-            
+
             BrokenModels = new Queue<ComputerModel>();
         }
 
@@ -25,7 +25,7 @@ namespace Model.Staff.SysAdmin
 
         public event Action ModelRemoved;
 
-        public void AddBrokenModel(ComputerModel model)
+        public void UpdateQueue(ComputerModel model)
         {
             if (BrokenModels.Contains(model))
             {
@@ -39,9 +39,10 @@ namespace Model.Staff.SysAdmin
 
                         if (model == element)
                             continue;
-                        
+
                         BrokenModels.Enqueue(element);
                     }
+
                     ModelRemoved?.Invoke();
                 }
             }
@@ -49,16 +50,18 @@ namespace Model.Staff.SysAdmin
             {
                 BrokenModels.Enqueue(model);
             }
+
+            if (BrokenModels != null)
+                DestinationPoint = BrokenModels.Peek().Position;
         }
 
         public float GetTimeToRepair() => GetTimeForJob(100 - BrokenModels.Peek().Quality);
         
-
-        public void RemoveRepairedModel()
+        public override void RemoveProcessedData()
         {
             if (BrokenModels.IsEmpty())
                 return;
-            
+
             BrokenModels.Dequeue();
         }
     }

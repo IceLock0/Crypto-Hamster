@@ -45,7 +45,8 @@ namespace Model.Staff
         public int CompletedUnits { get; set; }
 
         public bool HasWork { get; private set; }
-        
+
+        public Vector3 DestinationPoint { get; protected set; }
 
         public void ResetCompletedUnits() => CompletedUnits = 0;
 
@@ -56,6 +57,8 @@ namespace Model.Staff
             CompletedUnits++;
             HasWork = false;
         }
+
+        public abstract void RemoveProcessedData();
 
         protected float GetTimeForJob(float jobUnits)
         {

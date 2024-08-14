@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
-using Model;
+﻿using Model;
 using Presenters.Room;
 using ScriptableObjects;
-using Services;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Utils;
 
 namespace Presenters.Player
@@ -30,7 +26,7 @@ namespace Presenters.Player
             _playerConfig = playerConfig;
             _playerRigidbody = playerRigidbody;
 
-            _speedModel = new SpeedModel(_playerConfig.MovementSpeed);
+            _speedModel = new SpeedModel(playerConfig);
             
             _contaminationPresenter = contaminationPresenter;
         }
