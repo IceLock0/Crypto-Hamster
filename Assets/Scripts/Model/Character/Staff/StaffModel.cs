@@ -8,14 +8,16 @@ namespace Model.Staff
     {
         public StaffModel(StaffConfig staffConfig, NavMeshAgent agent)
         {
-            RotationSpeed = staffConfig.AngularSpeed;
+            SpeedModel = new SpeedModel(staffConfig);
+            
             Acceleration = staffConfig.Acceleration;
 
-            SpeedModel = new SpeedModel(staffConfig.MovementSpeed);
+            Price = staffConfig.Price;
             
             RelaxTime = staffConfig.RelaxTime;
             Efficiency = staffConfig.Efficiency;
-          //  CheckerTime = staffConfig.CheckerTime;
+            ValueReaction = staffConfig.ValueReaction;
+            JobSpeed = staffConfig.JobSpeed;
             
             SourcePoint = staffConfig.SourcePoint;
 
@@ -25,44 +27,48 @@ namespace Model.Staff
 
             SetAgentParameter();
         }
+        public SpeedModel SpeedModel { get; }
+        
         public float Acceleration { get; }
-        public float RotationSpeed { get; }
+
+        public float Price { get; }
 
         public float RelaxTime { get; }
         public float Efficiency { get; }
-        public int CompletedUnits { get; set; }
-        
-        public float CheckerTime { get; }
+        public float ValueReaction { get; }
+        public float JobSpeed { get; }
         
         public Transform SourcePoint { get; }
         
         public NavMeshAgent Agent { get; }
+        
+        public int CompletedUnits { get; set; }
 
         public bool HasWork { get; private set; }
         
-        public SpeedModel SpeedModel { get; }
 
-        private void SetAgentParameter()
-        {
-            Agent.acceleration = Acceleration;
-            Agent.speed = SpeedModel.CurrentSpeed;
-            Agent.angularSpeed = RotationSpeed;
-        }
+        public void ResetCompletedUnits() => CompletedUnits = 0;
 
-        public void Relax()
-        {
-            CompletedUnits = 0;
-        }
-        
-        public void StartWork()
-        {
-            HasWork = true;
-        }
+        public void StartWork() => HasWork = true;
 
         public void EndWork()
         {
             CompletedUnits++;
             HasWork = false;
+        }
+
+        protected float GetTimeForJob(float jobUnits)
+        {
+            var timeToRepair = JobSpeed / 100 * jobUnits;
+
+            return timeToRepair;
+        }
+        
+        private void SetAgentParameter()
+        {            
+            Agent.speed = SpeedModel.CurrentSpeed;
+            Agent.angularSpeed = SpeedModel.AngularSpeed;
+            Agent.acceleration = Acceleration;
         }
     }
 }

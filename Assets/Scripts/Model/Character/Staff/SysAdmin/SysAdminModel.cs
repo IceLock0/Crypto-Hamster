@@ -15,19 +15,13 @@ namespace Model.Staff.SysAdmin
         public SysAdminModel(SysAdminConfig sysAdminConfig, NavMeshAgent agent, List<ComputerModel> computers) : base(
             sysAdminConfig, agent)
         {
-            BrokenModels = new Queue<ComputerModel>();
-
-            Computers = new List<ComputerModel>();
             Computers = computers;
-
-          //  FatigueValueReaction = sysAdminConfig.FatigueValueReaction;
-          //  RepairSpeed = sysAdminConfig.RepairSpeed;
+            
+            BrokenModels = new Queue<ComputerModel>();
         }
 
         public List<ComputerModel> Computers { get; }
         public Queue<ComputerModel> BrokenModels { get; }
-        public float FatigueValueReaction { get; }
-        public float RepairSpeed { get; }
 
         public event Action ModelRemoved;
 
@@ -35,7 +29,7 @@ namespace Model.Staff.SysAdmin
         {
             if (BrokenModels.Contains(model))
             {
-                if (model.Quality > FatigueValueReaction)
+                if (model.Quality > ValueReaction)
                 {
                     var brokenModelsCount = BrokenModels.Count;
 
@@ -51,20 +45,14 @@ namespace Model.Staff.SysAdmin
                     ModelRemoved?.Invoke();
                 }
             }
-            else if (model.Quality <= FatigueValueReaction)
+            else if (model.Quality <= ValueReaction)
             {
                 BrokenModels.Enqueue(model);
             }
         }
 
-        public float GetTimeToRepair()
-        {
-            var qualityToRepair = 100 - BrokenModels.Peek().Quality;
-
-            var timeToRepair = RepairSpeed / 100 * qualityToRepair;
-
-            return timeToRepair;
-        }
+        public float GetTimeToRepair() => GetTimeForJob(100 - BrokenModels.Peek().Quality);
+        
 
         public void RemoveRepairedModel()
         {

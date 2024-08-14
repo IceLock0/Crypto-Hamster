@@ -1,18 +1,22 @@
 ﻿using System;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Model
 {
     public class SpeedModel
     {
-        public SpeedModel(float currentSpeed)
+        public SpeedModel(CharacterConfig characterConfig)
         {
-            if (currentSpeed < 0.0f)
+            if (characterConfig.MovementSpeed < 0.0f)
                 throw new ArgumentOutOfRangeException();
-            CurrentSpeed = currentSpeed;
+            
+            CurrentSpeed = characterConfig.MovementSpeed;
 
             MaxSpeed = CurrentSpeed;
             MinSpeed = CurrentSpeed * 0.3f;
+
+            AngularSpeed = characterConfig.AngularSpeed;
         }
 
         public float MaxSpeed { get; }
@@ -20,6 +24,8 @@ namespace Model
         public float CurrentSpeed { get;  set;}
 
         public float MinSpeed { get; }
+
+        public float AngularSpeed { get; }
 
         public void ChangeSpeedByContamination(float contamination)
         {

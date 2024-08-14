@@ -1,4 +1,5 @@
-﻿using Presenters.Room;
+﻿using Model.Staff;
+using Presenters.Room;
 using ScriptableObjects;
 using UnityEngine.AI;
 
@@ -9,6 +10,8 @@ namespace Presenters.Character.Staff
         private readonly StaffConfig _staffConfig;
         private readonly NavMeshAgent _navMeshAgent;
         private readonly ContaminationPresenter _contaminationPresenter;
+
+        protected StaffModel StaffModel;
         
         public StaffPresenter(StaffConfig staffConfig, NavMeshAgent navMeshAgent, ContaminationPresenter contaminationPresenter)
         {

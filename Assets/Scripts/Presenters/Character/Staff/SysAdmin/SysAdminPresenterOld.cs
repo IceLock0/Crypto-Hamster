@@ -33,13 +33,12 @@ namespace Presenters.Staff.SysAdmin
         {
             InvariantChecker.CheckObjectInvariant(sysAdminConfig, computerPresenters, agent, surface, contaminationPresenter);
 
-            _computerPresenters = new List<ComputerBuilderPresenter>();
             _computerPresenters = computerPresenters;
 
             var computers = _computerPresenters.Select(presenter => presenter.Model).ToList();
 
             _sysAdminModel = new SysAdminModel(sysAdminConfig, agent, computers);
-
+            
             _surface = surface;
 
             _cts = new CancellationTokenSource();
