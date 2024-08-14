@@ -37,7 +37,7 @@ namespace Presenters.Character.Staff
             ContaminationPresenter.ContaminationChanged -= ProcessContaminationChange;
         }
 
-        protected async UniTaskVoid CheckTaskEveryFrame(CancellationTokenSource cts = default)
+        protected async UniTaskVoid CheckTaskEveryFrame()
         {
             while (IsChecking)
             {
@@ -49,20 +49,20 @@ namespace Presenters.Character.Staff
                         await Relax();
 
                     else 
-                        await Work(cts);
+                        await Work();
                 }
             }
         }
 
-        protected virtual async UniTask Work(CancellationTokenSource cts)
+        protected virtual async UniTask Work()
         {
             StaffModel.StartWork();
 
             try
             {
-                await GoToDestination(cts);
+                await GoToDestination();
 
-                await DoJob(cts);
+                await DoJob();
             }
             catch (OperationCanceledException e)
             {
@@ -79,16 +79,16 @@ namespace Presenters.Character.Staff
             }
         }
 
-        protected abstract UniTask DoJob(CancellationTokenSource cts);
+        protected abstract UniTask DoJob();
         
         protected abstract void ProcessContaminationChange(float contaminationValue);
         
-        private async UniTask GoToDestination(CancellationTokenSource cancellationToken)
+        private async UniTask GoToDestination()
         {
             StaffModel.Agent.SetDestination(StaffModel.DestinationPoint);
             
             await UniTask.WaitUntil(() =>
-                    !StaffModel.Agent.pathPending && StaffModel.Agent.remainingDistance <= StaffModel.Agent.stoppingDistance, cancellationToken : cancellationToken.Token
+                    !StaffModel.Agent.pathPending && StaffModel.Agent.remainingDistance <= StaffModel.Agent.stoppingDistance
             );
         }
         

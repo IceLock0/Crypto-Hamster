@@ -42,7 +42,7 @@ namespace Presenters.Staff.SysAdmin
 
             _cts = new CancellationTokenSource();
             
-            CheckTaskEveryFrame(_cts).Forget();
+            CheckTaskEveryFrame().Forget();
         }
 
         public override void Enable()
@@ -71,19 +71,19 @@ namespace Presenters.Staff.SysAdmin
             _sysAdminModel.ModelRemoved -= CancelWork;
         }
 
-        protected override async UniTask Work(CancellationTokenSource cts)
+        protected override async UniTask Work()
         {
             if (_sysAdminModel.BrokenModels.IsEmpty())
                 return;
              
-            base.Work(cts).Forget();
+            base.Work().Forget();
         }
 
-        protected override async UniTask DoJob(CancellationTokenSource cts)
+        protected override async UniTask DoJob()
         {
             var timeToRepair = _sysAdminModel.GetTimeToRepair();
 
-            await UniTask.Delay((int) (timeToRepair * 1000), cancellationToken : cts.Token);
+            await UniTask.Delay((int) (timeToRepair * 1000));
 
             _sysAdminModel.BrokenModels.Peek().ChangeQuality(100.0f);
         }

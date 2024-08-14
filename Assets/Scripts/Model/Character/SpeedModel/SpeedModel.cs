@@ -31,7 +31,7 @@ namespace Model
         {
             contamination = Mathf.Clamp01(contamination / 100f);
             CurrentSpeed = Mathf.Lerp(MaxSpeed, MinSpeed, contamination);
-            Debug.Log($"CurrentSpeed = {CurrentSpeed}");
+         //   Debug.Log($"CurrentSpeed = {CurrentSpeed}");
         }
     }
 }

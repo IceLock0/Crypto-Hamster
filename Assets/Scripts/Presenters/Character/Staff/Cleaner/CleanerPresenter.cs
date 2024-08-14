@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Model.Staff.Cleaner;
 using Presenters.Room;
 using ScriptableObjects;
+using UnityEngine;
 using UnityEngine.AI;
 using Utils;
 using Views.Staff.Cleaner;
@@ -32,19 +33,21 @@ namespace Presenters.Character.Staff.Cleaner
         }
 
 
-        protected override async UniTask Work(CancellationTokenSource cts)
+        protected override async UniTask Work()
         {
             if (_cleanerModel.CurrentCleaningPoint == null)
                 return;
             
-            base.Work(cts).Forget();
+            base.Work().Forget();
         }
 
-        protected override async UniTask DoJob(CancellationTokenSource cts)
+        protected override async UniTask DoJob()
         {
             var timeToClean = _cleanerModel.GetTimeToClean(_cleanerModel.LastContaminationValue);
 
-            await UniTask.Delay((int) (timeToClean * 1000), cancellationToken : cts.Token);
+            Debug.Log($"TimeToClean = {timeToClean}");
+            
+            await UniTask.Delay((int) (timeToClean * 1000));
 
             ContaminationPresenter.ChangeContaminationByCleaner();
         }
@@ -54,6 +57,8 @@ namespace Presenters.Character.Staff.Cleaner
             if (contaminationValue <= _cleanerModel.ValueReaction)
                 return;
 
+            Debug.Log($"Contamination = {contaminationValue}");
+            
             _cleanerModel.LastContaminationValue = contaminationValue;
             
             _cleanerModel.UpdateCleaningPoint(_navMeshPath);

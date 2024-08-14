@@ -13,13 +13,11 @@ MonoBehaviour:
   m_Name: Cleaner config
   m_EditorClassIdentifier: 
   _movementSpeed: 3.5
-  _rotationSpeed: 120
+  _angularSpeed: 180
   _acceleration: 8
-  _name: 
   _price: 0
-  _sourcePoint: {fileID: 1203637856209266767, guid: a2a480533b401164c9a6597153a4a056, type: 3}
-  _relaxTime: 5
+  _relaxTime: 60
   _efficiency: 3
-  _checkerTime: 0
-  _cleanSpeed: 10
-  _contaminationValueReaction: 50
+  _valueReaction: 50
+  _jobSpeed: 10
+  _sourcePoint: {fileID: 1203637856209266767, guid: a2a480533b401164c9a6597153a4a056, type: 3}
