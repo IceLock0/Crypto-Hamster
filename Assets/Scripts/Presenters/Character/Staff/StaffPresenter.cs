@@ -19,12 +19,16 @@ namespace Presenters.Character.Staff
         protected StaffModel StaffModel;
 
         protected bool IsChecking = true;
-        
+
+        protected CancellationTokenSource CTS;
+
         public StaffPresenter(StaffConfig staffConfig, NavMeshAgent navMeshAgent, ContaminationPresenter contaminationPresenter)
         {
             _staffConfig = staffConfig;
             _navMeshAgent = navMeshAgent;
             ContaminationPresenter = contaminationPresenter;
+
+            CTS = new CancellationTokenSource();
         }
 
         public virtual void Enable()
@@ -83,17 +87,29 @@ namespace Presenters.Character.Staff
         
         protected abstract void ProcessContaminationChange(float contaminationValue);
         
+        protected void CancelWork()
+        {
+            CTS.Cancel();
+
+            CTS = new CancellationTokenSource();
+        }
+        
         private async UniTask GoToDestination()
         {
-            StaffModel.Agent.SetDestination(StaffModel.DestinationPoint);
+            if (StaffModel.Agent.isActiveAndEnabled == false)
+                return;
             
+            StaffModel.Agent.SetDestination(StaffModel.DestinationPoint);
+
             await UniTask.WaitUntil(() =>
-                    !StaffModel.Agent.pathPending && StaffModel.Agent.remainingDistance <= StaffModel.Agent.stoppingDistance
+                    !StaffModel.Agent.pathPending && StaffModel.Agent.remainingDistance <= StaffModel.Agent.stoppingDistance, cancellationToken: CTS.Token
             );
         }
         
         private async UniTask Relax()
         {
+            Debug.Log($"Model {StaffModel} RELAX");
+        
             StaffModel.ResetCompletedUnits();
 
             await UniTask.Delay((int) (StaffModel.RelaxTime * 1000));
@@ -103,5 +119,6 @@ namespace Presenters.Character.Staff
         {
             StaffModel.Agent.SetDestination(StaffModel.SourcePoint.position);
         }
+        
     }
 }

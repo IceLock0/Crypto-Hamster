@@ -51,7 +51,7 @@ namespace Model.Staff.SysAdmin
                 BrokenModels.Enqueue(model);
             }
 
-            if (BrokenModels != null)
+            if (BrokenModels != null && !BrokenModels.IsEmpty())
                 DestinationPoint = BrokenModels.Peek().Position;
         }
 
@@ -59,10 +59,10 @@ namespace Model.Staff.SysAdmin
         
         public override void RemoveProcessedData()
         {
-            if (BrokenModels.IsEmpty())
-                return;
-
-            BrokenModels.Dequeue();
+            // if (BrokenModels == null || BrokenModels.IsEmpty())
+            //     return;
+            //
+            // BrokenModels.Dequeue();
         }
     }
 }

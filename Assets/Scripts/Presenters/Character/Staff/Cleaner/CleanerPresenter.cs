@@ -28,7 +28,7 @@ namespace Presenters.Character.Staff.Cleaner
             StaffModel = _cleanerModel;
             
             _navMeshPath = new NavMeshPath();
-            
+
             CheckTaskEveryFrame().Forget();
         }
 
@@ -44,8 +44,6 @@ namespace Presenters.Character.Staff.Cleaner
         protected override async UniTask DoJob()
         {
             var timeToClean = _cleanerModel.GetTimeToClean(_cleanerModel.LastContaminationValue);
-
-            Debug.Log($"TimeToClean = {timeToClean}");
             
             await UniTask.Delay((int) (timeToClean * 1000));
 
@@ -56,8 +54,6 @@ namespace Presenters.Character.Staff.Cleaner
         {
             if (contaminationValue <= _cleanerModel.ValueReaction)
                 return;
-
-            Debug.Log($"Contamination = {contaminationValue}");
             
             _cleanerModel.LastContaminationValue = contaminationValue;
             

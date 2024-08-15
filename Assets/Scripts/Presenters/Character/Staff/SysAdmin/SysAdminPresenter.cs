@@ -3,12 +3,14 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Enums;
+using Model.Computer;
 using Model.Staff.SysAdmin;
 using ModestTree;
 using Presenters.Character.Staff;
 using Presenters.Computer;
 using Presenters.Room;
 using ScriptableObjects;
+using UnityEngine;
 using UnityEngine.AI;
 using Utils;
 using NavMeshSurface = Unity.AI.Navigation.NavMeshSurface;
@@ -19,11 +21,10 @@ namespace Presenters.Staff.SysAdmin
     {
         private readonly NavMeshSurface _navMeshSurface;
         private readonly List<ComputerBuilderPresenter> _computerBuilderPresenters;
-
+        private readonly List<ComputerModel> _computerModels;
+        
         private readonly SysAdminModel _sysAdminModel;
 
-        private CancellationTokenSource _cts;
-        
         public SysAdminPresenter(StaffConfig staffConfig, NavMeshAgent navMeshAgent,
             ContaminationPresenter contaminationPresenter, List<ComputerBuilderPresenter> computerBuilderPresenters,
             NavMeshSurface navMeshSurface) : base(staffConfig, navMeshAgent, contaminationPresenter)
@@ -34,14 +35,12 @@ namespace Presenters.Staff.SysAdmin
 
             _computerBuilderPresenters = computerBuilderPresenters;
             
-            var computerModels = _computerBuilderPresenters.Select(presenter => presenter.Model).ToList();
+            _computerModels = _computerBuilderPresenters.Select(presenter => presenter.Model).ToList();
 
-            _sysAdminModel = new SysAdminModel(staffConfig, navMeshAgent, computerModels);
+            _sysAdminModel = new SysAdminModel(staffConfig, navMeshAgent, _computerModels);
 
             StaffModel = _sysAdminModel;
 
-            _cts = new CancellationTokenSource();
-            
             CheckTaskEveryFrame().Forget();
         }
 
@@ -49,7 +48,7 @@ namespace Presenters.Staff.SysAdmin
         {
             base.Disable();
             
-            foreach (var computer in _sysAdminModel.Computers)
+            foreach (var computer in _computerModels)
                 computer.QualityChanged += _sysAdminModel.UpdateQueue;
 
             foreach (var presenter in _computerBuilderPresenters)
@@ -62,7 +61,7 @@ namespace Presenters.Staff.SysAdmin
         {
             base.Enable();
             
-            foreach (var computer in _sysAdminModel.Computers)
+            foreach (var computer in _computerModels)
                 computer.QualityChanged -= _sysAdminModel.UpdateQueue;
 
             foreach (var presenter in _computerBuilderPresenters)
@@ -86,6 +85,8 @@ namespace Presenters.Staff.SysAdmin
             await UniTask.Delay((int) (timeToRepair * 1000));
 
             _sysAdminModel.BrokenModels.Peek().ChangeQuality(100.0f);
+            
+            Debug.Log($"FIXED");
         }
 
         protected override void ProcessContaminationChange(float contaminationValue)
@@ -98,13 +99,6 @@ namespace Presenters.Staff.SysAdmin
         {
             if (computerType == ComputerType.Common)
                 _navMeshSurface.BuildNavMesh();
-        }
-        
-        private void CancelWork()
-        {
-            _cts.Cancel();
-
-            _cts = new CancellationTokenSource();
         }
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   _acceleration: 8
   _price: 111
   _relaxTime: 10
-  _efficiency: 2
-  _valueReaction: 40
-  _jobSpeed: 60
+  _efficiency: 5
+  _valueReaction: 90
+  _jobSpeed: 1
   _sourcePoint: {fileID: 1659931549745464885, guid: 9d89974457e610f44a19dfde0bd59208, type: 3}
