@@ -35,7 +35,7 @@ namespace Presenters.Currency
             
             var targetConfig = cryptoConfigs.FirstOrDefault(x =>
                 CryptoEnumToTypeService.CryptoToType(x.CryptoCurrency) == typeof(Bitcoin));
-            
+
             if (targetConfig == null)
                 throw new NullReferenceException();
             
