@@ -16,6 +16,8 @@ namespace Installers
         [SerializeField] private ElectricityConfig _electricityConfig;
         [SerializeField] private RepairKit _repairKit;
         [SerializeField] private CostConfig _costConfig;
+        [SerializeField] private ContaminationConfig _contaminationConfig;
+        [SerializeField] private CleanerConfig _cleanerConfig;
         
         public override void InstallBindings()
         {
@@ -43,8 +45,15 @@ namespace Installers
                 .FromInstance(_cryptoConfigs)
                 .AsSingle()
                 .NonLazy();
+            BindContaminationConfig();
+            BindCleanerConfig();
         }
 
+        private void BindContaminationConfig()
+        {
+            Container.Bind<ContaminationConfig>().FromScriptableObject(_contaminationConfig).AsSingle().NonLazy();
+        }
+        
         private void BindRepairKit()
         {
             Container.Bind<RepairKit>().FromScriptableObject(_repairKit).AsSingle().NonLazy();
@@ -73,6 +82,11 @@ namespace Installers
         private void BindPlayerConfig()
         {
              Container.Bind<PlayerConfig>().FromScriptableObject(_playerConfig).AsSingle().NonLazy();
+        }
+
+        private void BindCleanerConfig()
+        {
+            Container.Bind<CleanerConfig>().FromScriptableObject(_cleanerConfig).AsSingle().NonLazy();
         }
     }
 

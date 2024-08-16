@@ -13,13 +13,11 @@ MonoBehaviour:
   m_Name: SysAdmin config
   m_EditorClassIdentifier: 
   _movementSpeed: 3.5
-  _rotationSpeed: 120
+  _angularSpeed: 100
   _acceleration: 8
-  _name: Moisuk
   _price: 111
-  _sourcePoint: {fileID: 1659931549745464885, guid: 9d89974457e610f44a19dfde0bd59208, type: 3}
   _relaxTime: 10
-  _efficiency: 2
-  _checkerTime: 1
-  _repairSpeed: 3
-  _fatigueValueReaction: 85
+  _efficiency: 5
+  _valueReaction: 90
+  _jobSpeed: 1
+  _sourcePoint: {fileID: 1659931549745464885, guid: 9d89974457e610f44a19dfde0bd59208, type: 3}
