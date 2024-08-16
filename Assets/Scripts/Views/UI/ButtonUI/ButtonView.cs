@@ -14,7 +14,7 @@ namespace Views.UI.ButtonUI
             _button = GetComponent<Button>();
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             _button.onClick.AddListener(ButtonClicked);
         }

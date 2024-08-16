@@ -1,6 +1,5 @@
 ﻿using System;
 using Model.Wallet;
-using Presenters.Currency;
 
 namespace Presenters.Wallet
 {
@@ -15,6 +14,7 @@ namespace Presenters.Wallet
 
         public virtual void Enable()
         {
+            SetCurrencyText(typeof(Currency.Cash));
             Model.AmountChanged += SetCurrencyText;
         }
 

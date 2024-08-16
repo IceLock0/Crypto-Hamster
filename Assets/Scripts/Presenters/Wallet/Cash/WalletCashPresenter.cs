@@ -1,6 +1,5 @@
 ﻿using System;
 using Model.Wallet;
-using UnityEngine;
 using Views.Wallet;
 
 namespace Presenters.Wallet.Cash

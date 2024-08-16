@@ -7,18 +7,17 @@ using Views.UI.SellButton;
 using Views.Wallet;
 using Zenject;
 
-namespace Installers
+namespace Installers.GameObjectInstallers.TradeApp
 {
 
-    public class ExchangeInstaller : MonoInstaller
+    public class ExchangeInstaller : MonoInstaller<ExchangeInstaller>
     {
         [SerializeField] private SellCryptoButtonView _sellCryptoButtonView;
         [SerializeField] private BuyCryptoButtonView _buyCryptoButtonView;
-        [SerializeField] private WalletCryptoUIView _walletCryptoUIView;
+
         public override void InstallBindings()
         {
             BindExchangeModel();
-            BindWalletCryptoUIView();
             BindSellCryptoButtonView();
             BindBuyCryptoButtonView();
             BindSellCryptoButtonPresenter();
@@ -40,13 +39,7 @@ namespace Installers
                 .NonLazy();
         }
 
-        private void BindWalletCryptoUIView()
-        {
-            Container.Bind<WalletCryptoUIView>()
-                .FromInstance(_walletCryptoUIView)
-                .AsSingle()
-                .NonLazy();
-        }
+        
 
         private void BindSellCryptoButtonPresenter()
         {

@@ -3,10 +3,10 @@ using Presenters.CryptoCourse.EtheriumCryptoCourseChange;
 using Presenters.CryptoCourse.SolanaCourseCryptoChange;
 using Zenject;
 
-namespace Installers
+namespace Installers.GameObjectInstallers.TradeApp
 {
 
-    public class CourseChangeInstaller : MonoInstaller
+    public class CourseChangeInstaller : MonoInstaller<CourseChangeInstaller>
     {
         public override void InstallBindings()
         {
