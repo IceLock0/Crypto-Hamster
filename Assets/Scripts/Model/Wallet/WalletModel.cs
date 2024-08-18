@@ -16,10 +16,10 @@ namespace Model.Wallet
         {
             InvariantChecker.CheckObjectInvariant(currencies);
             Currencies = currencies;
-            AddCurency(typeof(Cash), 99999); // DEBUG
+            AddCurrency(typeof(Cash), 99999); // DEBUG
         }
 
-        public void AddCurency(Type currencyType, float value)
+        public void AddCurrency(Type currencyType, float value)
         {
             if (value < 0)
                 throw new ArgumentOutOfRangeException();

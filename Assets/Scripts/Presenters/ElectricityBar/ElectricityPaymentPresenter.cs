@@ -27,7 +27,7 @@ namespace Presenters.ElectricityBar
 
         private void Pay()
         {
-            _walletModel.AddCurency(typeof(Cash), -_paymentPrice);
+            _walletModel.AddCurrency(typeof(Cash), -_paymentPrice);
             
             PaymentCompleted?.Invoke();
         }

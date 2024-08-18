@@ -112,7 +112,7 @@ namespace Presenters.Hamster
         {
            var resultCash = _model.Exchange();
            
-           _walletModel.AddCurency(typeof(Cash), resultCash);
+           _walletModel.AddCurrency(typeof(Cash), resultCash);
         }
 
         private void AddMoneyPerClick() => _model.AddPerClick();

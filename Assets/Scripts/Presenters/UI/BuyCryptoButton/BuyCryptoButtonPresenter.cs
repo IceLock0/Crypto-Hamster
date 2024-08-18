@@ -36,7 +36,7 @@ namespace Presenters.UI.BuyCryptoButton
         {
             var targetCrypto = ExchangeModel.CryptoExchangables
                 .FirstOrDefault(x => x.Key == WalletCryptoUIView.CurrentChosenCrypto).Value;
-            WalletModel.AddCurency(WalletCryptoUIView.CurrentChosenCrypto, TargetExchangeAmount/targetCrypto.Rate);
+            WalletModel.AddCurrency(WalletCryptoUIView.CurrentChosenCrypto, TargetExchangeAmount/targetCrypto.Rate);
             WalletModel.NullifyCurrency(typeof(Cash));
         }
 

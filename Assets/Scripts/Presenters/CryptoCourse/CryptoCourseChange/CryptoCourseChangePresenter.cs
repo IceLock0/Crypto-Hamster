@@ -39,7 +39,7 @@ namespace Presenters.CryptoCourse.CryptoCourseChange
                 throw new ArgumentNullException();
             while (true)
             {
-                Debug.Log($"Crypto {_targetConfig.CryptoCurrency}\nRate {_targetExchangable.Rate}");
+                //  Debug.Log($"Crypto {_targetConfig.CryptoCurrency}\nRate {_targetExchangable.Rate}");
                 await UniTask.Delay((int) (_targetConfig.RateChangeDelay * 1000));
                 _targetExchangable.ChangeRate();
             }

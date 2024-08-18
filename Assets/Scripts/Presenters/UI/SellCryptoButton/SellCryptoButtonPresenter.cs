@@ -33,7 +33,7 @@ namespace Presenters.UI.SellCryptoButton
 
         protected override void ExchangeCash()
         {
-            WalletModel.AddCurency(typeof(Cash), TargetExchangeAmount);
+            WalletModel.AddCurrency(typeof(Cash), TargetExchangeAmount);
             WalletModel.NullifyCurrency(_targetCryptoType);
         }
 

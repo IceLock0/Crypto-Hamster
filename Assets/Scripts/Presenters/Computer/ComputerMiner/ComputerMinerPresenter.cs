@@ -35,7 +35,7 @@ namespace Presenters.ComputerMiner
             while (ComputerModel.Quality > 0 && _electricityModel.CurrentElectricity > 0f)
             {
                 await UniTask.Delay((int)(_targetCryptoModel.PerTime * 1000));
-                _walletModel.AddCurency(CryptoEnumToTypeService.CryptoToType(_targetCryptoModel.Currency), _targetCryptoModel.Rate * ComputerModel.Quality);
+                _walletModel.AddCurrency(CryptoEnumToTypeService.CryptoToType(_targetCryptoModel.Currency), _targetCryptoModel.Rate * ComputerModel.Quality);
             }
         }
 
