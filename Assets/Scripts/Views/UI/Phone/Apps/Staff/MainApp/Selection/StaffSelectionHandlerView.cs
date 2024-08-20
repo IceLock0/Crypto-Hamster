@@ -22,11 +22,18 @@ namespace Views.UI.Phone.Apps.Staff.MainApp
 
         public StaffState GetCurrentStaffState() => _staffStates[(StaffType) _currentIndex];
         public StaffType GetCurrentStaffType() => (StaffType) _currentIndex;
+
+        public void SetStaffState(StaffType staffType, StaffState staffState)
+        {
+            _staffStates[staffType] = staffState;
+            
+            ShowInfo();
+        }
         
         private void Awake()
         {
             _staffStates.Add(StaffType.Admin, StaffState.NotBought);
-            _staffStates.Add(StaffType.SysAdmin, StaffState.Bought);
+            _staffStates.Add(StaffType.SysAdmin, StaffState.NotBought);
             _staffStates.Add(StaffType.Cleaner, StaffState.NotBought);
             
             UpdateSprite();

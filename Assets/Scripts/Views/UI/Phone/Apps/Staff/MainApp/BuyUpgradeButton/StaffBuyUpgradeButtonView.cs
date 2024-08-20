@@ -12,7 +12,16 @@ namespace Views.UI.Phone.Apps.Staff.MainApp
         public event Action<StaffType> BuyClicked;
         public event Action UpgradeClicked;
 
+        public event Action StateChanged;
+        
         private StaffState _staffState;
+
+        public void ChangeStaffState(StaffState staffState)
+        {
+            _staffState = staffState;
+            
+            _staffSelectionHandlerView.SetStaffState(_staffSelectionHandlerView.GetCurrentStaffType(), staffState);
+        }
         
         protected override void ButtonClicked()
         {

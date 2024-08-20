@@ -4,6 +4,7 @@ using Enums.Staff;
 using Model.Wallet;
 using Presenters.StaffTransaction;
 using ScriptableObjects;
+using Services.Fabric.Staff;
 using UnityEngine;
 using Zenject;
 
@@ -18,13 +19,14 @@ namespace Views.UI.Phone.Apps.Staff.MainApp.BuyStaff
         private Dictionary<StaffType, StaffConfig> _staffConfigs = new();
 
         [Inject]
-        public void Initialize(SysAdminConfig sysAdminConfig, CleanerConfig cleanerConfig, WalletModel walletModel)
+        public void Initialize(SysAdminConfig sysAdminConfig, CleanerConfig cleanerConfig, WalletModel walletModel,
+            IStaffFabric staffFabric)
         {
             _staffConfigs[StaffType.Admin] = null;
             _staffConfigs[StaffType.SysAdmin] = sysAdminConfig;
             _staffConfigs[StaffType.Cleaner] = cleanerConfig;
 
-            _presenter = new BuyStaffPresenter(walletModel);
+            _presenter = new BuyStaffPresenter(walletModel, staffFabric);
         }
 
         private void OnEnable()
@@ -39,7 +41,9 @@ namespace Views.UI.Phone.Apps.Staff.MainApp.BuyStaff
 
         private void Buy(StaffType staffType)
         {
-            _presenter.Buy(_staffConfigs[staffType]);
+            _presenter.Buy(staffType, _staffConfigs[staffType]);
+            
+            _buyButton.ChangeStaffState(StaffState.Bought);
         }
     }
 }

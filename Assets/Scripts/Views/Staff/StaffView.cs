@@ -11,7 +11,7 @@ namespace Views.Staff
     [RequireComponent(typeof(NavMeshAgent))]
     public abstract class StaffView : MonoBehaviour
     { 
-        [SerializeField] protected NavMeshAgent Agent;
+        protected NavMeshAgent Agent;
 
         protected StaffPresenter StaffPresenter;
 

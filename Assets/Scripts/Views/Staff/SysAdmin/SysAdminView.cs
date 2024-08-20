@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Model.Computer;
-using Presenters.Computer;
-using Presenters.Room;
 using Presenters.Staff.SysAdmin;
 using ScriptableObjects;
-using Unity.AI.Navigation;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Views.Computer.ComputerBuilder;
 using Zenject;
 
@@ -16,23 +11,20 @@ namespace Views.Staff
 {
     public class SysAdminView : StaffView
     {
-        [SerializeField] private List<ComputerBuilderView> _computerViews;
-
-        private NavMeshSurface _navMeshSurface;
+        private List<ComputerBuilderView> _computerViews;
 
         [Inject]
-        public void Initialize(SysAdminConfig sysAdminConfig, NavMeshSurface navMeshSurface)
+        public void Initialize(SysAdminConfig sysAdminConfig, List<ComputerBuilderView> computerViews)
         {
             StaffConfig = sysAdminConfig;
 
-            _navMeshSurface = navMeshSurface;
-        }
-        
-        private void Awake()
-        {
+            Agent = GetComponent<NavMeshAgent>();
+
+            _computerViews = computerViews;
+
             var computerBuilderPresenters = _computerViews.Select(view => view.GetPresenter()).ToList();
 
-            StaffPresenter = new SysAdminPresenter(StaffConfig, Agent, ContaminationPresenter, computerBuilderPresenters, _navMeshSurface);
+            StaffPresenter = new SysAdminPresenter(StaffConfig, Agent, ContaminationPresenter, computerBuilderPresenters);
         }
     }
 }

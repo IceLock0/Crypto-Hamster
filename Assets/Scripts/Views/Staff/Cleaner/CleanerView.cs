@@ -11,16 +11,20 @@ namespace Views.Staff.Cleaner
 {
     public class CleanerView : StaffView
     {
-        [SerializeField] private List<CleaningPoint> _cleaningPoints;
-        
+        private List<CleaningPoint> _cleaningPoints;
+
         [Inject]
-        public void Initialize(CleanerConfig cleanerConfig)
+        public void Initialize(CleanerConfig cleanerConfig, List<CleaningPoint> cleaningPoints)
         {
             StaffConfig = cleanerConfig;
 
+            _cleaningPoints = cleaningPoints;
+
+            Agent = GetComponent<NavMeshAgent>();
+
             StaffPresenter = new CleanerPresenter(StaffConfig, Agent, ContaminationPresenter, _cleaningPoints);
         }
-        
+
         [Serializable]
         public class CleaningPoint
         {
@@ -30,20 +34,5 @@ namespace Views.Staff.Cleaner
             public Transform PointTransform => _pointTransform;
             public float PointRadius => _pointRadius;
         }
-        
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.black;
-
-            foreach (var patrolPoint in _cleaningPoints)
-            {
-                var point = patrolPoint.PointTransform;
-                var radius = patrolPoint.PointRadius;
-                
-                Gizmos.DrawWireSphere(point.position , radius);
-            }
-
-        }
-
     }
 }

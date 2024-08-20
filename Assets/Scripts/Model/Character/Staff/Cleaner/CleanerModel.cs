@@ -26,21 +26,25 @@ namespace Model.Staff.Cleaner
             
             var isPointCorrect = false;
 
+            Vector3 randomPointPosition = Vector3.zero;
+            
             while (!isPointCorrect)
             {
                 CurrentCleaningPoint = CleaningPoints[Random.Range(0, CleaningPoints.Count)];
 
-                NavMesh.SamplePosition(
+                UnityEngine.AI.NavMesh.SamplePosition(
                     Random.insideUnitSphere * CurrentCleaningPoint.PointRadius + CurrentCleaningPoint.PointTransform.position,
                     out var hit,
-                    CurrentCleaningPoint.PointRadius, NavMesh.AllAreas);
+                    CurrentCleaningPoint.PointRadius, UnityEngine.AI.NavMesh.AllAreas);
 
                 Agent.CalculatePath(hit.position, path);
-
+                
+                randomPointPosition = hit.position;
+                
                 isPointCorrect = path.status == NavMeshPathStatus.PathComplete;
             }
-
-            DestinationPoint = CurrentCleaningPoint.PointTransform.position;
+            
+            DestinationPoint = randomPointPosition;
         }
 
         public float GetTimeToClean(float contamination) => GetTimeForJob(contamination);

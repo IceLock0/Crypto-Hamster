@@ -15,7 +15,7 @@ MonoBehaviour:
   _movementSpeed: 3.5
   _angularSpeed: 100
   _acceleration: 8
-  _price: 111
+  _price: 5000
   _relaxTime: 10
   _efficiency: 5
   _valueReaction: 90

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Cysharp.Threading.Tasks;
-using Enums;
 using Model.Computer;
 using Model.Staff.SysAdmin;
 using ModestTree;
@@ -22,21 +20,20 @@ namespace Presenters.Staff.SysAdmin
         private readonly NavMeshSurface _navMeshSurface;
         private readonly List<ComputerBuilderPresenter> _computerBuilderPresenters;
         private readonly List<ComputerModel> _computerModels;
-        
+
         private readonly SysAdminModel _sysAdminModel;
 
         public SysAdminPresenter(StaffConfig staffConfig, NavMeshAgent navMeshAgent,
-            ContaminationPresenter contaminationPresenter, List<ComputerBuilderPresenter> computerBuilderPresenters,
-            NavMeshSurface navMeshSurface) : base(staffConfig, navMeshAgent, contaminationPresenter)
+            ContaminationPresenter contaminationPresenter, List<ComputerBuilderPresenter> computerBuilderPresenters) :
+            base(staffConfig, navMeshAgent, contaminationPresenter)
         {
-            InvariantChecker.CheckObjectInvariant(staffConfig, navMeshAgent, contaminationPresenter, computerBuilderPresenters, navMeshSurface);
-
-            _navMeshSurface = navMeshSurface;
-
-            _computerBuilderPresenters = computerBuilderPresenters;
+            InvariantChecker.CheckObjectInvariant(staffConfig, navMeshAgent, contaminationPresenter,
+                computerBuilderPresenters);
             
-            _computerModels = _computerBuilderPresenters.Select(presenter => presenter.Model).ToList();
+            _computerBuilderPresenters = computerBuilderPresenters;
 
+            _computerModels = _computerBuilderPresenters.Select(presenter => presenter.Model).ToList();
+            
             _sysAdminModel = new SysAdminModel(staffConfig, navMeshAgent, _computerModels);
 
             StaffModel = _sysAdminModel;
@@ -47,12 +44,9 @@ namespace Presenters.Staff.SysAdmin
         public override void Enable()
         {
             base.Disable();
-            
+
             foreach (var computer in _computerModels)
                 computer.QualityChanged += _sysAdminModel.UpdateQueue;
-
-            foreach (var presenter in _computerBuilderPresenters)
-                presenter.ComputerBuilded += BuildNavMesh;
 
             _sysAdminModel.ModelRemoved += CancelWork;
         }
@@ -60,13 +54,10 @@ namespace Presenters.Staff.SysAdmin
         public override void Disable()
         {
             base.Enable();
-            
+
             foreach (var computer in _computerModels)
                 computer.QualityChanged -= _sysAdminModel.UpdateQueue;
 
-            foreach (var presenter in _computerBuilderPresenters)
-                presenter.ComputerBuilded -= BuildNavMesh;
-            
             _sysAdminModel.ModelRemoved -= CancelWork;
         }
 
@@ -74,7 +65,7 @@ namespace Presenters.Staff.SysAdmin
         {
             if (_sysAdminModel.BrokenModels.IsEmpty())
                 return;
-             
+
             base.Work().Forget();
         }
 
@@ -85,20 +76,13 @@ namespace Presenters.Staff.SysAdmin
             await UniTask.Delay((int) (timeToRepair * 1000));
 
             _sysAdminModel.BrokenModels.Peek().ChangeQuality(100.0f);
-            
+
             Debug.Log($"FIXED");
         }
 
         protected override void ProcessContaminationChange(float contaminationValue)
         {
             _sysAdminModel.SpeedModel.ChangeSpeedByContamination(contaminationValue);
-        }
-        
-        
-        private void BuildNavMesh(ComputerType computerType)
-        {
-            if (computerType == ComputerType.Common)
-                _navMeshSurface.BuildNavMesh();
         }
     }
 }
