@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Enums.Staff;
 using TMPro;
 using UnityEngine;
@@ -13,30 +14,16 @@ namespace Views.UI.Phone.Apps.Staff.MainApp
         [SerializeField] private PhoneStaffLeftArrowButtonView _leftArrowButton;
         [SerializeField] private PhoneStaffRightArrowButtonView _rightArrowButton;
         [SerializeField] private Image _staffImage;
-        [SerializeField] private Sprite[] _staffSprites;
+        [SerializeField] private List<StaffSpriteWithTypeAssociation> _staffSprites;
         [SerializeField] private TextMeshProUGUI _buyUpgradeText;
 
         private int _currentIndex = 0;
 
-        private readonly Dictionary<StaffType, StaffState> _staffStates = new();
-
-        public StaffState GetCurrentStaffState() => _staffStates[(StaffType) _currentIndex];
-        public StaffType GetCurrentStaffType() => (StaffType) _currentIndex;
-
-        public void SetStaffState(StaffType staffType, StaffState staffState)
-        {
-            _staffStates[staffType] = staffState;
-            
-            ShowInfo();
-        }
+        public StaffType GetCurrentStaffType() => (StaffType)_currentIndex;
         
         private void Awake()
         {
-            _staffStates.Add(StaffType.Admin, StaffState.NotBought);
-            _staffStates.Add(StaffType.SysAdmin, StaffState.NotBought);
-            _staffStates.Add(StaffType.Cleaner, StaffState.NotBought);
-            
-            UpdateSprite();
+            UpdateInfo();
         }
 
         private void OnEnable()
@@ -53,40 +40,58 @@ namespace Views.UI.Phone.Apps.Staff.MainApp
 
         private void OnLeftArrowButtonClicked()
         {
-            _currentIndex = (_currentIndex - 1 + _staffSprites.Length) % _staffSprites.Length;
+            _currentIndex = (_currentIndex - 1 + _staffSprites.Count) % _staffSprites.Count;
 
-            UpdateSprite();
+            UpdateInfo();
         }
 
         private void OnRightArrowButtonClicked()
         {
-            _currentIndex = (_currentIndex + 1) % _staffSprites.Length;
+            _currentIndex = (_currentIndex + 1) % _staffSprites.Count;
 
+            UpdateInfo();
+        }
+
+        private void UpdateInfo()
+        {
             UpdateSprite();
+            //UpdateText();
         }
 
         private void UpdateSprite()
         {
-            _staffImage.sprite = _staffSprites[_currentIndex];
-
-            ShowInfo();
+            foreach (var staffSprite in _staffSprites)
+            {
+                if (staffSprite.Type == (StaffType) _currentIndex)
+                    _staffImage.sprite = staffSprite.Sprite;
+            }
         }
 
-        private void ShowInfo()
+        // private void UpdateText()
+        // {
+        //     string text = "";
+        //
+        //     switch (GetCurrentStaffState())
+        //     {
+        //         case StaffState.NotBought:
+        //             text = "КУПИТЬ";
+        //             break;
+        //         case StaffState.Bought:
+        //             text = "УЛУЧШИТЬ";
+        //             break;
+        //     }
+        //
+        //     _buyUpgradeText.text = text;
+        // }
+
+        [Serializable]
+        public class StaffSpriteWithTypeAssociation
         {
-            string text = "";
+            [SerializeField] private StaffType _type;
+            [SerializeField] private Sprite _sprite;
 
-            switch (GetCurrentStaffState())
-            {
-                case StaffState.NotBought:
-                    text = "КУПИТЬ";
-                    break;
-                case StaffState.Bought:
-                    text = "УЛУЧШИТЬ";
-                    break;
-            }
-
-            _buyUpgradeText.text = text;
+            public StaffType Type => _type;
+            public Sprite Sprite => _sprite;
         }
     }
 }

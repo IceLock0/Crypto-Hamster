@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 268c9b6aba9c449aacdafa9953b515cf, type: 3}
-  m_Name: SysAdmin config
+  m_Name: Epic Sysadmin
   m_EditorClassIdentifier: 
-  _movementSpeed: 3.5
-  _angularSpeed: 100
-  _acceleration: 8
-  _price: 5000
-  _relaxTime: 10
-  _efficiency: 5
-  _valueReaction: 90
-  _jobSpeed: 1
+  _movementSpeed: 5.5
+  _angularSpeed: 220
+  _acceleration: 10
+  _upgradeType: 3
+  _price: 15000
+  _relaxTime: 40
+  _efficiency: 4
+  _valueReaction: 75
+  _jobSpeed: 10
   _sourcePoint: {fileID: 1659931549745464885, guid: 9d89974457e610f44a19dfde0bd59208, type: 3}

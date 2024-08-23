@@ -31,7 +31,7 @@ namespace Services.Fabric.Staff
             _cleaner = Resources.Load(CleanerPath);
         }
         
-        public Object Create(StaffType staffType, Vector3 position, Quaternion rotation, Transform parent)
+        public GameObject Create(StaffType staffType, Vector3 position, Quaternion rotation, Transform parent)
         {
             switch (staffType)
             {

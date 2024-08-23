@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Enums.Staff;
 using Presenters.Staff.SysAdmin;
 using ScriptableObjects;
 using UnityEngine;
@@ -14,9 +15,9 @@ namespace Views.Staff
         private List<ComputerBuilderView> _computerViews;
 
         [Inject]
-        public void Initialize(SysAdminConfig sysAdminConfig, List<ComputerBuilderView> computerViews)
+        public void Initialize(List<SysAdminConfig> sysAdminConfigs, List<ComputerBuilderView> computerViews)
         {
-            StaffConfig = sysAdminConfig;
+            StaffConfig = sysAdminConfigs.FirstOrDefault(config => config.UpgradeType == StaffUpgradeType.Common);
 
             Agent = GetComponent<NavMeshAgent>();
 

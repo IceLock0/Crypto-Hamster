@@ -2,6 +2,8 @@
 using Presenters.Character.Staff.Cleaner;
 using Presenters.Room;
 using System.Collections.Generic;
+using System.Linq;
+using Enums.Staff;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,9 +16,9 @@ namespace Views.Staff.Cleaner
         private List<CleaningPoint> _cleaningPoints;
 
         [Inject]
-        public void Initialize(CleanerConfig cleanerConfig, List<CleaningPoint> cleaningPoints)
+        public void Initialize(List<CleanerConfig> cleanerConfigs, List<CleaningPoint> cleaningPoints)
         {
-            StaffConfig = cleanerConfig;
+            StaffConfig = cleanerConfigs.FirstOrDefault(config => config.UpgradeType == StaffUpgradeType.Common);
 
             _cleaningPoints = cleaningPoints;
 

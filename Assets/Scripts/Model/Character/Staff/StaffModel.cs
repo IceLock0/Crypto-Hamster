@@ -1,4 +1,6 @@
-﻿using ScriptableObjects;
+﻿using System;
+using Enums.Staff;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,7 +26,7 @@ namespace Model.Staff
             Agent = agent;
 
             HasWork = false;
-
+            
             SetAgentParameter();
         }
         public SpeedModel SpeedModel { get; }
@@ -32,6 +34,7 @@ namespace Model.Staff
         public float Acceleration { get; }
 
         public float Price { get; }
+        public StaffUpgradeType StaffUpgradeType { get; private set; }
 
         public float RelaxTime { get; }
         public float Efficiency { get; }
@@ -48,6 +51,16 @@ namespace Model.Staff
 
         public Vector3 DestinationPoint { get; protected set; }
 
+        public void SetUpgradeType(StaffUpgradeType staffUpgradeType)
+        {
+            if (!Enum.IsDefined(typeof(StaffUpgradeType), staffUpgradeType))
+                throw new ArgumentOutOfRangeException("The upgrade type is maximum.");
+            
+            StaffUpgradeType = staffUpgradeType;
+
+            Debug.Log("Upgrade type changed");
+        }
+        
         public void ResetCompletedUnits() => CompletedUnits = 0;
 
         public void StartWork() => HasWork = true;

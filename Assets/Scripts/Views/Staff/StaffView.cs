@@ -13,8 +13,6 @@ namespace Views.Staff
     { 
         protected NavMeshAgent Agent;
 
-        protected StaffPresenter StaffPresenter;
-
         protected StaffConfig StaffConfig;
 
         protected ContaminationPresenter ContaminationPresenter;
@@ -25,13 +23,15 @@ namespace Views.Staff
             ContaminationPresenter = contaminationPresenter;
         }
 
+        public StaffPresenter StaffPresenter { get; protected set; }
+        
         private void OnEnable()
         {
             StaffPresenter.Enable();
         }
 
         private void OnDisable()
-        {
+        { 
             StaffPresenter.Disable();
         }
     }

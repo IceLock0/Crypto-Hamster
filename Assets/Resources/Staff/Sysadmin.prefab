@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 6663913535646994112}
   - component: {fileID: 2870169721591095999}
   - component: {fileID: 2856917896233851786}
-  - component: {fileID: 2669692154457500122}
+  - component: {fileID: 2351585414057516700}
   m_Layer: 3
   m_Name: Sysadmin
   m_TagString: Untagged
@@ -281,7 +281,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2669692154457500122
+--- !u!114 &2351585414057516700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,8 +293,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b87d4ec484b4538a3a46490513b1749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Agent: {fileID: 2856917896233851786}
-  _computerViews:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}

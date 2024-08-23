@@ -8,45 +8,44 @@ namespace Installers
 
     public class ConfigInstaller : MonoInstaller
     {
-        [SerializeField] private List<CryptoConfig> _cryptoConfigs;
+        [Header("Characters")]
         [SerializeField] private PlayerConfig _playerConfig;
-        [SerializeField] private CameraConfig _cameraConfig;
-        [SerializeField] private List<ComputerConfig> _computerConfig;
-        [SerializeField] private SysAdminConfig _sysAdminConfig;
-        [SerializeField] private ElectricityConfig _electricityConfig;
+        [SerializeField] private List<SysAdminConfig> _sysAdminConfigs;
+        [SerializeField] private List<CleanerConfig> _cleanerConfigs;
+        
+        [Header("Mining & PC")]
+        [SerializeField] private List<ComputerConfig> _computerConfigs;
+        [SerializeField] private List<CryptoConfig> _cryptoConfigs;
         [SerializeField] private RepairKit _repairKit;
         [SerializeField] private CostConfig _costConfig;
-        [SerializeField] private ContaminationConfig _contaminationConfig;
-        [SerializeField] private CleanerConfig _cleanerConfig;
         
+        [Header("Environment")]
+        [SerializeField] private CameraConfig _cameraConfig;
+        [SerializeField] private ElectricityConfig _electricityConfig;
+        [SerializeField] private ContaminationConfig _contaminationConfig;
+
         public override void InstallBindings()
-        {
+        {          
+            BindSysAdminConfigs();
+            BindCleanerConfigs();
             BindPlayerConfig();
             BindCameraConfig();
-            BindComputerConfig();
-            BindSysAdminConfig();
+            BindComputerConfigs();
             BindElectricityConfig();
             BindRepairKit();
             BindCryptoConfigs();
             BindCostConfig();
+            BindContaminationConfig();
         }
 
         private void BindCostConfig()
         {
-            Container.Bind<CostConfig>()
-                .FromScriptableObject(_costConfig)
-                .AsSingle()
-                .NonLazy();
+            Container.Bind<CostConfig>().FromScriptableObject(_costConfig).AsSingle() .NonLazy();
         }
 
         private void BindCryptoConfigs()
         {
-            Container.Bind<List<CryptoConfig>>()
-                .FromInstance(_cryptoConfigs)
-                .AsSingle()
-                .NonLazy();
-            BindContaminationConfig();
-            BindCleanerConfig();
+            Container.Bind<List<CryptoConfig>>().FromInstance(_cryptoConfigs).AsSingle().NonLazy();
         }
 
         private void BindContaminationConfig()
@@ -64,14 +63,14 @@ namespace Installers
             Container.Bind<ElectricityConfig>().FromScriptableObject(_electricityConfig).AsSingle().NonLazy();
         }
 
-        private void BindSysAdminConfig()
+        private void BindSysAdminConfigs()
         {
-            Container.Bind<SysAdminConfig>().FromInstance(_sysAdminConfig).AsSingle().NonLazy();
+            Container.Bind<List<SysAdminConfig>>().FromInstance(_sysAdminConfigs).AsSingle().NonLazy();
         }
 
-        private void BindComputerConfig()
+        private void BindComputerConfigs()
         {
-             Container.Bind<List<ComputerConfig>>().FromInstance(_computerConfig).AsSingle().NonLazy();
+             Container.Bind<List<ComputerConfig>>().FromInstance(_computerConfigs).AsSingle().NonLazy();
         }
 
         private void BindCameraConfig()
@@ -84,9 +83,9 @@ namespace Installers
              Container.Bind<PlayerConfig>().FromScriptableObject(_playerConfig).AsSingle().NonLazy();
         }
 
-        private void BindCleanerConfig()
+        private void BindCleanerConfigs()
         {
-            Container.Bind<CleanerConfig>().FromScriptableObject(_cleanerConfig).AsSingle().NonLazy();
+            Container.Bind<List<CleanerConfig>>().FromInstance(_cleanerConfigs).AsSingle().NonLazy();
         }
     }
 

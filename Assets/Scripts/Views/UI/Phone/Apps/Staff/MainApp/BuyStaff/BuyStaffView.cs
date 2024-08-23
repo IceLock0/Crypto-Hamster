@@ -1,9 +1,10 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using Enums.Staff;
 using Model.Wallet;
 using Presenters.StaffTransaction;
-using ScriptableObjects;
+    using Presenters.StaffTransaction.Buy;
+    using ScriptableObjects;
 using Services.Fabric.Staff;
 using UnityEngine;
 using Zenject;
@@ -15,35 +16,26 @@ namespace Views.UI.Phone.Apps.Staff.MainApp.BuyStaff
         [SerializeField] private StaffBuyUpgradeButtonView _buyButton;
 
         private BuyStaffPresenter _presenter;
-
-        private Dictionary<StaffType, StaffConfig> _staffConfigs = new();
-
+        
         [Inject]
-        public void Initialize(SysAdminConfig sysAdminConfig, CleanerConfig cleanerConfig, WalletModel walletModel,
-            IStaffFabric staffFabric)
+        public void Initialize(WalletModel walletModel, IStaffFabric staffFabric, List<SysAdminConfig> sysAdminConfigs, List<CleanerConfig> cleanerConfigs)
         {
-            _staffConfigs[StaffType.Admin] = null;
-            _staffConfigs[StaffType.SysAdmin] = sysAdminConfig;
-            _staffConfigs[StaffType.Cleaner] = cleanerConfig;
-
-            _presenter = new BuyStaffPresenter(walletModel, staffFabric);
+            _presenter = new BuyStaffPresenter(walletModel, staffFabric, sysAdminConfigs, cleanerConfigs);
         }
 
         private void OnEnable()
         {
-            _buyButton.BuyClicked += Buy;
+            _buyButton.Clicked += ProcessBuyUpgradeClick;
         }
-
+        
         private void OnDisable()
         {
-            _buyButton.BuyClicked -= Buy;
+            _buyButton.Clicked -= ProcessBuyUpgradeClick;
         }
-
-        private void Buy(StaffType staffType)
+        
+        private void ProcessBuyUpgradeClick(StaffType staffType)
         {
-            _presenter.Buy(staffType, _staffConfigs[staffType]);
-            
-            _buyButton.ChangeStaffState(StaffState.Bought);
+            _presenter.BuyUpgrade(staffType);
         }
     }
 }

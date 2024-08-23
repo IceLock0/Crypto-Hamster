@@ -344,9 +344,12 @@ MonoBehaviour:
   _rightArrowButton: {fileID: 156133728}
   _staffImage: {fileID: 205952541}
   _staffSprites:
-  - {fileID: 935085179, guid: 7bd9993086def8340a3d0e918db34f4b, type: 3}
-  - {fileID: -1913801701, guid: 50d6e648578b2d046a109ac3e57f47ca, type: 3}
-  - {fileID: -1266038714, guid: 08e2c718b3498084f9dde43d479b18aa, type: 3}
+  - _type: 0
+    _sprite: {fileID: 935085179, guid: 7bd9993086def8340a3d0e918db34f4b, type: 3}
+  - _type: 1
+    _sprite: {fileID: -1913801701, guid: 50d6e648578b2d046a109ac3e57f47ca, type: 3}
+  - _type: 2
+    _sprite: {fileID: -1266038714, guid: 08e2c718b3498084f9dde43d479b18aa, type: 3}
   _buyUpgradeText: {fileID: 1319528960}
 --- !u!1 &107327222
 GameObject:
@@ -1721,7 +1724,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00090026855}
+  m_AnchoredPosition: {x: 0, y: 0.00064468384}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &489701506
@@ -1928,6 +1931,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 506217062}
+  - component: {fileID: 506217063}
   m_Layer: 0
   m_Name: NavMesh
   m_TagString: Untagged
@@ -1951,6 +1955,18 @@ Transform:
   - {fileID: 107327223}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &506217063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506217061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5864213e264cd08197eba0e962001b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &520183126
 GameObject:
   m_ObjectHideFlags: 0
@@ -3783,8 +3799,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1023781813}
   m_HandleRect: {fileID: 1023781812}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.8133349
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5671,21 +5687,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e341c984c1304cdfaa263a47c0023ce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerConfig: {fileID: 11400000, guid: 374e66283f7593c4685b2bfeacc44ecb, type: 2}
+  _sysAdminConfigs:
+  - {fileID: 11400000, guid: c715e5344125bf3419a3132377cea4d1, type: 2}
+  - {fileID: 11400000, guid: dcde4c3d02a8cd441aa79462d7a86c04, type: 2}
+  - {fileID: 11400000, guid: 967680d207c8b8f4e89c5b053c0005be, type: 2}
+  _cleanerConfigs:
+  - {fileID: 11400000, guid: 5a20b0c6fe39e90488840eefe23d88ea, type: 2}
+  - {fileID: 11400000, guid: 7d38e8610bc7d4242b95797126752aa4, type: 2}
+  - {fileID: 11400000, guid: 0c1168f29af468e478701d2c225b4b42, type: 2}
+  _computerConfigs:
+  - {fileID: 11400000, guid: f0cf76bca193eae49a0ccbe8a13ea14b, type: 2}
+  - {fileID: 11400000, guid: 778093697a106904a84811d361a3ffe3, type: 2}
   _cryptoConfigs:
   - {fileID: 11400000, guid: b585e9903a92f894890de059d33939c2, type: 2}
   - {fileID: 11400000, guid: c986d53ffd919da4b949855257479c4c, type: 2}
   - {fileID: 11400000, guid: c8d8df4b2c05c464d80321c8103d3f4d, type: 2}
-  _playerConfig: {fileID: 11400000, guid: 374e66283f7593c4685b2bfeacc44ecb, type: 2}
-  _cameraConfig: {fileID: 11400000, guid: 9cc75fd57ac9dd7479dac83117beb00e, type: 2}
-  _computerConfig:
-  - {fileID: 11400000, guid: f0cf76bca193eae49a0ccbe8a13ea14b, type: 2}
-  - {fileID: 11400000, guid: 778093697a106904a84811d361a3ffe3, type: 2}
-  _sysAdminConfig: {fileID: 11400000, guid: c715e5344125bf3419a3132377cea4d1, type: 2}
-  _electricityConfig: {fileID: 11400000, guid: c95b11fb1e7f6934182a6dcd114fef39, type: 2}
   _repairKit: {fileID: 11400000, guid: 3c3b6241cdf4f64459f728f8a3d7acb5, type: 2}
   _costConfig: {fileID: 11400000, guid: 4c9a0690cfc008149a99b94aeaacba63, type: 2}
+  _cameraConfig: {fileID: 11400000, guid: 9cc75fd57ac9dd7479dac83117beb00e, type: 2}
+  _electricityConfig: {fileID: 11400000, guid: c95b11fb1e7f6934182a6dcd114fef39, type: 2}
   _contaminationConfig: {fileID: 11400000, guid: c2c1c3caec4eb074ca5bce7f5a55d963, type: 2}
-  _cleanerConfig: {fileID: 11400000, guid: 5a20b0c6fe39e90488840eefe23d88ea, type: 2}
 --- !u!4 &1532642758
 Transform:
   m_ObjectHideFlags: 0
@@ -7380,7 +7402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8214367, y: 0}
   m_AnchorMax: {x: 1, y: 0.18900001}
-  m_AnchoredPosition: {x: -22, y: 19.999939}
+  m_AnchoredPosition: {x: -22, y: 19.999756}
   m_SizeDelta: {x: -49.47998, y: -16.839996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1948125225

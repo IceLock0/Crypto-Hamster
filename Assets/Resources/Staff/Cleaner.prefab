@@ -207,18 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88ddc89a6d74d05b1ed8cbba6493fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Agent: {fileID: 17251029084279697}
-  _cleaningPoints:
-  - _pointTransform: {fileID: 0}
-    _pointRadius: 3
-  - _pointTransform: {fileID: 0}
-    _pointRadius: 4
-  - _pointTransform: {fileID: 0}
-    _pointRadius: 5
-  - _pointTransform: {fileID: 0}
-    _pointRadius: 6
-  - _pointTransform: {fileID: 0}
-    _pointRadius: 7
 --- !u!1 &6709340590228930322
 GameObject:
   m_ObjectHideFlags: 0

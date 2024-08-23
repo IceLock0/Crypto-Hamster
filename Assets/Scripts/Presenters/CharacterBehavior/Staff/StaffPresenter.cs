@@ -16,8 +16,6 @@ namespace Presenters.Character.Staff
         
         protected readonly ContaminationPresenter ContaminationPresenter;
 
-        protected StaffModel StaffModel;
-
         protected bool IsChecking = true;
 
         protected CancellationTokenSource CTS;
@@ -31,6 +29,8 @@ namespace Presenters.Character.Staff
             CTS = new CancellationTokenSource();
         }
 
+        public StaffModel StaffModel { get; protected set; }
+        
         public virtual void Enable()
         {
             ContaminationPresenter.ContaminationChanged += ProcessContaminationChange;

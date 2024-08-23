@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62b6ed598dec42c2b90a0ae3fdf299c3, type: 3}
-  m_Name: Cleaner config
+  m_Script: {fileID: 11500000, guid: 268c9b6aba9c449aacdafa9953b515cf, type: 3}
+  m_Name: Rare Sysadmin
   m_EditorClassIdentifier: 
-  _movementSpeed: 3.5
-  _angularSpeed: 180
-  _acceleration: 8
+  _movementSpeed: 4.5
+  _angularSpeed: 200
+  _acceleration: 9
+  _upgradeType: 2
   _price: 10000
   _relaxTime: 60
   _efficiency: 3
   _valueReaction: 50
-  _jobSpeed: 10
-  _sourcePoint: {fileID: 1203637856209266767, guid: a2a480533b401164c9a6597153a4a056, type: 3}
+  _jobSpeed: 20
+  _sourcePoint: {fileID: 1659931549745464885, guid: 9d89974457e610f44a19dfde0bd59208, type: 3}
