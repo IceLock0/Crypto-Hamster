@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Enums.Staff;
 using Model.Staff;
-using Model.Staff.Cleaner;
-using Model.Staff.SysAdmin;
 using Model.Wallet;
 using Presenters.Currency;
 using ScriptableObjects;
 using Services.Fabric.Staff;
 using Unity.Mathematics;
-using UnityEngine;
 using Views.Staff;
 
 namespace Presenters.StaffTransaction.Buy
@@ -60,7 +57,7 @@ namespace Presenters.StaffTransaction.Buy
 
             var staffModel = staffGameObject.GetComponent<StaffView>().StaffPresenter.StaffModel;
             
-            staffModel.SetUpgradeType(StaffUpgradeType.Common);
+            staffModel.SetUpgradeType(StaffUpgradeType.Common, staffConfig);
             
             _staffModels[staffType] = staffModel;
         }
@@ -73,9 +70,12 @@ namespace Presenters.StaffTransaction.Buy
 
             var staffConfig = GetCurrentStaffConfig(staffType, nextUpgradeType);
 
+            if (staffConfig == null)
+                return;
+
             CheckForAvailabilityForMoney(staffConfig);
             
-            staffModel.SetUpgradeType(nextUpgradeType);
+            staffModel.SetUpgradeType(nextUpgradeType, staffConfig);
 
             _walletModel?.RemoveCurrency(typeof(Cash), staffConfig.Price);
         }

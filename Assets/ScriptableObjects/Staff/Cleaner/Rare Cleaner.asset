@@ -15,7 +15,7 @@ MonoBehaviour:
   _movementSpeed: 5.5
   _angularSpeed: 200
   _acceleration: 9
-  _upgradeType: 3
+  _upgradeType: 2
   _price: 10000
   _relaxTime: 50
   _efficiency: 2
