@@ -8,7 +8,9 @@ using Presenters.Currency;
 using ScriptableObjects;
 using Services.Fabric.Staff;
 using Unity.Mathematics;
+using UnityEngine;
 using Views.Staff;
+using Views.UI.Phone.Apps.Staff.MainApp.BuyStaff;
 
 namespace Presenters.StaffTransaction.Buy
 {
@@ -22,8 +24,10 @@ namespace Presenters.StaffTransaction.Buy
 
         private readonly Dictionary<StaffType, StaffModel> _staffModels;
 
+        private readonly BuyStaffView _buyStaffView;
+
         public BuyStaffPresenter(WalletModel walletModel, IStaffFabric staffFabric,
-            List<SysAdminConfig> sysAdminConfigs, List<CleanerConfig> cleanerConfigs)
+            List<SysAdminConfig> sysAdminConfigs, List<CleanerConfig> cleanerConfigs, BuyStaffView buyStaffView)
         {
             _walletModel = walletModel;
             _staffFabric = staffFabric;
@@ -35,6 +39,8 @@ namespace Presenters.StaffTransaction.Buy
             _staffModels[StaffType.Admin] = null;
             _staffModels[StaffType.SysAdmin] = null;
             _staffModels[StaffType.Cleaner] = null;
+
+            _buyStaffView = buyStaffView;
         }
 
         public void BuyUpgrade(StaffType staffType)
@@ -43,8 +49,29 @@ namespace Presenters.StaffTransaction.Buy
                 Buy(staffType);
 
             else Upgrade(staffType);
+            
+            _buyStaffView.SetBuyUpgradeText(staffType);
         }
 
+        public string GetCurrentText(StaffType staffType)
+        {
+            const string BUY_TEXT = "КУПИТЬ";
+            const string UPGRADE_TEXT = "УЛУЧШИТЬ";
+            const string MAX_UPGRADE_TEXT = "МАКС. УРОВЕНЬ";
+
+            if (_staffModels[staffType] == null)
+                return BUY_TEXT;
+
+            var enumUpgradeLength = Enum.GetNames(typeof(StaffUpgradeType)).Length;
+
+            var lastUpgrade = (StaffUpgradeType) enumUpgradeLength - 1;
+
+            if (_staffModels[staffType].StaffUpgradeType == lastUpgrade)
+                return MAX_UPGRADE_TEXT;
+
+            return UPGRADE_TEXT;
+        }
+        
         private void Buy(StaffType staffType)
         {
             var staffConfig = GetCurrentStaffConfig(staffType, StaffUpgradeType.Common);
@@ -53,12 +80,13 @@ namespace Presenters.StaffTransaction.Buy
 
             _walletModel?.RemoveCurrency(typeof(Cash), staffConfig.Price);
 
-            var staffGameObject = _staffFabric.Create(staffType, staffConfig.SourcePoint.position, quaternion.identity, null);
+            var staffGameObject =
+                _staffFabric.Create(staffType, staffConfig.SourcePoint.position, quaternion.identity, null);
 
             var staffModel = staffGameObject.GetComponent<StaffView>().StaffPresenter.StaffModel;
-            
+
             staffModel.SetUpgradeType(StaffUpgradeType.Common, staffConfig);
-            
+
             _staffModels[staffType] = staffModel;
         }
 
@@ -73,8 +101,10 @@ namespace Presenters.StaffTransaction.Buy
             if (staffConfig == null)
                 return;
 
-            CheckForAvailabilityForMoney(staffConfig);
+            Debug.Log($"StaffConfig = {staffConfig}");
             
+            CheckForAvailabilityForMoney(staffConfig);
+
             staffModel.SetUpgradeType(nextUpgradeType, staffConfig);
 
             _walletModel?.RemoveCurrency(typeof(Cash), staffConfig.Price);
@@ -102,5 +132,6 @@ namespace Presenters.StaffTransaction.Buy
             if (_walletModel?.Currencies[typeof(Cash)].Amount < staffConfig.Price)
                 throw new ArgumentException("Not enough money to do this transaction.");
         }
+        
     }
 }

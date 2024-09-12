@@ -15,10 +15,11 @@ namespace Views.UI.Phone.Apps.Staff.MainApp
         [SerializeField] private PhoneStaffRightArrowButtonView _rightArrowButton;
         [SerializeField] private Image _staffImage;
         [SerializeField] private List<StaffSpriteWithTypeAssociation> _staffSprites;
-        [SerializeField] private TextMeshProUGUI _buyUpgradeText;
 
         private int _currentIndex = 0;
 
+        public event Action<StaffType> StaffTypeChanged;
+        
         public StaffType GetCurrentStaffType() => (StaffType)_currentIndex;
         
         private void Awake()
@@ -55,7 +56,6 @@ namespace Views.UI.Phone.Apps.Staff.MainApp
         private void UpdateInfo()
         {
             UpdateSprite();
-            //UpdateText();
         }
 
         private void UpdateSprite()
@@ -65,24 +65,9 @@ namespace Views.UI.Phone.Apps.Staff.MainApp
                 if (staffSprite.Type == (StaffType) _currentIndex)
                     _staffImage.sprite = staffSprite.Sprite;
             }
-        }
 
-        // private void UpdateText()
-        // {
-        //     string text = "";
-        //
-        //     switch (GetCurrentStaffState())
-        //     {
-        //         case StaffState.NotBought:
-        //             text = "КУПИТЬ";
-        //             break;
-        //         case StaffState.Bought:
-        //             text = "УЛУЧШИТЬ";
-        //             break;
-        //     }
-        //
-        //     _buyUpgradeText.text = text;
-        // }
+            StaffTypeChanged?.Invoke(GetCurrentStaffType());
+        }
 
         [Serializable]
         public class StaffSpriteWithTypeAssociation
