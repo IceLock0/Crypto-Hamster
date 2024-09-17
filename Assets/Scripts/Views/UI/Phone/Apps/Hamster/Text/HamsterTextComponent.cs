@@ -15,22 +15,22 @@ namespace Views.Hamster
             switch (_textType)
             {
                 case HamsterTextType.Amount:
-                    _text.text = "Amount " + $"{value:f10}";
+                    _text.text = $"{value:f8}";
                     break;
                 case HamsterTextType.PerClick:
-                    _text.text = "PerClick " + $"{value:f5}";
+                    _text.text = $"{value:f5}";
                     break;
                 case HamsterTextType.PerTime:
-                    _text.text = "PerTime " + $"{value:f5}";
+                    _text.text = $"{value:f5}";
                     break;
                 case HamsterTextType.PerClickPrice:
-                    _text.text = "Upgrade Price " + $"{value:f4}";
+                    _text.text = $"{value:f4}";
                     break;
                 case HamsterTextType.PerTimePrice:
-                    _text.text = "Upgrade Price " + $"{value:f4}";
+                    _text.text = $"{value:f4}";
                     break;
                 case HamsterTextType.Rate:
-                    _text.text = "Rate = " + $"{value:f7}";
+                    _text.text = $"{value:f7}";
                     break;
             }
         }
