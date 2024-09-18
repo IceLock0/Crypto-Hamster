@@ -15,4 +15,4 @@ MonoBehaviour:
   _maxElectricity: 100
   _secondsDelay: 1
   _paymentPrice: 0
-  _decreaseValue: 0
+  _decreaseValue: 20

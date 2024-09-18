@@ -3,9 +3,9 @@ using Views.UI.ButtonUI;
 
 namespace Views.UI.Phone.Apps.Staff.Shortcut
 {
-    public class PhoneStaffButtonView : ButtonView
+    public class PhoneShortcutAppButtonUIView : ButtonView
     {
-        [SerializeField] private GameObject _staffPanelGO;
+        [SerializeField] private GameObject _appGO;
     
         protected override void ButtonClicked()
         {
@@ -14,7 +14,7 @@ namespace Views.UI.Phone.Apps.Staff.Shortcut
     
         private void ChangeStaffPanelVisibility()
         {
-            _staffPanelGO.SetActive(!_staffPanelGO.activeSelf);
+            _appGO.SetActive(!_appGO.activeSelf);
         }
     
     }
