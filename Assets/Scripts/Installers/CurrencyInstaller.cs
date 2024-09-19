@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Presenters.Currency;
-using ScriptableObjects;
-using UnityEngine;
 using Views.Currency;
 using Zenject;
 

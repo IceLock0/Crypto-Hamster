@@ -9,7 +9,6 @@
         public float MaxRate { get; set; }
 
         public float GetSellAmount();
-        public void Buy(float amount);
         public void ChangeRate();
     }
 }

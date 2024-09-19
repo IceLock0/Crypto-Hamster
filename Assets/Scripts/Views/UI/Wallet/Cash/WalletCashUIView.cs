@@ -1,5 +1,4 @@
-﻿using System;
-using Model.Wallet;
+﻿using Model.Wallet;
 using Presenters.Wallet.Cash;
 using TMPro;
 using UnityEngine;

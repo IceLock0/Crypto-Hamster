@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace Presenters.Currency
 {
-    public class Hamster : ICurrency, IExchangeable
+    public class Hamster : ICurrency, IExchangeable //Обрати внимание на CryptoCurrencyPresenter когда будешь делать хомяка
     {
         public float MinRate { get; set; }
         public float Amount { get; set; }
@@ -56,7 +56,7 @@ namespace Presenters.Currency
             return resultCash;
         }
 
-        public void Buy(float amount)
+        public void Buy()
         {
             throw new NotImplementedException();
         }

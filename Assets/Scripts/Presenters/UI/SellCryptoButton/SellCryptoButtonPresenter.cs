@@ -12,28 +12,15 @@ namespace Presenters.UI.SellCryptoButton
 {
     public class SellCryptoButtonPresenter : ExchangeCryptoButtonPresenter
     {
-        private SellCryptoButtonView _view;
         private Type _targetCryptoType;
-        public SellCryptoButtonPresenter(WalletModel walletModel, WalletCryptoUIView walletCryptoUIView, ExchangeModel exchangeModel, SellCryptoButtonView view) : base(walletModel, walletCryptoUIView, exchangeModel)
+        public SellCryptoButtonPresenter(WalletModel walletModel, WalletCryptoUIView walletCryptoUIView, ExchangeModel exchangeModel) : base(walletModel, walletCryptoUIView, exchangeModel)
         {
-            InvariantChecker.CheckObjectInvariant(view);
-            _view = view;
-            Subscribe();
-        }
-        
-        protected override void Subscribe()
-        {
-            _view.SellCryptoButtonClicked += OnExchangeButtonClicked;
-        }
-
-        protected override void Unsubscribe()
-        {
-            _view.SellCryptoButtonClicked -= OnExchangeButtonClicked;
+            InvariantChecker.CheckObjectInvariant(walletModel, walletCryptoUIView, exchangeModel);
         }
 
         protected override void ExchangeCash()
         {
-            WalletModel.AddCurency(typeof(Cash), TargetExchangeAmount);
+            WalletModel.AddCurrency(typeof(Cash), TargetExchangeAmount);
             WalletModel.NullifyCurrency(_targetCryptoType);
         }
 

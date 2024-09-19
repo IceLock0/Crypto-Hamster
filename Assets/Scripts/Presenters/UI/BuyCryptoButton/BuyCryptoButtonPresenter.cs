@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using Model.ChooseAmount;
 using Model.Exchange;
 using Model.Wallet;
 using Presenters.Currency;
 using Presenters.UI.ExchangeCryptoButton;
-using UnityEngine;
 using Utils;
-using Views.UI.BuyCryptoButton;
 using Views.Wallet;
 
 namespace Presenters.UI.BuyCryptoButton
@@ -14,36 +12,29 @@ namespace Presenters.UI.BuyCryptoButton
 
     public class BuyCryptoButtonPresenter : ExchangeCryptoButtonPresenter
     {
-        private BuyCryptoButtonView _view;
-        public BuyCryptoButtonPresenter(WalletModel walletModel, WalletCryptoUIView walletCryptoUIView, ExchangeModel exchangeModel, BuyCryptoButtonView view) : base(walletModel, walletCryptoUIView, exchangeModel)
-        {
-            InvariantChecker.CheckObjectInvariant(view);
-            _view = view;
-            Subscribe();
-        }
+        private readonly ChooseAmountModel _chooseAmountModel;
 
-        protected override void Subscribe()
+        public BuyCryptoButtonPresenter(WalletModel walletModel, WalletCryptoUIView walletCryptoUIView,
+            ExchangeModel exchangeModel, ChooseAmountModel chooseAmountModel) : base(walletModel, walletCryptoUIView,
+            exchangeModel)
         {
-            _view.BuyButtonClicked += OnExchangeButtonClicked;
-        }
+            InvariantChecker.CheckObjectInvariant(chooseAmountModel);
+            _chooseAmountModel = chooseAmountModel;
 
-        protected override void Unsubscribe()
-        {
-            _view.BuyButtonClicked -= OnExchangeButtonClicked;
         }
 
         protected override void ExchangeCash()
         {
             var targetCrypto = ExchangeModel.CryptoExchangables
                 .FirstOrDefault(x => x.Key == WalletCryptoUIView.CurrentChosenCrypto).Value;
-            WalletModel.AddCurency(WalletCryptoUIView.CurrentChosenCrypto, TargetExchangeAmount/targetCrypto.Rate);
-            WalletModel.NullifyCurrency(typeof(Cash));
+            WalletModel.AddCurrency(WalletCryptoUIView.CurrentChosenCrypto, _chooseAmountModel.Amount);
+            WalletModel.RemoveCurrency(typeof(Cash), targetCrypto.Rate * _chooseAmountModel.Amount);
+
         }
 
         protected override void CalculateExchangeAmount()
         {
-            TargetExchangeAmount = WalletModel.Currencies[typeof(Cash)].Amount;
+
         }
     }
-
 }

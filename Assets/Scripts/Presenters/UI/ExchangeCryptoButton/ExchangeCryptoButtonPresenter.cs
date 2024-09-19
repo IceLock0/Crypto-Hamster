@@ -1,16 +1,12 @@
-﻿using System;
-using System.Linq;
-using Model.Exchange;
+﻿using Model.Exchange;
 using Model.Wallet;
-using Presenters.Currency;
 using Utils;
-using Views.UI.SellButton;
 using Views.Wallet;
 
 namespace Presenters.UI.ExchangeCryptoButton
 {
 
-    public abstract class ExchangeCryptoButtonPresenter : IDisposable
+    public abstract class ExchangeCryptoButtonPresenter
     {
         protected readonly WalletModel WalletModel;
         protected readonly WalletCryptoUIView WalletCryptoUIView;
@@ -24,12 +20,10 @@ namespace Presenters.UI.ExchangeCryptoButton
             WalletModel = walletModel;
             WalletCryptoUIView = walletCryptoUIView;
             ExchangeModel = exchangeModel;
+
         }
 
-        protected abstract void Subscribe();
-        protected abstract void Unsubscribe();
-
-        protected void OnExchangeButtonClicked()
+        public void OnExchangeButtonClicked()
         {
             CalculateExchangeAmount();
             ExchangeCash();
@@ -38,16 +32,6 @@ namespace Presenters.UI.ExchangeCryptoButton
         protected abstract void ExchangeCash();
 
         protected abstract void CalculateExchangeAmount();
-
-        public void Dispose()
-        {
-            Unsubscribe();
-        }
-
-        ~ExchangeCryptoButtonPresenter()
-        {
-            Dispose();
-        }
     }
 
 }
