@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c647576f7bb460f8f9d5fce1c35a3cf, type: 3}
-  m_Name: Common
+  m_Name: Uncommon
   m_EditorClassIdentifier: 
-  _repairPower: 20
-  _cost: 1000
+  _repairPower: 30
+  _cost: 2000

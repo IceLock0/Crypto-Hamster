@@ -28,5 +28,5 @@ namespace Services.Fabric
         {
             return _container.InstantiatePrefabForComponent<RepairKitItemView>(_repairKitItemView, parent,new object[] {repairKit});
         }
-    }
+    }   
 }
