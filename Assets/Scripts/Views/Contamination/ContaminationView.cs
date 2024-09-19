@@ -1,7 +1,5 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Presenters.Room;
-using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;

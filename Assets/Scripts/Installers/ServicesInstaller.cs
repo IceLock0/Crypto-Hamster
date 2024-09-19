@@ -33,8 +33,8 @@ namespace Installers
 
         private void BindFabricService()
         {
-            Container.Bind<IComputerFabric>()
-                .To<ComputerFabric>()
+            Container.Bind<IComputerFactory>()
+                .To<ComputerFactory>()
                 .AsSingle()
                 .NonLazy();
         }

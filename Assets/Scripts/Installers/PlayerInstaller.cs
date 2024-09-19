@@ -1,4 +1,5 @@
-﻿using ScriptableObjects;
+﻿using Model.Inventory;
+using ScriptableObjects;
 using UnityEngine;
 using Views.Player;
 using Zenject;
@@ -12,8 +13,16 @@ namespace Installers
         
         public override void InstallBindings()
         {
+            BindInventoryModel();
             InstantiatePlayer();
             BindComponents();
+        }
+
+        private void BindInventoryModel()
+        {
+            Container.Bind<InventoryModel>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void InstantiatePlayer()

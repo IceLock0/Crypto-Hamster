@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 namespace Services.Fabric
 {
-    public class ComputerFabric : IComputerFabric
+    public class ComputerFactory : IComputerFactory
     {
         private const string ComputerPath = "Computers/";
         private const string CommonComputer = ComputerPath + "CommonComputer";
@@ -16,7 +16,7 @@ namespace Services.Fabric
         private Object _rareComputer;
         private DiContainer _container;
         
-        public ComputerFabric(DiContainer container)
+        public ComputerFactory(DiContainer container)
         {
             _container = container;
             Load();

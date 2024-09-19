@@ -18,7 +18,7 @@ namespace Presenters.Computer
     public class ComputerBuilderPresenter
     {
         private readonly BuyButtonView _buyButtonView;
-        private readonly IComputerFabric _computerFabric;
+        private readonly IComputerFactory _computerFactory;
         private readonly Transform _computerParent;
         private readonly GameObjectDestroyerService _gameObjectDestroyerService;
         private readonly WalletModel _walletModel;
@@ -26,16 +26,16 @@ namespace Presenters.Computer
         
         private GameObject _currentComputerModel;
 
-        public ComputerBuilderPresenter(BuyButtonView buyButtonView, IComputerFabric computerFabric,  
+        public ComputerBuilderPresenter(BuyButtonView buyButtonView, IComputerFactory computerFactory,  
             Transform computersParent, ComputerModel model, 
             GameObjectDestroyerService gameObjectDestroyerServiceService, WalletModel walletModel, List<ComputerConfig> computerConfigs)
         {
-            InvariantChecker.CheckObjectInvariant(buyButtonView, computerFabric, computerFabric,
+            InvariantChecker.CheckObjectInvariant(buyButtonView, computerFactory, computerFactory,
                 computersParent, model, gameObjectDestroyerServiceService, walletModel, computerConfigs);
 
             Model = model;
             _buyButtonView = buyButtonView;
-            _computerFabric = computerFabric;
+            _computerFactory = computerFactory;
             _computerParent = computersParent;
             _gameObjectDestroyerService = gameObjectDestroyerServiceService;
             _walletModel = walletModel;
@@ -96,7 +96,7 @@ namespace Presenters.Computer
         private void TryBuildNewComputer()
         {
             //Нехватка бабок и тп обработка невозможности билда
-            _currentComputerModel = _computerFabric.Create(Model.ComputerType, Model.Position, _computerParent) as GameObject;
+            _currentComputerModel = _computerFactory.Create(Model.ComputerType, Model.Position, _computerParent) as GameObject;
             ComputerBuilded?.Invoke(Model.ComputerType);
         }
     }
