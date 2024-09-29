@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Views.Phone.Apps.ShopApp.RepairKitShop
 {
-    public class RepairKitShopView : MonoBehaviour
+    public class RepairKitShopView : InShopShopView
     {
         [SerializeField] private Transform _itemContainer;
         private RepairKitShopPresenter _presenter;

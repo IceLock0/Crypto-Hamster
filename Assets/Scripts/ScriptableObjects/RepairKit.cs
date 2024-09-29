@@ -11,5 +11,10 @@ namespace ScriptableObjects
 
         public float RepairPower => _repairPower;
         public float Cost => _cost;
+
+        public override string ToString()
+        {
+            return $"Repair kit with {_repairPower} repair power, and {_cost} cost";
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Services.Fabric
 
         private readonly DiContainer _container;
 
-        private RepairKitItemView _repairKitItemView;
+        private Object _repairKitItemView;
 
         public RepairKitItemFactory(DiContainer container)
         {
@@ -21,10 +21,10 @@ namespace Services.Fabric
 
         private void Load()
         {
-            _repairKitItemView = Resources.Load(RepairKitItemView) as RepairKitItemView;
+            _repairKitItemView = Resources.Load(RepairKitItemView);
         }
 
-        public RepairKitItemView Create(Transform parent, RepairKit repairKit)
+        public object Create(Transform parent, RepairKit repairKit)
         {
             return _container.InstantiatePrefabForComponent<RepairKitItemView>(_repairKitItemView, parent,new object[] {repairKit});
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using Utils;
 
 namespace Model.Inventory
@@ -22,6 +23,7 @@ namespace Model.Inventory
                 Inventory.Add(typeof(T), new List<T>()); 
             
             Inventory[typeof(T)].Add(item);
+            Debug.Log($"Added new Item {item.ToString()}");
         }
     }
 }
