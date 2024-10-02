@@ -7,15 +7,16 @@ using Zenject;
 
 namespace Views.Phone.Apps.ShopApp.RepairKitShop
 {
-    public class RepairKitShopView : InShopShopView
+    public class ShopView : InShopShopView
     {
         [SerializeField] private Transform _itemContainer;
-        private RepairKitShopPresenter _presenter;
+        
+        private ShopPresenter _presenter;
 
         [Inject]
-        public void Initialize(RepairKitShopModel kitShopModel, RepairKitItemFactory factory)
+        public void Initialize(ShopModel shopModel, ShopItemFactory factory)
         {
-            _presenter = new RepairKitShopPresenter(kitShopModel, factory, _itemContainer);
+            _presenter = new ShopPresenter(shopModel, factory, _itemContainer);
         }
 
         private void Start()

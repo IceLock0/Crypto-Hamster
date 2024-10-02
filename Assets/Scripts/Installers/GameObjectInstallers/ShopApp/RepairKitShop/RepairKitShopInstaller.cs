@@ -10,7 +10,7 @@ namespace Installers.GameObjectInstallers.ShopApp.RepairKitShop
     public class RepairKitShopInstaller : MonoInstaller<RepairKitShopInstaller>
     {
         [Header("Repair kit shop items")]
-        [SerializeField] private List<RepairKit> _repairKits;
+        [SerializeField] private List<ScriptableObjects.ShopItem> _repairKits;
         
         public override void InstallBindings()
         {
@@ -20,15 +20,15 @@ namespace Installers.GameObjectInstallers.ShopApp.RepairKitShop
 
         private void BindRepairKitShopModel()
         {
-            Container.Bind<RepairKitShopModel>()
-                .FromInstance(new RepairKitShopModel(_repairKits))
+            Container.Bind<ShopModel>()
+                .FromInstance(new ShopModel(_repairKits))
                 .AsSingle()
                 .NonLazy();
         }
 
         private void BindRepairKitItemFactory()
         {
-            Container.Bind<RepairKitItemFactory>()
+            Container.Bind<ShopItemFactory>()
                 .AsSingle()
                 .NonLazy();
         }

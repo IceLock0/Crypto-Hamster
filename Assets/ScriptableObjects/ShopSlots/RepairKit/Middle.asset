@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c647576f7bb460f8f9d5fce1c35a3cf, type: 3}
   m_Name: Middle
   m_EditorClassIdentifier: 
-  _repairPower: 40
   _cost: 3000
+  _itemImage: {fileID: 21300000, guid: 32e5b5fda17dd1d4fa860643835a3fde, type: 3}
+  _itemName: Middle kit
+  _repairPower: 40
