@@ -18,12 +18,12 @@ namespace Model.Inventory
         public void AddItem<T>(T item)
         {
             InvariantChecker.CheckObjectInvariant(item);
-            
+
             if (Inventory.ContainsKey(typeof(T)) == false)
                 Inventory.Add(typeof(T), new List<T>()); 
             
             Inventory[typeof(T)].Add(item);
-            Debug.Log($"Added new Item {item.ToString()}");
+            Debug.Log($"Added new {typeof(T)} {item.ToString()}");
         }
     }
 }

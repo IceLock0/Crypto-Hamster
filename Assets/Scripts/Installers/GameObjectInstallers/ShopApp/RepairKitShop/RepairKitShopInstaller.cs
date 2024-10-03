@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Model.ShopApp;
+using Model.ShopApp.RepairKitShop;
 using ScriptableObjects;
 using Services.Fabric;
 using UnityEngine;
@@ -10,25 +10,17 @@ namespace Installers.GameObjectInstallers.ShopApp.RepairKitShop
     public class RepairKitShopInstaller : MonoInstaller<RepairKitShopInstaller>
     {
         [Header("Repair kit shop items")]
-        [SerializeField] private List<ScriptableObjects.ShopItem> _repairKits;
+        [SerializeField] private List<RepairKit> _repairKits;
         
         public override void InstallBindings()
         {
             BindRepairKitShopModel();
-            BindRepairKitItemFactory();
         }
 
         private void BindRepairKitShopModel()
         {
-            Container.Bind<ShopModel>()
-                .FromInstance(new ShopModel(_repairKits))
-                .AsSingle()
-                .NonLazy();
-        }
-
-        private void BindRepairKitItemFactory()
-        {
-            Container.Bind<ShopItemFactory>()
+            Container.Bind<RepairKitShopModel>()
+                .FromInstance(new RepairKitShopModel(_repairKits))
                 .AsSingle()
                 .NonLazy();
         }

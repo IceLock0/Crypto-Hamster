@@ -5,27 +5,19 @@ using Utils;
 
 namespace Presenters.Phone.Apps.ShopApp.RepairKitShop
 {
-    public class ShopPresenter
+    public abstract class ShopPresenter
     {
-        private readonly ShopModel _shopModel;
-        private readonly ShopItemFactory _factory;
-        private readonly Transform _container;
+        protected readonly ShopItemFactory Factory;
+        protected readonly Transform Container;
         
-        public ShopPresenter(ShopModel shopModel, ShopItemFactory factory, Transform container)
+        public ShopPresenter(ShopItemFactory factory, Transform container)
         {
-            InvariantChecker.CheckObjectInvariant(shopModel, factory, container);
+            InvariantChecker.CheckObjectInvariant(factory, container);
             
-            _shopModel = shopModel;
-            _factory = factory;
-            _container = container;
+            Factory = factory;
+            Container = container;
         }
 
-        public void InitializeItems()
-        {
-            foreach (var item in _shopModel.ShopItems)
-            {
-                _factory.Create(_container, item);
-            }
-        }
+        public abstract void InitializeItems();
     }
 }

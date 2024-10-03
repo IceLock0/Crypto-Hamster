@@ -10,17 +10,17 @@ using Zenject;
 
 namespace Views.Phone.Apps.ShopApp.RepairKitShop
 {
-    public class ShopItemView : MonoBehaviour
+    public abstract class ShopItemView<T> : MonoBehaviour where T: ShopItem
     {
-        private ShopItemPresenter _presenter;
+        private ShopItemPresenter<T> _presenter;
         
         [Inject]
         public void Initialize(WalletModel walletModel, Button buyButton, Image itemImage, TMP_Text itemName, InventoryModel inventoryModel)
         {
-            _presenter = new ShopItemPresenter(walletModel, buyButton, itemImage, itemName, inventoryModel);
+            _presenter = new ShopItemPresenter<T>(walletModel, buyButton, itemImage, itemName, inventoryModel);
         }
 
-        public void GiveItem(ShopItem shopItem)
+        public void GiveItem(T shopItem)
         {
             _presenter.GiveItem(shopItem);
         }

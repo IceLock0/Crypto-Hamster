@@ -1,27 +1,29 @@
-﻿using System;
-using Model.ShopApp;
-using Presenters.Phone.Apps.ShopApp.RepairKitShop;
-using Services.Fabric;
+﻿using Presenters.Phone.Apps.ShopApp.RepairKitShop;
 using UnityEngine;
-using Zenject;
+using UnityEngine.UI;
 
 namespace Views.Phone.Apps.ShopApp.RepairKitShop
 {
-    public class ShopView : InShopShopView
+    public abstract class ShopView : MonoBehaviour
     {
-        [SerializeField] private Transform _itemContainer;
+        [SerializeField] protected Transform ItemContainer;
+        [SerializeField] private Button _homeButton;
         
-        private ShopPresenter _presenter;
-
-        [Inject]
-        public void Initialize(ShopModel shopModel, ShopItemFactory factory)
-        {
-            _presenter = new ShopPresenter(shopModel, factory, _itemContainer);
-        }
+        protected ShopPresenter Presenter;
 
         private void Start()
         {
-            _presenter.InitializeItems();
+            Presenter.InitializeItems();
+        }
+        
+        private void OnEnable()
+        {
+            _homeButton.onClick.AddListener(() => gameObject.SetActive(false));
+        }
+
+        private void OnDisable()
+        {
+            _homeButton.onClick.RemoveListener(() => gameObject.SetActive(false));
         }
     }
 }
