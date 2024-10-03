@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Model.ComputerCells;
 using Views.UI.ButtonUI;
 using Zenject;
 
@@ -6,11 +6,17 @@ namespace Views.UI.BuyCellButton
 {
     public class BuyCellButtonView : ButtonView
     {
-        public event Action BuyCellButtonClicked;
+        private ComputerCellsModel _computerCellModel;
+
+        [Inject]
+        public void Initialize(ComputerCellsModel computerCellsModel)
+        {
+            _computerCellModel = computerCellsModel;
+        }
 
         protected override void ButtonClicked()
         {
-            BuyCellButtonClicked?.Invoke();
+            _computerCellModel.TryBuyCell();
         }
     }
 }
