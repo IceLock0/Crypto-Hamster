@@ -1,6 +1,4 @@
 ﻿using System;
-using Views.Currency;
-using Views.Wallet;
 using Views.Wallet.Association_dropdown;
 
 namespace Model.Crypto

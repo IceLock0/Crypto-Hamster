@@ -6,8 +6,6 @@ using Presenters.Computer.ComputerQualityChange;
 using Presenters.ComputerMiner;
 using Presenters.ComputerRepair;
 using UnityEngine;
-using Views.Computer;
-using Views.Computer.ComputerBuilder;
 using Zenject;
 
 namespace Installers.GameObjectInstallers.ComputerCell

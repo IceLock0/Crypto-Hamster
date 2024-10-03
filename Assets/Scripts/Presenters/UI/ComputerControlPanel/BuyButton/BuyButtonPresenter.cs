@@ -1,5 +1,4 @@
 ﻿using System;
-using Views.Computer;
 
 namespace Presenters.UI.ComputerControlPanel.BuyButton
 {

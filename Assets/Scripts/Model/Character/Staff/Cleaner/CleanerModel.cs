@@ -1,8 +1,8 @@
-﻿using ScriptableObjects;
+﻿using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
 using Views.Staff.Cleaner;
-using System.Collections.Generic;
 
 namespace Model.Staff.Cleaner
 {

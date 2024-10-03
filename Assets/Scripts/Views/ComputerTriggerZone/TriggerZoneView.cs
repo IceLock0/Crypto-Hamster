@@ -2,7 +2,6 @@
 using Presenters.ComputerTriggerZone;
 using UnityEngine;
 using Views.ComputerServant;
-using Views.UI.ComputerControlPanel;
 
 namespace Views.ComputerTriggerZone
 {

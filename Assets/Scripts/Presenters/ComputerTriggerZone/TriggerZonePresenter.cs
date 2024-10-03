@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Presenters.ComputerTriggerZone
+﻿namespace Presenters.ComputerTriggerZone
 {
     public class TriggerZonePresenter
     {

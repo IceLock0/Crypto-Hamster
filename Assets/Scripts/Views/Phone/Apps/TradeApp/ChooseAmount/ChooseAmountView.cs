@@ -8,7 +8,6 @@ using Presenters.Phone.Apps.TradeApp.ChooseAmount;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Views.Phone.Apps.TradeApp.ChooseAmount
 {

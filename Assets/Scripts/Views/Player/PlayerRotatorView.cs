@@ -1,5 +1,4 @@
-﻿using System;
-using Presenters.Player;
+﻿using Presenters.Player;
 using ScriptableObjects;
 using UnityEngine;
 using Zenject;

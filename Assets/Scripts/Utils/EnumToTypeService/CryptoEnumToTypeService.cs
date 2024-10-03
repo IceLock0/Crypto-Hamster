@@ -1,6 +1,5 @@
 ﻿using System;
 using Presenters.Currency;
-using Views.Currency;
 using Views.Wallet.Association_dropdown;
 
 namespace Utils.EnumToTypeService

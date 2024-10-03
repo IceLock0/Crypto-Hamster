@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Model.TradeApp;
 using Presenters.Currency;
 using TMPro;
-using UnityEngine;
 using Utils;
 using Views.Phone.Apps.TradeApp.Rate;
 

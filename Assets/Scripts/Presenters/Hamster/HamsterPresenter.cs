@@ -2,7 +2,6 @@
 using Model.HamsterModel;
 using Model.Wallet;
 using Presenters.Currency;
-using UnityEngine;
 using Utils;
 using Views.Hamster;
 

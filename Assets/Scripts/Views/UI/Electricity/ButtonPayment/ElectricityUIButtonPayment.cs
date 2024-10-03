@@ -1,9 +1,6 @@
 ﻿using System;
-using Model.Wallet;
-using Presenters.Electricity;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Views.UI.Electricity.ButtonPayment
 {

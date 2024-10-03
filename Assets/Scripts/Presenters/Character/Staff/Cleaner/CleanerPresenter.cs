@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using Model.Staff.Cleaner;
 using Presenters.Room;
 using ScriptableObjects;
-using UnityEngine;
 using UnityEngine.AI;
 using Utils;
 using Views.Staff.Cleaner;

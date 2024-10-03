@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model.ChooseAmount;
 using ScriptableObjects;
 
 namespace Presenters.Currency

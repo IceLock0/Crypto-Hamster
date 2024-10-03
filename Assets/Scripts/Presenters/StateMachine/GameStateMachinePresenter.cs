@@ -1,5 +1,4 @@
-﻿using System;
-using Model.StateMachine;
+﻿using Model.StateMachine;
 using Presenters.State;
 using Views.StateMachine;
 

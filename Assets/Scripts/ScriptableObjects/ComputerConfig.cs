@@ -2,7 +2,6 @@
 using Enums;
 using Model.Crypto;
 using UnityEngine;
-using Views.Wallet.Association_dropdown;
 
 namespace ScriptableObjects
 {

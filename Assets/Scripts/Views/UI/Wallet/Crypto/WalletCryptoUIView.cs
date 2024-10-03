@@ -3,7 +3,6 @@ using Model.Wallet;
 using Presenters.Wallet.Crypto;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Utils.EnumToTypeService;
 using Views.Wallet.Association_dropdown;
 using Zenject;

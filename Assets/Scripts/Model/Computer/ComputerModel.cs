@@ -1,10 +1,9 @@
 ﻿using System;
-using UnityEngine;
 using Enums;
 using Presenters.Currency;
+using UnityEngine;
 using Utils;
 using Utils.EnumToTypeService;
-using Views.Currency;
 using Views.Wallet.Association_dropdown;
 
 namespace Model.Computer

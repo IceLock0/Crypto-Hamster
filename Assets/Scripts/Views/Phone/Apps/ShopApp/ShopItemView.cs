@@ -1,5 +1,4 @@
-﻿using System;
-using Model.Inventory;
+﻿using Model.Inventory;
 using Model.Wallet;
 using Presenters.Phone.Apps.ShopApp.RepairKitShop;
 using ScriptableObjects;

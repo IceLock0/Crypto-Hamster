@@ -1,10 +1,8 @@
 ﻿using System;
-using Presenters.Character.Staff.Cleaner;
-using Presenters.Room;
 using System.Collections.Generic;
+using Presenters.Character.Staff.Cleaner;
 using ScriptableObjects;
 using UnityEngine;
-using UnityEngine.AI;
 using Zenject;
 
 namespace Views.Staff.Cleaner

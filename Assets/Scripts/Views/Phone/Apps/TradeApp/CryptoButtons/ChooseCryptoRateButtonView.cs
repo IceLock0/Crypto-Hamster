@@ -5,7 +5,6 @@ using Presenters.Currency;
 using Presenters.Phone.Apps.TradeApp.CryptoButtons;
 using TMPro;
 using UnityEngine;
-using Utils;
 using Views.Phone.Apps.TradeApp.Rate;
 using Views.UI.ButtonUI;
 using Zenject;

@@ -10,7 +10,6 @@ using Services;
 using Services.Fabric;
 using UnityEngine;
 using Utils;
-using Views.Computer;
 using Views.UI.ComputerControlPanel.BuyButton;
 
 namespace Presenters.Computer

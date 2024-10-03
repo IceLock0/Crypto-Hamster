@@ -1,9 +1,6 @@
 ﻿using DG.Tweening;
-using Model.Computer;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils;
-using Zenject;
 
 namespace Views.UI.ComputerControlPanel.ComputerHealthbar
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using Presenters.Character.Staff;
+﻿using Presenters.Character.Staff;
 using Presenters.Room;
 using ScriptableObjects;
 using UnityEngine;

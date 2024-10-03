@@ -1,6 +1,5 @@
 ﻿using System;
 using Views.UI.ButtonUI;
-using Zenject;
 
 namespace Views.UI.BuyCellButton
 {

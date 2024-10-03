@@ -5,7 +5,6 @@ using Model.Wallet;
 using Presenters.Currency;
 using Presenters.UI.ExchangeCryptoButton;
 using Utils;
-using Views.UI.SellButton;
 using Views.Wallet;
 
 namespace Presenters.UI.SellCryptoButton

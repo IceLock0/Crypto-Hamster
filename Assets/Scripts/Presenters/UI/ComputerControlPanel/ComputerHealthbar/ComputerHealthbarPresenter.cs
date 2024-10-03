@@ -2,7 +2,6 @@
 using Model.Computer;
 using Utils;
 using Views.UI.ComputerControlPanel.ComputerHealthbar;
-using Zenject;
 
 namespace Presenters.UI.ComputerControlPanel.ComputerHealthbar
 {

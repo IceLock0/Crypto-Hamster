@@ -1,5 +1,4 @@
 ﻿using Model.ShopApp.RepairKitShop;
-using Presenters.Phone.Apps.ShopApp.RepairKitShop;
 using Presenters.Phone.Apps.ShopApp.RepairKitShop.MusicShop;
 using Services.Fabric;
 using Zenject;
