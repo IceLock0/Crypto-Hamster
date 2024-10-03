@@ -11,7 +11,7 @@ namespace Views.Phone.Apps.ShopApp.RepairKitShop
         
         protected ShopPresenter Presenter;
 
-        private void Start()
+        protected virtual void Start()
         {
             Presenter.InitializeItems();
         }

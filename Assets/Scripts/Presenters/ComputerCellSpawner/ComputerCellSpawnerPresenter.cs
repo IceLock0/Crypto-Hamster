@@ -1,62 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using Model.ComputerCells;
 using Model.Wallet;
 using Presenters.Currency;
 using ScriptableObjects;
 using Utils;
 using Views.ComputerCell;
-using Views.UI.BuyCellButton;
 
 namespace Presenters.ComputerCellSpawner
 {
     public class ComputerCellSpawnerPresenter
     {
-        private readonly List<ComputerCellView> _computerCellViews;
-        private readonly BuyCellButtonView _buyCellButtonView;
         private readonly CostConfig _costConfig;
         private readonly WalletModel _walletModel;
+        private readonly ComputerCellsModel _computerCellsModel;
 
         private ComputerCellView _disabledComputerCell;
-        
-        public ComputerCellSpawnerPresenter(List<ComputerCellView> computerCellViews, BuyCellButtonView buyCellButtonView, CostConfig costConfig, WalletModel walletModel)
+
+        public ComputerCellSpawnerPresenter(ComputerCellsModel computerCellsModel, CostConfig costConfig, WalletModel walletModel)
         {
-            InvariantChecker.CheckObjectInvariant(computerCellViews, buyCellButtonView, costConfig, walletModel);
-            _computerCellViews = computerCellViews;
-            _buyCellButtonView = buyCellButtonView;
+            InvariantChecker.CheckObjectInvariant(computerCellsModel, costConfig, walletModel);
+            _computerCellsModel = computerCellsModel;
             _costConfig = costConfig;
             _walletModel = walletModel;
         }
 
         public void Enable()
         {
-            _buyCellButtonView.BuyCellButtonClicked += OnBuyCellButtonClicked;
+            _computerCellsModel.ActivateCellButtonPressed += OnActivateCellButtonPressed;
         }
 
         public void Disable()
         {
-            _buyCellButtonView.BuyCellButtonClicked -= OnBuyCellButtonClicked;
+            _computerCellsModel.ActivateCellButtonPressed -= OnActivateCellButtonPressed;
         }
 
-        private void OnBuyCellButtonClicked()
+        private void OnActivateCellButtonPressed()
         {
-            _disabledComputerCell = _computerCellViews.FirstOrDefault(x => x.gameObject.activeSelf == false);
+            _disabledComputerCell = _computerCellsModel.GetFirstActive();
             TryBuySlot();
         }
 
         private void TryBuySlot()
         {
             if (_disabledComputerCell == null)
-                throw new ArgumentNullException("Max size of cells");
+                throw new ArgumentNullException($"Max size of cells");
             if (_costConfig.PCSlotPrice > _walletModel.Currencies[typeof(Cash)].Amount)
-                throw new ArgumentOutOfRangeException("Not enough money");
+                return;
             BuySlot();
         }
 
         private void BuySlot()
         {
             _walletModel.RemoveCurrency(typeof(Cash), _costConfig.PCSlotPrice);
-            _disabledComputerCell.gameObject.SetActive(true);
+            _computerCellsModel.BuyCell();
         }
     }
 }

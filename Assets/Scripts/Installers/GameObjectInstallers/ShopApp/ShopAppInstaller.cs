@@ -8,8 +8,16 @@ namespace Installers.GameObjectInstallers.ShopApp
         public override void InstallBindings()
         {
             BindRepairKitItemFactory();
+            BindPCSlotShopItemFactory();
         }
-        
+
+        private void BindPCSlotShopItemFactory()
+        {
+            Container.Bind<PCSLotShopItemFactory>()
+                .AsSingle()
+                .NonLazy();
+        }
+
         private void BindRepairKitItemFactory()
         {
             Container.Bind<ShopItemFactory>()
