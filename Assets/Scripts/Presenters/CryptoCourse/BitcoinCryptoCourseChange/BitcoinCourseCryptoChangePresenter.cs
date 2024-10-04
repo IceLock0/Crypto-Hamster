@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Model.Exchange;
 using Presenters.CryptoCourse.CryptoCourseChange;
 using Presenters.Currency;
 using ScriptableObjects;
-using Utils.EnumToTypeService;
 
 namespace Presenters.CryptoCourse.BitcoinCryptoCourseChange
 {

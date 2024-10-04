@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using Model.Exchange;
 using Presenters.Currency;
 using ScriptableObjects;
-using UnityEngine;
 using Utils;
 using Utils.EnumToTypeService;
 

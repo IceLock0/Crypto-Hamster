@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Model.ComputerCells;
 using UnityEngine;
 using Views.ComputerCell;

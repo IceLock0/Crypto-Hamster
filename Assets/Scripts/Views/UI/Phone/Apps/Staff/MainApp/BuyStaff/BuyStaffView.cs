@@ -1,16 +1,14 @@
-﻿    using System;
-using System.Collections.Generic;
-using Enums.Staff;
-using Model.Wallet;
-using Presenters.StaffTransaction;
+﻿    using System.Collections.Generic;
+    using Enums.Staff;
+    using Model.Wallet;
     using Presenters.StaffTransaction.Buy;
     using ScriptableObjects;
-using Services.Fabric.Staff;
+    using Services.Fabric.Staff;
     using TMPro;
     using UnityEngine;
-using Zenject;
+    using Zenject;
 
-namespace Views.UI.Phone.Apps.Staff.MainApp.BuyStaff
+    namespace Views.UI.Phone.Apps.Staff.MainApp.BuyStaff
 {
     public class BuyStaffView : MonoBehaviour
     {
@@ -21,9 +19,9 @@ namespace Views.UI.Phone.Apps.Staff.MainApp.BuyStaff
         private BuyStaffPresenter _presenter;
         
         [Inject]
-        public void Initialize(WalletModel walletModel, IStaffFabric staffFabric, List<SysAdminConfig> sysAdminConfigs, List<CleanerConfig> cleanerConfigs)
+        public void Initialize(WalletModel walletModel, IStaffFactory staffFactory, List<SysAdminConfig> sysAdminConfigs, List<CleanerConfig> cleanerConfigs)
         {
-            _presenter = new BuyStaffPresenter(walletModel, staffFabric, sysAdminConfigs, cleanerConfigs, this);
+            _presenter = new BuyStaffPresenter(walletModel, staffFactory, sysAdminConfigs, cleanerConfigs, this);
         }
         
         public void SetBuyUpgradeText(StaffType staffType)

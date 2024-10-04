@@ -1,6 +1,6 @@
 ﻿namespace Services.Fabric
 {
-    public interface IFabric
+    public interface IFactory
     {
         public void Load();
     }

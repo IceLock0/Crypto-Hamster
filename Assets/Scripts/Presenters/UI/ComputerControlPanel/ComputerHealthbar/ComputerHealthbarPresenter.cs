@@ -1,8 +1,8 @@
 ﻿using System;
 using Model.Computer;
+using UnityEngine;
 using Utils;
 using Views.UI.ComputerControlPanel.ComputerHealthbar;
-using Zenject;
 
 namespace Presenters.UI.ComputerControlPanel.ComputerHealthbar
 {
@@ -31,6 +31,7 @@ namespace Presenters.UI.ComputerControlPanel.ComputerHealthbar
 
         private void OnQualityChanged(ComputerModel model)
         {
+            Debug.Log($"Quality changed, now it's {_computerModel.Quality}");
             _view.UpdateVisual(_computerModel.Quality);
         }
     }

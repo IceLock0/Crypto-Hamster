@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 using Views.UI.ButtonUI;
 
 public class PhoneShortcutButtonView : ButtonView

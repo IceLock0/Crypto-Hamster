@@ -1,7 +1,6 @@
 ﻿using System;
 using Model.Wallet;
 using Presenters.Currency;
-using UnityEngine;
 using Views.Wallet;
 
 namespace Presenters.Wallet.Crypto

@@ -17,7 +17,7 @@ namespace Presenters.StaffTransaction.Buy
     public class BuyStaffPresenter
     {
         private readonly WalletModel _walletModel;
-        private readonly IStaffFabric _staffFabric;
+        private readonly IStaffFactory _staffFactory;
 
         private readonly List<SysAdminConfig> _sysAdminConfigs;
         private readonly List<CleanerConfig> _cleanerConfigs;
@@ -26,11 +26,11 @@ namespace Presenters.StaffTransaction.Buy
 
         private readonly BuyStaffView _buyStaffView;
 
-        public BuyStaffPresenter(WalletModel walletModel, IStaffFabric staffFabric,
+        public BuyStaffPresenter(WalletModel walletModel, IStaffFactory staffFactory,
             List<SysAdminConfig> sysAdminConfigs, List<CleanerConfig> cleanerConfigs, BuyStaffView buyStaffView)
         {
             _walletModel = walletModel;
-            _staffFabric = staffFabric;
+            _staffFactory = staffFactory;
 
             _sysAdminConfigs = sysAdminConfigs;
             _cleanerConfigs = cleanerConfigs;
@@ -81,7 +81,7 @@ namespace Presenters.StaffTransaction.Buy
             _walletModel?.RemoveCurrency(typeof(Cash), staffConfig.Price);
 
             var staffGameObject =
-                _staffFabric.Create(staffType, staffConfig.SourcePoint.position, quaternion.identity, null);
+                _staffFactory.Create(staffType, staffConfig.SourcePoint.position, quaternion.identity, null);
 
             var staffModel = staffGameObject.GetComponent<StaffView>().StaffPresenter.StaffModel;
 

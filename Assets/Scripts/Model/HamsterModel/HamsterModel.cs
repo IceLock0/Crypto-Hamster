@@ -1,6 +1,5 @@
 ﻿using System;
 using Presenters.Currency;
-using UnityEngine;
 
 namespace Model.HamsterModel
 {

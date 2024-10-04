@@ -1,6 +1,6 @@
-﻿using Enums.Staff;
+﻿using System;
+using Enums.Staff;
 using ScriptableObjects;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 

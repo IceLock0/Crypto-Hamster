@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Model.ComputerCells;
+﻿using Model.ComputerCells;
 using Model.Wallet;
 using Presenters.ComputerCellSpawner;
 using ScriptableObjects;
 using UnityEngine;
-using Views.ComputerCell;
 using Views.UI.BuyCellButton;
 using Zenject;
 

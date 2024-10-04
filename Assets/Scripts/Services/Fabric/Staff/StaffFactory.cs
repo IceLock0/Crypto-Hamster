@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 namespace Services.Fabric.Staff
 {
-    public class StaffFabric : IStaffFabric
+    public class StaffFactory : IStaffFactory
     {
         private const string StaffPath = "Staff/";
         private const string AdminPath = StaffPath + "Admin";
@@ -17,7 +17,7 @@ namespace Services.Fabric.Staff
 
         private Object _admin, _sysAdmin, _cleaner;
 
-        public StaffFabric(DiContainer container)
+        public StaffFactory(DiContainer container)
         {
             _container = container;
 

@@ -1,5 +1,4 @@
-﻿using Model.ShopApp;
-using Services.Fabric;
+﻿using Services.Fabric;
 using UnityEngine;
 using Utils;
 

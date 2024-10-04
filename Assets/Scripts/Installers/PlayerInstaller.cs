@@ -1,5 +1,4 @@
 ﻿using Model.Inventory;
-using ScriptableObjects;
 using UnityEngine;
 using Views.Player;
 using Zenject;

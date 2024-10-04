@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Utils;
+﻿using Utils;
 using Views.ComputerTriggerZone;
 using Views.UI.ComputerControlPanel;
 

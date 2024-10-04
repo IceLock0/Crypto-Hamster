@@ -1,5 +1,4 @@
-﻿using System;
-using Presenters.ComputerRepair;
+﻿using Presenters.ComputerRepair;
 using UnityEngine;
 using Utils;
 using Zenject;

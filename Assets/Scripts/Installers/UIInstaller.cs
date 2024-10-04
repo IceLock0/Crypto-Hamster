@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using UnityEngine;
+﻿using UnityEngine;
 using Views.UI.BuyCellButton;
 using Views.UI.Electricity.ButtonPayment;
 using Zenject;

@@ -1,5 +1,4 @@
-﻿using System;
-using Presenters.CameraCell;
+﻿using Presenters.CameraCell;
 using UnityEngine;
 using Views.Entity;
 

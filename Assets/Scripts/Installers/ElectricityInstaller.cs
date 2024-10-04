@@ -1,6 +1,4 @@
 ﻿using Model.Electricity;
-using ScriptableObjects;
-using UnityEngine;
 using Zenject;
 
 namespace Installers

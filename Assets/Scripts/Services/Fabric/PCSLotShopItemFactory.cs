@@ -1,7 +1,5 @@
 ﻿using Enums.Slot;
-using ScriptableObjects;
 using UnityEngine;
-using Views.Phone.Apps.ShopApp.RepairKitShop;
 using Zenject;
 
 namespace Services.Fabric

@@ -39,8 +39,8 @@ namespace Installers
                 .AsSingle()
                 .NonLazy();
 
-            Container.Bind<IStaffFabric>()
-                .To<StaffFabric>()
+            Container.Bind<IStaffFactory>()
+                .To<StaffFactory>()
                 .AsSingle()
                 .NonLazy();
         }

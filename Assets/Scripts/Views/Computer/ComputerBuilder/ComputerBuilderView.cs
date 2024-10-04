@@ -1,6 +1,4 @@
 ﻿using Presenters.Computer;
-using Presenters.ComputerMiner;
-using Presenters.ComputerRepair;
 using UnityEngine;
 using Zenject;
 

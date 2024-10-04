@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Services.Fabric.Staff
 {
-    public interface IStaffFabric : IFabric
+    public interface IStaffFactory : IFactory
     {
         public GameObject Create(StaffType staffType, Vector3 position, Quaternion rotation, Transform parent);
     }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Presenters.UI.ComputerControlPanel;
+﻿using Presenters.UI.ComputerControlPanel;
 using UnityEngine;
 using Views.ComputerTriggerZone;
 

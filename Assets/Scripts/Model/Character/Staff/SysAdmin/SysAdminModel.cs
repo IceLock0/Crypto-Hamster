@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Model.Computer;
 using ModestTree;
 using ScriptableObjects;
-using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 namespace Model.Staff.SysAdmin
 {

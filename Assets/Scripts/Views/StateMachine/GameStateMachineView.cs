@@ -1,5 +1,4 @@
-﻿using System;
-using Presenters.StateMachine;
+﻿using Presenters.StateMachine;
 using UnityEngine;
 
 namespace Views.StateMachine

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Enums.Staff;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Views.UI.Phone.Apps.Staff.MainApp.ArrowButtons;

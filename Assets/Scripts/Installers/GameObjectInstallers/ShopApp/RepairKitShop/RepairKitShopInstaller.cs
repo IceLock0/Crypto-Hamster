@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Model.ShopApp.RepairKitShop;
 using ScriptableObjects;
-using Services.Fabric;
 using UnityEngine;
 using Zenject;
 

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Enums;
-using Unity.AI.Navigation;
-using UnityEngine;
-using Model.Computer;
 using Presenters.Computer;
+using Unity.AI.Navigation;
 
 namespace Model.NavMesh
 {

@@ -1,11 +1,8 @@
-﻿using System;
-using Model.Computer;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Model.NavMesh;
 using Unity.AI.Navigation;
 using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
-using Presenters.Computer;
 using Views.Computer.ComputerBuilder;
 using Zenject;
 
