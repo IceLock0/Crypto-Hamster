@@ -1,5 +1,6 @@
 ﻿using Services;
 using Services.Fabric;
+using Services.Fabric.Staff;
 using UnityEngine;
 using Zenject;
 
@@ -35,6 +36,11 @@ namespace Installers
         {
             Container.Bind<IComputerFactory>()
                 .To<ComputerFactory>()
+                .AsSingle()
+                .NonLazy();
+
+            Container.Bind<IStaffFabric>()
+                .To<StaffFabric>()
                 .AsSingle()
                 .NonLazy();
         }

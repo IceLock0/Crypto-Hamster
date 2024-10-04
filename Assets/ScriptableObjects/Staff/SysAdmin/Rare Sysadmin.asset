@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268c9b6aba9c449aacdafa9953b515cf, type: 3}
+  m_Name: Rare Sysadmin
+  m_EditorClassIdentifier: 
+  _movementSpeed: 4.5
+  _angularSpeed: 200
+  _acceleration: 9
+  _upgradeType: 2
+  _price: 10000
+  _relaxTime: 60
+  _efficiency: 3
+  _valueReaction: 50
+  _jobSpeed: 20
+  _sourcePoint: {fileID: 1659931549745464885, guid: 9d89974457e610f44a19dfde0bd59208, type: 3}

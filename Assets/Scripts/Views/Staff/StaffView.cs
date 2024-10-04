@@ -11,9 +11,7 @@ namespace Views.Staff
     [RequireComponent(typeof(NavMeshAgent))]
     public abstract class StaffView : MonoBehaviour
     { 
-        [SerializeField] protected NavMeshAgent Agent;
-
-        protected StaffPresenter StaffPresenter;
+        protected NavMeshAgent Agent;
 
         protected StaffConfig StaffConfig;
 
@@ -25,13 +23,15 @@ namespace Views.Staff
             ContaminationPresenter = contaminationPresenter;
         }
 
+        public StaffPresenter StaffPresenter { get; protected set; }
+        
         private void OnEnable()
         {
             StaffPresenter.Enable();
         }
 
         private void OnDisable()
-        {
+        { 
             StaffPresenter.Disable();
         }
     }

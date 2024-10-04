@@ -1,4 +1,5 @@
-﻿using Unity.AI.Navigation;
+﻿using Model.NavMesh;
+using Unity.AI.Navigation;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +11,7 @@ namespace Installers
         public override void InstallBindings()
         {
             BindNavMeshSurface();
+            BindNavMeshBuilder();
         }
 
         private void BindNavMeshSurface()
@@ -17,6 +19,14 @@ namespace Installers
             Container
                 .Bind<NavMeshSurface>()
                 .FromInstance(_surface)
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindNavMeshBuilder()
+        {
+            Container
+                .Bind<NavMeshBuilderPresenter>()
                 .AsSingle()
                 .NonLazy();
         }

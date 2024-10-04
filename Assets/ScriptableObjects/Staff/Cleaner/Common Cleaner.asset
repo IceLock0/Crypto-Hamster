@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b6ed598dec42c2b90a0ae3fdf299c3, type: 3}
+  m_Name: Common Cleaner
+  m_EditorClassIdentifier: 
+  _movementSpeed: 4.5
+  _angularSpeed: 180
+  _acceleration: 8
+  _upgradeType: 1
+  _price: 5000
+  _relaxTime: 60
+  _efficiency: 1
+  _valueReaction: 80
+  _jobSpeed: 40
+  _sourcePoint: {fileID: 1203637856209266767, guid: a2a480533b401164c9a6597153a4a056, type: 3}

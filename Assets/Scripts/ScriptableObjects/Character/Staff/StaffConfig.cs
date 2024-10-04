@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enums.Staff;
+using UnityEngine;
 
 namespace ScriptableObjects
 {
@@ -7,7 +8,9 @@ namespace ScriptableObjects
     {
         [Header("Agent")] [SerializeField] private float _acceleration;
 
-        [Header("Buying")] [SerializeField] private float _price;
+        [Header("Buying")] 
+        [SerializeField] private StaffUpgradeType _upgradeType;
+        [SerializeField] private float _price;
 
         [Header("Job")] 
         [SerializeField] private float _relaxTime;
@@ -17,6 +20,7 @@ namespace ScriptableObjects
         [SerializeField] private Transform _sourcePoint;
 
         public float Acceleration => _acceleration;
+        public StaffUpgradeType UpgradeType => _upgradeType;
         public float Price => _price;
         public float RelaxTime => _relaxTime;
         public float Efficiency => _efficiency;

@@ -2,6 +2,8 @@
 using Presenters.Character.Staff.Cleaner;
 using Presenters.Room;
 using System.Collections.Generic;
+using System.Linq;
+using Enums.Staff;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,16 +13,20 @@ namespace Views.Staff.Cleaner
 {
     public class CleanerView : StaffView
     {
-        [SerializeField] private List<CleaningPoint> _cleaningPoints;
-        
+        private List<CleaningPoint> _cleaningPoints;
+
         [Inject]
-        public void Initialize(CleanerConfig cleanerConfig)
+        public void Initialize(List<CleanerConfig> cleanerConfigs, List<CleaningPoint> cleaningPoints)
         {
-            StaffConfig = cleanerConfig;
+            StaffConfig = cleanerConfigs.FirstOrDefault(config => config.UpgradeType == StaffUpgradeType.Common);
+
+            _cleaningPoints = cleaningPoints;
+
+            Agent = GetComponent<NavMeshAgent>();
 
             StaffPresenter = new CleanerPresenter(StaffConfig, Agent, ContaminationPresenter, _cleaningPoints);
         }
-        
+
         [Serializable]
         public class CleaningPoint
         {
@@ -30,20 +36,5 @@ namespace Views.Staff.Cleaner
             public Transform PointTransform => _pointTransform;
             public float PointRadius => _pointRadius;
         }
-        
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.black;
-
-            foreach (var patrolPoint in _cleaningPoints)
-            {
-                var point = patrolPoint.PointTransform;
-                var radius = patrolPoint.PointRadius;
-                
-                Gizmos.DrawWireSphere(point.position , radius);
-            }
-
-        }
-
     }
 }
