@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Model.ComputerCells;
 using Model.Wallet;
 using Presenters.ComputerCellSpawner;
 using ScriptableObjects;
@@ -12,14 +13,12 @@ namespace Views.ComputerCellSpawner
 {
     public class ComputerCellSpawnerView : MonoBehaviour
     {
-        [SerializeField] private List<ComputerCellView> _computerCellViews;
-
         private ComputerCellSpawnerPresenter _presenter;
 
         [Inject]
-        private void Initialize(BuyCellButtonView buyCellButtonView, CostConfig costConfig, WalletModel walletModel)
+        private void Initialize(BuyCellButtonView buyCellButtonView, ComputerCellsModel computerCellsModel, CostConfig costConfig, WalletModel walletModel)
         {
-            _presenter = new ComputerCellSpawnerPresenter(_computerCellViews,buyCellButtonView,costConfig, walletModel);
+            _presenter = new ComputerCellSpawnerPresenter(computerCellsModel,costConfig, walletModel);
         }
 
         private void OnEnable()

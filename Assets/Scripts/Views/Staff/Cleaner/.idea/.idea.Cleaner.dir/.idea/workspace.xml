@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="172c3b8d-04ce-4c95-917e-2ef8f28ca797" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../../Prefabs/UI/Phone/Apps/ShopApp/PCSlotShop.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Prefabs/UI/Phone/Apps/ShopApp/PCSlotShop/SlotsShop.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Prefabs/UI/Phone/Apps/ShopApp/PCSlotShop/SlotsShop.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Resources/Shop/PCSlot.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Resources/Shop/PCSlot/Available.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Resources/Shop/PCSlot/Available.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Resources/Shop/PCSlot/Unavailable.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Resources/Shop/PCSlot/Unavailable.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Enums/Slot.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Enums/Slot/PCSlotType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Enums/Slot/PCSlotType.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Installers/SceneInstaller.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Installers/SceneInstaller.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Model/ComputerCells.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Model/ComputerCells/ComputerCellsModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Model/ComputerCells/ComputerCellsModel.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Presenters/Phone/Apps/PCSlotShop.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Presenters/Phone/Apps/PCSlotShop/PCSlotShopPresenter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Presenters/Phone/Apps/PCSlotShop/PCSlotShopPresenter.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Services/Fabric/PCSLotShopItemFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Services/Fabric/PCSLotShopItemFactory.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Phone/Apps/ShopApp/PCSlotShop.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Phone/Apps/ShopApp/PCSlotShop/PCSlotShopView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Phone/Apps/ShopApp/PCSlotShop/PCSlotShopView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Phone/Apps/ShopApp/PCSlotShop/SlotView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Phone/Apps/ShopApp/PCSlotShop/SlotView.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Prefabs/UI/Phone/Apps/ShopApp/ShopApp.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Prefabs/UI/Phone/Apps/ShopApp/ShopApp.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Scenes/zxcarnage.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Scenes/zxcarnage.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Installers/GameObjectInstallers/ShopApp/ShopAppInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Installers/GameObjectInstallers/ShopApp/ShopAppInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Presenters/ComputerCellSpawner/ComputerCellSpawnerPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Presenters/ComputerCellSpawner/ComputerCellSpawnerPresenter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ComputerCellSpawner/ComputerCellSpawnerView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../ComputerCellSpawner/ComputerCellSpawnerView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Phone/Apps/ShopApp/ShopView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Phone/Apps/ShopApp/ShopView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../UI/BuyCellButton/BuyCellButtonView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../UI/BuyCellButton/BuyCellButtonView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/CleanerView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../ComputerCellSpawner/ComputerCellSpawnerView.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="2mxxR6HQoMXs3HQrg8DnyYTrRUk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="172c3b8d-04ce-4c95-917e-2ef8f28ca797" name="Changes" comment="" />
+      <created>1728032020450</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728032020450</updated>
+      <workItem from="1728032063176" duration="416000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
