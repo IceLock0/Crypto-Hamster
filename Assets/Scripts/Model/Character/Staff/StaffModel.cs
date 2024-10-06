@@ -44,12 +44,8 @@ namespace Model.Staff
                 throw new ArgumentOutOfRangeException("The upgrade type is maximum.");
 
             StaffUpgradeType = staffUpgradeType;
-
-            Debug.Log("---BEFORE---");
-            ShowInfo();
+            
             SetParameter(staffConfig);
-            Debug.Log("---AFTER---");
-            ShowInfo();
         }
 
         public void ResetCompletedUnits() => CompletedUnits = 0;
@@ -98,15 +94,6 @@ namespace Model.Staff
             Agent.speed = SpeedModel.CurrentSpeed;
             Agent.angularSpeed = SpeedModel.AngularSpeed;
             Agent.acceleration = Acceleration;
-        }
-
-        //DEBUG
-        private void ShowInfo()
-        {
-            Debug.Log($"Acceleration = {Acceleration}, Price = {Price}, CurrentUpgradeType = {StaffUpgradeType}, " +
-                $"RelaxTime = {RelaxTime}, Efficiency = {Efficiency}, " +
-                $"ValueReaction = {ValueReaction}, JobSpeed = {JobSpeed}");
-
         }
     }
 }

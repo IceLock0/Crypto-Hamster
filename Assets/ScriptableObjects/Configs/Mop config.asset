@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ab45aecd8ce418eadda58aaba92e2ba, type: 3}
-  m_Name: Electricity config
+  m_Script: {fileID: 11500000, guid: fdd44539beae4a11bc8a5ac34214f356, type: 3}
+  m_Name: Mop config
   m_EditorClassIdentifier: 
-  _maxElectricity: 100
-  _secondsDelay: 1
-  _paymentPrice: 0
-  _decreaseValue: 1
+  _timeToClean: 5
+  _power: 30

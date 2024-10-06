@@ -29,7 +29,11 @@ namespace Model.Contamination
             CurrentContamination = Mathf.Clamp(CurrentContamination + amount, 0f, MaxContamination);
             CurrentContaminationChanged?.Invoke();
         }
-        
-        
+
+        public void NullifyContamination()
+        {
+            CurrentContamination = 0.0f;
+            CurrentContaminationChanged?.Invoke();
+        }
     }
 }

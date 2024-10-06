@@ -43,6 +43,11 @@ namespace Installers
                 .To<StaffFactory>()
                 .AsSingle()
                 .NonLazy();
+
+            Container.Bind<IMopPointFabric>()
+                .To<MopPointFactory>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }

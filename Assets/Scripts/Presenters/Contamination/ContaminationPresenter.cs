@@ -37,10 +37,10 @@ namespace Presenters.Room
             _model.CurrentContaminationChanged -= SpeedChange;
         }
 
-        public void ChangeContaminationByCleaner()
+        public void Clean()
         {
             Debug.Log("Cleaned");
-            _model.IncreaseContamination(-100.0f);
+            _model.NullifyContamination();
         }
         
         private async UniTask Contaminate()

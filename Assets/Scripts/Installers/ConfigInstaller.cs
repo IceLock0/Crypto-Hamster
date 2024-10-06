@@ -23,7 +23,8 @@ namespace Installers
         [SerializeField] private CameraConfig _cameraConfig;
         [SerializeField] private ElectricityConfig _electricityConfig;
         [SerializeField] private ContaminationConfig _contaminationConfig;
-
+        [SerializeField] private MopConfig _mopConfig;
+        
         public override void InstallBindings()
         {          
             BindSysAdminConfigs();
@@ -36,6 +37,7 @@ namespace Installers
             BindCryptoConfigs();
             BindCostConfig();
             BindContaminationConfig();
+            BindMopConfig();
         }
 
         private void BindCostConfig()
@@ -86,6 +88,11 @@ namespace Installers
         private void BindCleanerConfigs()
         {
             Container.Bind<List<CleanerConfig>>().FromInstance(_cleanerConfigs).AsSingle().NonLazy();
+        }
+
+        private void BindMopConfig()
+        {
+            Container.Bind<MopConfig>().FromInstance(_mopConfig).AsSingle().NonLazy();
         }
     }
 

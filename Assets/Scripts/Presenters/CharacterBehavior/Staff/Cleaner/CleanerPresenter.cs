@@ -43,16 +43,21 @@ namespace Presenters.Character.Staff.Cleaner
         {
             var timeToClean = _cleanerModel.GetTimeToClean(_cleanerModel.LastContaminationValue);
             
-            await UniTask.Delay((int) (timeToClean * 1000));
+            await UniTask.Delay((int) (timeToClean * 1000), cancellationToken: CTS.Token);
 
-            ContaminationPresenter.ChangeContaminationByCleaner();
+            ContaminationPresenter.Clean();
         }
 
         protected override void ProcessContaminationChange(float contaminationValue)
         {
             if (contaminationValue <= _cleanerModel.ValueReaction)
+            {
+                if(_cleanerModel.CurrentCleaningPoint != null)
+                    CancelWork();
+                
                 return;
-            
+            }
+
             _cleanerModel.LastContaminationValue = contaminationValue;
             
             _cleanerModel.UpdateCleaningPoint(_navMeshPath);
