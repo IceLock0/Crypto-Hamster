@@ -13,6 +13,16 @@ namespace Presenters.Phone.Apps.ShopApp.RepairKitShop
             _repairKitShopModel = repairKitShopModel;
         }
 
+        public override void Enable()
+        {
+            
+        }
+
+        public override void Disable()
+        {
+            
+        }
+
         public override void InitializeItems()
         {
             foreach (var item in _repairKitShopModel.ShopItems)

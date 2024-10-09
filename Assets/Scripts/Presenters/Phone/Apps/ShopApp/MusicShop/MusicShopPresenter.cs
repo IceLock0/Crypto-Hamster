@@ -13,6 +13,14 @@ namespace Presenters.Phone.Apps.ShopApp.RepairKitShop.MusicShop
             _musicShopModel = musicShopModel;
         }
 
+        public override void Enable()
+        {
+        }
+
+        public override void Disable()
+        {
+        }
+
         public override void InitializeItems()
         {
             foreach (var item in _musicShopModel.ShopItems)

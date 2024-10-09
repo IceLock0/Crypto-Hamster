@@ -11,11 +11,14 @@ namespace Presenters.Phone.Apps.ShopApp.RepairKitShop
         
         public ShopPresenter(ShopItemFactory factory, Transform container)
         {
-            InvariantChecker.CheckObjectInvariant(factory, container);
+            InvariantChecker.CheckObjectInvariant(container);
             
             Factory = factory;
             Container = container;
         }
+
+        public abstract void Enable();
+        public abstract void Disable();
 
         public abstract void InitializeItems();
     }
