@@ -1,35 +1,21 @@
-﻿using System;
-using Presenters.Phone.Apps.ShopApp.RepairKitShop;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using Views.UI.Phone.Apps.HomeButton;
 using Zenject;
 
-namespace Views.Phone.Apps.ShopApp.RepairKitShop
+namespace Views.UI.Phone.Apps
 {
-    public abstract class ShopView : MonoBehaviour
+    public class AppView: MonoBehaviour
     {
-        [SerializeField] protected Transform ItemContainer;
-
-
         private HomeButtonView _homeButton;
-        
-        protected ShopPresenter Presenter;
 
         [Inject]
         public void Initialize(HomeButtonView homeButton)
         {
             _homeButton = homeButton;
         }
-
-        protected virtual void Start()
-        {
-            Presenter.InitializeItems();
-        }
         
         private void OnEnable()
         {
-            Presenter.Enable();
             _homeButton.HomeButtonClicked += DisableScreen;
         }
 
@@ -40,7 +26,6 @@ namespace Views.Phone.Apps.ShopApp.RepairKitShop
 
         private void OnDisable()
         {
-            Presenter.Disable();
             _homeButton.HomeButtonClicked -= DisableScreen;
         }
     }
