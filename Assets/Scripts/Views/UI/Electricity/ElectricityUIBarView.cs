@@ -1,9 +1,11 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Model.Electricity;
 using Model.Wallet;
 using Presenters.Electricity;
 using UnityEngine;
 using UnityEngine.UI;
+using Views.Empty.Electricity;
 using Views.UI.Electricity.ButtonPayment;
 using Zenject;
 
@@ -11,21 +13,19 @@ namespace Views.UI.Electricity
 {
     public class ElectricityUIBarView : MonoBehaviour
     {
-        [SerializeField] private Image _electricityImage;
-        [SerializeField] private GameObject _noElectricityNotification;
-
         private ElectricityBarPresenter _barPresenter;
 
         [Inject]
-        public void Initialize(ElectricityUIButtonPayment paymentButton, WalletModel walletModel, ElectricityModel electricityModel)
+        public void Initialize(ElectricityUIButtonPayment paymentButton, ElectricityFillView electricityFillView, ElectricityIconView electricityIconView, WalletModel walletModel, ElectricityModel electricityModel)
         {
-            _barPresenter = new ElectricityBarPresenter(this, paymentButton, walletModel, electricityModel);
+            _barPresenter = new ElectricityBarPresenter(this, paymentButton, walletModel, electricityModel, electricityIconView, electricityFillView);
         }
-        
-        private void Awake()
+
+        private void Start()
         {
-            InitStartValues();
+            _barPresenter.InitializeImages();
         }
+
         private void OnEnable()
         {
             _barPresenter.Enable();
@@ -35,29 +35,14 @@ namespace Views.UI.Electricity
         {
             _barPresenter.Disable();
         }
-        public void ChangeFillAmount(float value, float duration)
+        public void ChangeFillAmount(Image targetImage, float value, float duration)
         {
-            _electricityImage.DOFillAmount(value, duration);
+            targetImage.DOFillAmount(value, duration);
         }
 
-        public void ShowNotification()
+        private void InitStartValues(Image targetImage)
         {
-            _noElectricityNotification.SetActive(true);
+            targetImage.fillAmount = 1.0f;
         }
-
-        public void HideNotification()
-        {
-            _noElectricityNotification.SetActive(false);
-        }
-
-
-        private void InitStartValues()
-        {
-            _electricityImage.gameObject.SetActive(true);
-            _electricityImage.fillAmount = 1.0f;
-            
-            _noElectricityNotification.gameObject.SetActive(false);
-        }
-
     }
 }

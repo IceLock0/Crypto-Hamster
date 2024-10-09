@@ -2,7 +2,9 @@
 using Model.Electricity;
 using Model.Wallet;
 using Presenters.ElectricityBar;
+using UnityEngine.UI;
 using Utils;
+using Views.Empty.Electricity;
 using Views.UI.Electricity;
 using Views.UI.Electricity.ButtonPayment;
 
@@ -10,44 +12,53 @@ namespace Presenters.Electricity
 {
     public class ElectricityBarPresenter
     {
-        public float PaymentPrice { get; private set; }
-
         private readonly ElectricityUIBarView _barView;
-        private readonly ElectricityUIButtonPayment _buttonPayment;
+        private readonly ElectricityUIButtonPayment _paymentButton;
         private readonly ElectricityPaymentPresenter _paymentPresenter;
 
         private readonly ElectricityModel _electricityModel;
-        
-        public ElectricityBarPresenter(ElectricityUIBarView barView, ElectricityUIButtonPayment buttonPayment, WalletModel walletModel, ElectricityModel electricityModel)
+        private readonly ElectricityIconView _electricityIconView;
+        private readonly ElectricityFillView _electricityFillView;
+
+        private Image _electricityIconImage;
+        private Image _electricityFillImage;
+
+
+        public ElectricityBarPresenter(ElectricityUIBarView barView, ElectricityUIButtonPayment paymentButton, WalletModel walletModel, ElectricityModel electricityModel, ElectricityIconView electricityIconView, ElectricityFillView electricityFillView)
         {
-            InvariantChecker.CheckObjectInvariant(barView,buttonPayment,walletModel,electricityModel);
+            InvariantChecker.CheckObjectInvariant(barView,paymentButton,walletModel,electricityModel,electricityIconView,electricityFillView);
 
             _barView = barView;
 
-            _buttonPayment = buttonPayment;
+            _paymentButton = paymentButton;
 
             _paymentPresenter = new ElectricityPaymentPresenter(walletModel);
             
             _electricityModel = electricityModel;
 
+            _electricityIconView = electricityIconView;
+
+            _electricityFillView = electricityFillView;
             DecreaseElectricity().Forget();
+        }
+
+        public void InitializeImages()
+        {
+            _electricityIconImage = _electricityIconView.GetComponent<Image>();
+            _electricityFillImage = _electricityFillView.GetComponent<Image>();
         }
 
         public void Enable()
         {
-            _buttonPayment.ButtonClicked += _paymentPresenter.TryToPay;
-
-            _electricityModel.ElectricityRanOut += _barView.ShowNotification;
-            _electricityModel.ElectricityReseted += _barView.HideNotification;
+            _paymentButton.ButtonClicked += _paymentPresenter.TryToPay;
+            
             _paymentPresenter.PaymentCompleted += FillElectricity;
         }
 
         public void Disable()
         {
-            _buttonPayment.ButtonClicked -= _paymentPresenter.TryToPay;
-
-            _electricityModel.ElectricityRanOut -= _barView.ShowNotification;
-            _electricityModel.ElectricityReseted -= _barView.HideNotification;
+            _paymentButton.ButtonClicked -= _paymentPresenter.TryToPay;
+            
             _paymentPresenter.PaymentCompleted -= FillElectricity;
         }
 
@@ -60,7 +71,8 @@ namespace Presenters.Electricity
                 
                 _electricityModel.DecreaseElectricity(_electricityModel.DecreaseValue);
                 
-                _barView.ChangeFillAmount(_electricityModel.CurrentElectricity / _electricityModel.MaxElectricity, _electricityModel.SecondsDelay * 2);
+                _barView.ChangeFillAmount(_electricityIconImage, _electricityModel.CurrentElectricity / _electricityModel.MaxElectricity, _electricityModel.SecondsDelay * 2);
+                _barView.ChangeFillAmount(_electricityFillImage, _electricityModel.CurrentElectricity / _electricityModel.MaxElectricity, _electricityModel.SecondsDelay * 2);
             }
         }
 

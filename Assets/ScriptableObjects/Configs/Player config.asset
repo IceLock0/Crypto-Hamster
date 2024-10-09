@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Player config
   m_EditorClassIdentifier: 
   _movementSpeed: 400
-  _angularSpeed: 300
+  _angularSpeed: 500

@@ -1,7 +1,5 @@
-﻿using System;
-using Presenters.Phone.Apps.ShopApp.RepairKitShop;
+﻿using Presenters.Phone.Apps.ShopApp.RepairKitShop;
 using UnityEngine;
-using UnityEngine.UI;
 using Views.UI.Phone.Apps.HomeButton;
 using Zenject;
 
@@ -10,8 +8,7 @@ namespace Views.Phone.Apps.ShopApp.RepairKitShop
     public abstract class ShopView : MonoBehaviour
     {
         [SerializeField] protected Transform ItemContainer;
-
-
+        
         private HomeButtonView _homeButton;
         
         protected ShopPresenter Presenter;
